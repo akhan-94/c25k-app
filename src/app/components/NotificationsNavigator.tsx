@@ -1,0 +1,1 @@
+vibrant colors, scenic garden, flowers, roses, tulips, birds, photorealistic, hyperrealism, 4k --ar 4:7

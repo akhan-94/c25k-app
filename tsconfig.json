@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@lib/*": ["lib/*"],
+      "@config": ["src/config"],
+      "@features/*": ["src/features/*"],
+      "@shared/*": ["src/shared/*"]
+    }
+  }
+}
