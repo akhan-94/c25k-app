@@ -1,1 +1,2 @@
-export {HomeScreen} from './screen/Home.screen';
+export type {HomeNavigatorParamList, HomeStackParamList} from './HomeNavigator';
+export {HomeNavigator} from './HomeNavigator';

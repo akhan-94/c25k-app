@@ -12,8 +12,8 @@ import {
   GuidesNavigator,
   type GuidesNavigatorParamList,
 } from './GuidesNavigator';
-import type {HomeNavigatorParamList} from './HomeNavigator';
-import {HomeNavigator} from './HomeNavigator';
+import type {HomeNavigatorParamList} from '../../features/home/HomeNavigator';
+import {HomeNavigator} from '../../features/home/HomeNavigator';
 import type {SettingsNavigatorParamList} from './SettingsNavigator';
 import {SettingsNavigator} from './SettingsNavigator';
 import {AppBarHeader} from './AppBarHeader';
