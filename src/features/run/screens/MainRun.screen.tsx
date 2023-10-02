@@ -1,14 +1,26 @@
-import {ScreenWrapper} from '@shared/components';
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {DayInstructions} from '../components/DayInstructions';
 import {DaySelector} from '../components/DaySelector';
 import {MainControls} from '../components/MainControls';
 import {MotivationImage} from '../components/MotivationImage';
+import {ActiveRunDetails} from '../components/ActiveRunDetails';
 
-export const StartScreen = () => {
+export const MainRunScreen = () => {
+  /** Hooks */
+  const insets = useSafeAreaInsets();
+
+  const insetSafetyStyles = [
+    {
+      paddingBottom: insets.bottom || 17,
+      paddingLeft: insets.left || 17,
+      paddingRight: insets.left || 17,
+    },
+  ];
+
   return (
-    <ScreenWrapper withScrollView={false}>
+    <View style={styles.container}>
       <View style={styles.wrapper}>
         <View style={styles.mainContent}>
           <DaySelector />
@@ -17,15 +29,20 @@ export const StartScreen = () => {
         <View style={styles.dayContainer}>
           <DayInstructions />
         </View>
-        <View style={styles.buttonContainer}>
+        <View style={[insetSafetyStyles, styles.buttonContainer]}>
+          <ActiveRunDetails />
           <MainControls />
         </View>
       </View>
-    </ScreenWrapper>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flex: 1,
+  },
   wrapper: {
     flex: 1,
     flexDirection: 'column',
@@ -39,6 +56,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonContainer: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     flexShrink: 1,
+    backgroundColor: 'rgba(0, 0, 0, .95)',
+    paddingTop: 17,
   },
 });

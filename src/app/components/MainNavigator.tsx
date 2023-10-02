@@ -12,15 +12,15 @@ import {
   GuidesNavigator,
   type GuidesNavigatorParamList,
 } from './GuidesNavigator';
-import type {HomeNavigatorParamList} from '../../features/home/HomeNavigator';
-import {HomeNavigator} from '../../features/home/HomeNavigator';
+import type {RunNavigatorParamList} from '../../features/run';
+import {RunNavigator} from '../../features/run';
 import type {SettingsNavigatorParamList} from './SettingsNavigator';
 import {SettingsNavigator} from './SettingsNavigator';
 import {AppBarHeader} from './AppBarHeader';
 
 export type MainStackParamList = {
   Guides: GuidesNavigatorParamList;
-  Home: HomeNavigatorParamList;
+  Run: RunNavigatorParamList;
   Settings: SettingsNavigatorParamList;
   About: AboutNavigatorParamList;
   Account: AccountNavigatorParamList;
@@ -36,17 +36,17 @@ const Drawer = createDrawerNavigator<MainStackParamList>();
 export const MainNavigator = () => {
   return (
     <Drawer.Navigator
-      initialRouteName="Home"
+      initialRouteName="Run"
       screenOptions={{
         drawerPosition: 'right',
       }}
       drawerContent={DrawerContent}>
       <Drawer.Screen
-        name="Home"
+        name="Run"
         options={{
           headerShown: false,
         }}
-        component={HomeNavigator}
+        component={RunNavigator}
       />
       <Drawer.Screen
         name="Account"

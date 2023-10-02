@@ -7,12 +7,11 @@ import {selectSession} from '../app.selectors';
 import {setSession} from '../app.slice';
 import type {AuthNavigatorParamList} from './AuthNavigator';
 import {AuthNavigator} from './AuthNavigator';
+import {LegalNavigator, type LegalNavigatorParamList} from './LegalNavigator';
 import type {MainNavigatorParamList} from './MainNavigator';
 import {MainNavigator} from './MainNavigator';
 import type {RegistrationNavigatorParamList} from './RegistrationNavigator';
 import {RegistrationNavigator} from './RegistrationNavigator';
-import {LegalNavigator, type LegalNavigatorParamList} from './LegalNavigator';
-import {AppBarHeader} from './AppBarHeader';
 
 export type RootStackParamList = {
   Main: MainNavigatorParamList | undefined;

@@ -16,9 +16,11 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist';
+import {runReducer} from '@features/run';
 
 const rootReducer = combineReducers({
   app: appReducer,
+  run: runReducer,
 });
 
 const persistConfig = {

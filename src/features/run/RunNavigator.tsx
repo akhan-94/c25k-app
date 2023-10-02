@@ -3,32 +3,29 @@ import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AppBarHeader} from '../../app/components/AppBarHeader';
 
-import {StartScreen} from './screens/Start.screen';
-import {RunScreen} from './screens/Run.screen';
+import {MainRunScreen} from './screens/MainRun.screen';
 import {SummaryScreen} from './screens/Summary.screen';
 
-export type HomeStackParamList = {
-  Start: undefined;
-  Run: undefined;
+export type RunStackParamList = {
+  MainRun: undefined;
   Summary: undefined;
 };
 
-export type HomeNavigatorParamList = {
-  screen?: keyof HomeStackParamList;
+export type RunNavigatorParamList = {
+  screen?: keyof RunStackParamList;
 };
 
-const Stack = createNativeStackNavigator<HomeStackParamList>();
+const Stack = createNativeStackNavigator<RunStackParamList>();
 
-export const HomeNavigator = () => {
+export const RunNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Start"
+      initialRouteName="MainRun"
       screenOptions={{
         headerShown: true,
         header: props => <AppBarHeader {...props} />,
       }}>
-      <Stack.Screen name="Start" component={StartScreen} />
-      <Stack.Screen name="Run" component={RunScreen} />
+      <Stack.Screen name="MainRun" component={MainRunScreen} />
       <Stack.Screen name="Summary" component={SummaryScreen} />
     </Stack.Navigator>
   );
