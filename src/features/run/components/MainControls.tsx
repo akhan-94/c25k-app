@@ -15,6 +15,12 @@ export const MainControls = () => {
   const status = useSelector(selectStatus);
 
   /** Derived State */
+  const mainButtonText = React.useMemo(() => {
+    if (status === 'waiting') return 'Start';
+    if (status === 'in-progress') return 'Pause';
+    if (status === 'paused') return 'Resume';
+  }, [status]);
+
   const showInProgressButtons = React.useMemo(() => {
     return status === 'in-progress' || status === 'paused';
   }, [status]);
@@ -50,7 +56,7 @@ export const MainControls = () => {
       </View>
       <View style={styles.middle}>
         <Pressable style={styles.mainButton} onPress={start}>
-          <Text>{status === 'waiting' ? 'Start' : 'Pause'}</Text>
+          <Text style={{color: '#000'}}>{mainButtonText}</Text>
         </Pressable>
       </View>
       <View style={styles.buttonContainer}>
@@ -89,8 +95,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   mainButton: {
-    backgroundColor: '#e7f1e5',
-    color: 'white',
+    backgroundColor: 'white',
     borderRadius: 200,
     width: 75,
     height: 75,
