@@ -1,30 +1,44 @@
 import {ScreenWrapper} from '@shared/components';
 import * as React from 'react';
+import {StyleSheet, View} from 'react-native';
 import {DayInstructions} from '../components/DayInstructions';
 import {DaySelector} from '../components/DaySelector';
+import {MainControls} from '../components/MainControls';
 import {MotivationImage} from '../components/MotivationImage';
-import {Button} from 'react-native-paper';
-import {View} from 'react-native';
 
 export const StartScreen = () => {
   return (
     <ScreenWrapper withScrollView={false}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-        }}>
-        <View style={{flex: 1}}>
+      <View style={styles.wrapper}>
+        <View style={styles.mainContent}>
           <DaySelector />
           <MotivationImage />
+        </View>
+        <View style={styles.dayContainer}>
           <DayInstructions />
         </View>
-        <View style={{flexShrink: 1}}>
-          <Button mode="contained" onPress={() => console.log('Pressed')}>
-            Start
-          </Button>
+        <View style={styles.buttonContainer}>
+          <MainControls />
         </View>
       </View>
     </ScreenWrapper>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  mainContent: {
+    flex: 1,
+  },
+  dayContainer: {
+    flexShrink: 1,
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexShrink: 1,
+  },
+});
