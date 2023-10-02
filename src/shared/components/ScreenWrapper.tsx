@@ -26,7 +26,7 @@ export const ScreenWrapper = ({
     styles.container,
     {
       backgroundColor: theme.colors.background,
-      paddingBottom: insets.bottom,
+      paddingBottom: insets.bottom || 17,
       paddingLeft: insets.left || 17,
       paddingRight: insets.left || 17,
     },

@@ -1,11 +1,11 @@
 import {ScreenWrapper} from '@shared/components';
 import * as React from 'react';
-import {FlowerOfTheWeek} from '../components/FlowerOfTheWeek';
+import {Text} from 'react-native-paper';
 
 export const RunScreen = () => {
   return (
     <ScreenWrapper>
-      <FlowerOfTheWeek />
+      <Text>Some Screen</Text>
     </ScreenWrapper>
   );
 };
