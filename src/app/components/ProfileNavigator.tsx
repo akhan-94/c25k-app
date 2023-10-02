@@ -19,7 +19,7 @@ export const ProfileNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: true,
-        header: props => <AppBarHeader {...props} back />,
+        header: props => <AppBarHeader {...props} />,
       }}>
       <Stack.Screen name="My Profile" component={ProfileScreen} />
     </Stack.Navigator>

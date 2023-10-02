@@ -22,27 +22,23 @@ export const AppBarHeader = ({
   AppbarHeaderProps) => {
   /** Hooks */
   const title = getHeaderTitle(options, route.name);
-  const canGoBack = navigation.canGoBack();
   return (
-    <Appbar.Header mode="medium">
+    <Appbar.Header mode="center-aligned" elevated>
       <StatusBar
         translucent
         backgroundColor="rgba(0, 0, 0, 0)"
         barStyle="dark-content"
         animated
       />
-      {canGoBack ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
+      <Appbar.Action icon="bell-outline" />
       <Appbar.Content title={title} />
       {noActions ? null : (
-        <>
-          <Appbar.Action icon="bell-outline" onPress={() => {}} />
-          <Appbar.Action
-            icon="menu"
-            onPress={() =>
-              (navigation as any as DrawerNavigationProp<any>).openDrawer()
-            }
-          />
-        </>
+        <Appbar.Action
+          icon="menu"
+          onPress={() =>
+            (navigation as any as DrawerNavigationProp<any>).openDrawer()
+          }
+        />
       )}
     </Appbar.Header>
   );
