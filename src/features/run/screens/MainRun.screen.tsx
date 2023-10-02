@@ -9,10 +9,12 @@ import {ActiveRunDetails} from '../components/ActiveRunDetails';
 import {useSelector} from 'react-redux';
 import {selectStatus} from '../run.selectors';
 import {ImageCarousel} from '../components/ImageCarousel';
+import {useAppTheme} from '@shared/hooks/useAppTheme';
 
 export const MainRunScreen = () => {
   /** Hooks */
   const insets = useSafeAreaInsets();
+  const appTheme = useAppTheme();
 
   /** Global State */
   const status = useSelector(selectStatus);
@@ -48,7 +50,14 @@ export const MainRunScreen = () => {
             <ActiveRunDetails />
           </View>
         )}
-        <View style={[insetSafetyStyles, styles.buttonContainer]}>
+        <View
+          style={[
+            insetSafetyStyles,
+            styles.buttonContainer,
+            {
+              backgroundColor: appTheme.colors.surfaceVariant,
+            },
+          ]}>
           <MainControls />
         </View>
       </View>
@@ -84,7 +93,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     flexShrink: 1,
     paddingBottom: 17,
-    backgroundColor: 'rgba(0, 0, 0, .95)',
     paddingTop: 17,
   },
 });

@@ -11,9 +11,5 @@ export const DayInstructions = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#e7f1e5',
-    padding: 16,
-    borderRadius: 10,
-  },
+  container: {},
 });

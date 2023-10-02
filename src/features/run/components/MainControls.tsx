@@ -45,7 +45,6 @@ export const MainControls = () => {
         <View style={styles.buttonContainer}>
           <IconButton
             icon="lock"
-            mode="contained"
             size={30}
             onPress={() => console.log('Pressed')}
           />
@@ -54,7 +53,6 @@ export const MainControls = () => {
       <View style={styles.buttonContainer}>
         <IconButton
           icon={status === 'waiting' ? 'run-fast' : 'chevron-double-left'}
-          mode="contained"
           size={30}
           onPress={() => console.log('Pressed')}
         />
@@ -68,18 +66,12 @@ export const MainControls = () => {
         <IconButton
           icon={status === 'waiting' ? 'run-fast' : 'chevron-double-right'}
           size={30}
-          mode="contained"
           onPress={() => console.log('Pressed')}
         />
       </View>
       {showInProgressButtons && (
         <View style={styles.buttonContainer}>
-          <IconButton
-            icon="close-octagon-outline"
-            mode="contained"
-            size={30}
-            onPress={finish}
-          />
+          <IconButton icon="close-octagon-outline" size={30} onPress={finish} />
         </View>
       )}
     </View>
