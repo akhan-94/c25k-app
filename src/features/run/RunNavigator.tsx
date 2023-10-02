@@ -6,7 +6,8 @@ import {AppBarHeader} from '../../app/components/AppBarHeader';
 import {MainRunScreen} from './screens/MainRun.screen';
 import {SummaryScreen} from './screens/Summary.screen';
 import {useSelector} from 'react-redux';
-import {selectStatus} from './run.selectors';
+import {selectStatus} from './selectors/run.selectors';
+import './listeners/run.listener';
 
 export type RunStackParamList = {
   MainRun: undefined;

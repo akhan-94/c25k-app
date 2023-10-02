@@ -7,9 +7,9 @@ import {MainControls} from '../components/MainControls';
 import {MotivationImage} from '../components/MotivationImage';
 import {ActiveRunDetails} from '../components/ActiveRunDetails';
 import {useSelector} from 'react-redux';
-import {selectStatus} from '../run.selectors';
 import {ImageCarousel} from '../components/ImageCarousel';
 import {useAppTheme} from '@shared/hooks/useAppTheme';
+import {selectStatus} from '../selectors/run.selectors';
 
 export const MainRunScreen = () => {
   /** Hooks */

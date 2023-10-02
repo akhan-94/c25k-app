@@ -1,5 +1,5 @@
 import {createSelector} from '@reduxjs/toolkit';
-import {selectRunState} from './run.slice';
+import {selectRunState} from '../state/run.slice';
 import {PROGRAM_MAP} from '@shared/constants';
 
 export const selectStatus = createSelector(
@@ -17,7 +17,7 @@ export const selectProgress = createSelector(selectRunState, ({progress}) => {
   return {week, day, step};
 });
 
-export const selectProgramActiveDayDetails = createSelector(
+export const selectProgramActiveDay = createSelector(
   selectProgram,
   selectProgress,
   (program, {week, day}) => {
@@ -25,7 +25,15 @@ export const selectProgramActiveDayDetails = createSelector(
   },
 );
 
-export const selectActiveStep = createSelector(
+export const selectProgramActiveStep = createSelector(
+  selectProgram,
+  selectProgress,
+  (program, {week, day, step}) => {
+    return PROGRAM_MAP[program][week][day].pattern[step];
+  },
+);
+
+export const selectActiveStage = createSelector(
   selectRunState,
   ({stage}) => stage || 'warm-up',
 );

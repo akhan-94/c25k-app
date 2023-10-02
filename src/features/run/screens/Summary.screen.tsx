@@ -3,7 +3,7 @@ import {useAppDispatch} from '@shared/hooks/useAppDispatch';
 import * as React from 'react';
 import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
-import {setStatus} from '../run.slice';
+import {setStatus} from '../state/run.slice';
 
 export const SummaryScreen = () => {
   /** Hooks */

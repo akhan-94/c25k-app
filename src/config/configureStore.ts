@@ -1,11 +1,16 @@
+import {runReducer} from '@features/run';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type {Middleware} from '@reduxjs/toolkit';
+import type {
+  Middleware,
+  TypedAddListener,
+  TypedStartListening,
+} from '@reduxjs/toolkit';
 import {
+  addListener,
   combineReducers,
   configureStore,
   createListenerMiddleware,
 } from '@reduxjs/toolkit';
-import {appReducer} from 'src/app';
 import {
   FLUSH,
   PAUSE,
@@ -16,7 +21,7 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist';
-import {runReducer} from '@features/run';
+import {appReducer} from 'src/app';
 
 const rootReducer = combineReducers({
   app: appReducer,
@@ -30,6 +35,7 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const listenerMiddleware = createListenerMiddleware<RootState>();
 
 const extraMiddleware: Middleware[] = [];
@@ -52,5 +58,15 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
+export type AppStartListening = TypedStartListening<RootState, AppDispatch>;
+
+export const startAppListening =
+  listenerMiddleware.startListening as AppStartListening;
+
+export const addAppListener = addListener as TypedAddListener<
+  RootState,
+  AppDispatch
+>;

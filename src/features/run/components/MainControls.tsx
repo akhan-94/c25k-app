@@ -3,9 +3,9 @@ import * as React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {IconButton, Text} from 'react-native-paper';
 import {useSelector} from 'react-redux';
-import {selectStatus} from '../run.selectors';
-import {setStatus} from '../run.slice';
+import {setStatus} from '../state/run.slice';
 import type {RunState} from '../types/RunState';
+import {selectStatus} from '../selectors/run.selectors';
 
 export const MainControls = () => {
   /** Hooks */

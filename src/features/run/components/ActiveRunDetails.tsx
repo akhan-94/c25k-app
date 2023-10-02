@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Surface, Text} from 'react-native-paper';
-import {useSelector} from 'react-redux';
-import {selectActiveStep, selectStatus} from '../run.selectors';
+import {Text} from 'react-native-paper';
 
 const StatCell = ({label, value}: {label: string; value: number | string}) => {
   return (
@@ -15,8 +13,8 @@ const StatCell = ({label, value}: {label: string; value: number | string}) => {
 
 export const ActiveRunDetails = () => {
   /** Global State */
-  const status = useSelector(selectStatus);
-  const activeStep = useSelector(selectActiveStep);
+  // const status = useSelector(selectStatus);
+
   return (
     <View>
       {/* <Text>{status}</Text>

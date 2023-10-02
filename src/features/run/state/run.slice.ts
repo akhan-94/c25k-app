@@ -1,7 +1,7 @@
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
-import type {RunState} from './types/RunState';
 import type {RootState} from 'src/config/configureStore';
+import type {RunState} from '../types/RunState';
 
 const initialState: RunState = {
   program: '10-week',
