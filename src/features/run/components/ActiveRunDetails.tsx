@@ -28,17 +28,14 @@ export const ActiveRunDetails = () => {
       <View style={styles.timerContainer}>
         <Text variant="displayLarge">5:00</Text>
       </View>
-      <Surface style={styles.surface} elevation={1} mode="elevated">
-        <View style={styles.statRow}>
-          <StatCell label="Calories" value={50} />
-          <StatCell label="Distance" value={50} />
-          <StatCell label="Steps" value={50} />
-        </View>
-        <View style={[styles.statRow, {marginTop: 10}]}>
-          <StatCell label="Avg. Speed" value={50} />
-          <StatCell label="Remaining Time" value={'30:00'} />
-        </View>
-      </Surface>
+      <View style={styles.statRow}>
+        <StatCell label="Calories" value={50} />
+        <StatCell label="Distance" value={50} />
+      </View>
+      <View style={[styles.statRow, {marginTop: 10}]}>
+        <StatCell label="Avg. Speed" value={50} />
+        <StatCell label="Remaining Time" value={'30:00'} />
+      </View>
     </View>
   );
 };
@@ -63,9 +60,5 @@ const styles = StyleSheet.create({
   statCell: {
     alignItems: 'center',
     flex: 1,
-  },
-  surface: {
-    paddingTop: 10,
-    paddingBottom: 10,
   },
 });
