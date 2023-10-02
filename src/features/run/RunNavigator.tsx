@@ -5,6 +5,8 @@ import {AppBarHeader} from '../../app/components/AppBarHeader';
 
 import {MainRunScreen} from './screens/MainRun.screen';
 import {SummaryScreen} from './screens/Summary.screen';
+import {useSelector} from 'react-redux';
+import {selectStatus} from './run.selectors';
 
 export type RunStackParamList = {
   MainRun: undefined;
@@ -18,6 +20,9 @@ export type RunNavigatorParamList = {
 const Stack = createNativeStackNavigator<RunStackParamList>();
 
 export const RunNavigator = () => {
+  /** Global State */
+  const status = useSelector(selectStatus);
+
   return (
     <Stack.Navigator
       initialRouteName="MainRun"
@@ -25,8 +30,11 @@ export const RunNavigator = () => {
         headerShown: true,
         header: props => <AppBarHeader {...props} />,
       }}>
-      <Stack.Screen name="MainRun" component={MainRunScreen} />
-      <Stack.Screen name="Summary" component={SummaryScreen} />
+      {status === 'finished' ? (
+        <Stack.Screen name="Summary" component={SummaryScreen} />
+      ) : (
+        <Stack.Screen name="MainRun" component={MainRunScreen} />
+      )}
     </Stack.Navigator>
   );
 };

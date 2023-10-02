@@ -34,6 +34,11 @@ export const MainControls = () => {
     dispatch(setStatus(action));
   }, [dispatch, status]);
 
+  const finish = React.useCallback(
+    () => dispatch(setStatus('finished')),
+    [dispatch],
+  );
+
   return (
     <View style={styles.container}>
       {showInProgressButtons && (
@@ -73,7 +78,7 @@ export const MainControls = () => {
             icon="close-octagon-outline"
             mode="contained"
             size={30}
-            onPress={() => console.log('Pressed')}
+            onPress={finish}
           />
         </View>
       )}
