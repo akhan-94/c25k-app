@@ -4,17 +4,10 @@ import type {RunState} from './types/RunState';
 import type {RootState} from 'src/config/configureStore';
 
 const initialState: RunState = {
+  program: '10-week',
   status: 'waiting',
-  step: {
-    active: 'warm-up',
-  },
-  activeDay: 0,
-  calories: 0,
-  distance: 0,
-  duration: {
-    elapsed: 0,
-    remaining: 1800,
-  },
+  stage: 'warm-up',
+  progress: [0, 0, 0],
 };
 
 export const runSlice = createSlice({
@@ -25,41 +18,42 @@ export const runSlice = createSlice({
       const {payload} = action;
       state.status = payload;
     },
-    setStep: (state, action: PayloadAction<RunState['step']['active']>) => {
+    setProgram: (state, action: PayloadAction<RunState['program']>) => {
       const {payload} = action;
-      state.step.active = payload;
+      state.program = payload;
     },
-    setActiveDay: (state, action: PayloadAction<number>) => {
+    setStage: (state, action: PayloadAction<RunState['stage']>) => {
       const {payload} = action;
-      state.activeDay = payload;
+      state.stage = payload;
     },
-    setCalories: (state, action: PayloadAction<number>) => {
-      const {payload} = action;
-      state.calories = payload;
+    setWeek: (state, action: PayloadAction<number>) => {
+      const [, day, step] = state.progress;
+      state.progress = [action.payload, day, step];
     },
-    setDistance: (state, action: PayloadAction<number>) => {
-      const {payload} = action;
-      state.distance = payload;
+    setDay: (state, action: PayloadAction<number>) => {
+      const [week, , step] = state.progress;
+      state.progress = [week, action.payload, step];
     },
-    setElapsedDuration: (state, action: PayloadAction<number>) => {
-      const {payload} = action;
-      state.duration.elapsed = payload;
+    setStep: (state, action: PayloadAction<number>) => {
+      const [week, day] = state.progress;
+      state.progress = [week, day, action.payload];
     },
-    setRemainingDuration: (state, action: PayloadAction<number>) => {
-      const {payload} = action;
-      state.duration.remaining = payload;
+    setWeekAndDay: (state, action: PayloadAction<[number, number]>) => {
+      const [week, day] = action.payload;
+      const [, , step] = state.progress;
+      state.progress = [week, day, step];
     },
   },
 });
 
 export const {
+  setDay,
   setStatus,
   setStep,
-  setActiveDay,
-  setCalories,
-  setDistance,
-  setElapsedDuration,
-  setRemainingDuration,
+  setWeek,
+  setWeekAndDay,
+  setProgram,
+  setStage,
 } = runSlice.actions;
 
 export const runReducer = runSlice.reducer;

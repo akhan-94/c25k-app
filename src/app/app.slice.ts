@@ -1,15 +1,15 @@
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
-import type {Session} from '@supabase/supabase-js';
-
-export interface AppState {
-  value: number;
-  session: Session | null;
-}
+import type {AppState} from './types/AppState';
 
 const initialState: AppState = {
-  value: 0,
   session: null,
+  settings: {
+    darkMode: false,
+    vibrate: true,
+    sound: true,
+    units: 'metric',
+  },
 };
 
 export const appSlice = createSlice({
