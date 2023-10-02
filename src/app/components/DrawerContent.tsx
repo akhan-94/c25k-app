@@ -25,10 +25,10 @@ export const DrawerContent = ({
         <ProfileSection />
         <Drawer.Section>
           <Drawer.Item
-            label="Home"
+            label="Run"
             icon="flower"
-            active={active === 'Home'}
-            onPress={() => navigation.navigate('Home')}
+            active={active === 'Run'}
+            onPress={() => navigation.navigate('Run')}
           />
 
           <Drawer.Item

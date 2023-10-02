@@ -8,6 +8,7 @@ import {MotivationImage} from '../components/MotivationImage';
 import {ActiveRunDetails} from '../components/ActiveRunDetails';
 import {useSelector} from 'react-redux';
 import {selectStatus} from '../run.selectors';
+import {ImageCarousel} from '../components/ImageCarousel';
 
 export const MainRunScreen = () => {
   /** Hooks */
@@ -19,8 +20,8 @@ export const MainRunScreen = () => {
   /** Derived State */
   const insetSafetyStyles = [
     {
-      paddingLeft: insets.left || 17,
-      paddingRight: insets.left || 17,
+      paddingLeft: insets.left || 16,
+      paddingRight: insets.left || 16,
     },
   ];
 
@@ -37,10 +38,16 @@ export const MainRunScreen = () => {
               </View>
             </>
           ) : (
-            <ActiveRunDetails />
+            <>
+              <ImageCarousel />
+            </>
           )}
         </View>
-
+        {status !== 'waiting' && (
+          <View style={[insetSafetyStyles, styles.detailsContainer]}>
+            <ActiveRunDetails />
+          </View>
+        )}
         <View style={[insetSafetyStyles, styles.buttonContainer]}>
           <MainControls />
         </View>
@@ -60,6 +67,12 @@ const styles = StyleSheet.create({
   },
   mainContent: {
     flex: 1,
+    marginTop: 16,
+  },
+  detailsContainer: {
+    flexShrink: 1,
+    marginTop: 16,
+    marginBottom: 16,
   },
   dayContainer: {
     flexShrink: 1,
