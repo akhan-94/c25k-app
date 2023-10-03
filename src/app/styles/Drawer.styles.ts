@@ -12,7 +12,7 @@ export const profileSectionStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
     paddingRight: 17,
     paddingTop: 17,
     paddingBottom: 17,
@@ -25,6 +25,6 @@ export const profileSectionStyles = StyleSheet.create({
   },
   nameContainer: {
     flex: 0,
-    marginRight: 17,
+    marginLeft: 16,
   },
 });

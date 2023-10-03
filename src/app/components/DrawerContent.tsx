@@ -43,13 +43,13 @@ export const DrawerContent = ({
             active={active === 'Settings'}
             onPress={() => navigation.navigate('Settings')}
           />
+          <Drawer.Item
+            label="Share App"
+            icon="share-variant-outline"
+            active={active === 'Share App'}
+            onPress={() => navigation.navigate('Share App')}
+          />
         </Drawer.Section>
-        <Drawer.Item
-          label="Share App"
-          icon="share-variant-outline"
-          active={active === 'Share App'}
-          onPress={() => navigation.navigate('Share App')}
-        />
       </ScrollView>
       <View>
         <Text variant="labelSmall" style={drawerStyles.text.versionDetails}>
@@ -65,11 +65,11 @@ const {profileSectionStyles} = drawerStyles;
 const ProfileSection = () => {
   return (
     <View style={profileSectionStyles.container}>
-      <View style={profileSectionStyles.nameContainer}>
-        <Text variant="headlineSmall">User</Text>
-      </View>
       <View style={profileSectionStyles.avatarContainer}>
         <Avatar.Text size={50} label="U" />
+      </View>
+      <View style={profileSectionStyles.nameContainer}>
+        <Text variant="headlineSmall">User</Text>
       </View>
     </View>
   );
