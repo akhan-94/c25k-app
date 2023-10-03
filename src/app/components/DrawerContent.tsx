@@ -26,27 +26,27 @@ export const DrawerContent = ({
         <Drawer.Section>
           <Drawer.Item
             label="Run"
-            icon="flower"
+            icon="run"
             active={active === 'Run'}
             onPress={() => navigation.navigate('Run')}
           />
 
           <Drawer.Item
             label="Achievements"
-            icon="bee-flower"
+            icon="trophy-outline"
             active={active === 'Achievements'}
             onPress={() => navigation.navigate('Achievements')}
           />
           <Drawer.Item
             label="Settings"
-            icon="cog"
+            icon="cog-outline"
             active={active === 'Settings'}
             onPress={() => navigation.navigate('Settings')}
           />
         </Drawer.Section>
         <Drawer.Item
           label="Share App"
-          icon="share-variant"
+          icon="share-variant-outline"
           active={active === 'Share App'}
           onPress={() => navigation.navigate('Share App')}
         />
