@@ -1,4 +1,4 @@
-package com.idlebyte.flowerapp;
+package com.idlebyte.couch2runner;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

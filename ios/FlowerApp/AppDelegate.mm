@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  self.moduleName = @"FlowerApp";
+  self.moduleName = @"Couch2Runner";
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

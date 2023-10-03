@@ -1,4 +1,4 @@
-# flowerapp
+# couch2runner
 To be used as a foundation / starting point for further apps
 
 ## Useful Links

@@ -101,9 +101,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.idlebyte.flowerapp"
+    namespace "com.idlebyte.couch2runner"
     defaultConfig {
-        applicationId "com.idlebyte.flowerapp"
+        applicationId "com.idlebyte.couch2runner"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

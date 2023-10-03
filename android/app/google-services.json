@@ -1,15 +1,15 @@
 {
   "project_info": {
     "project_number": "918249019166",
-    "project_id": "flowerapp-1ba68",
-    "storage_bucket": "flowerapp-1ba68.appspot.com"
+    "project_id": "couch2runner-1ba68",
+    "storage_bucket": "couch2runner-1ba68.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:918249019166:android:bbcf316843d00a377a5b0f",
         "android_client_info": {
-          "package_name": "com.idlebyte.flowerapp"
+          "package_name": "com.idlebyte.couch2runner"
         }
       },
       "oauth_client": [

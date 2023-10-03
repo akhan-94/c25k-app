@@ -1,4 +1,4 @@
-package com.idlebyte.flowerapp;
+package com.idlebyte.couch2runner;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
@@ -14,7 +14,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "FlowerApp";
+    return "Couch2Runner";
   }
 
   /**

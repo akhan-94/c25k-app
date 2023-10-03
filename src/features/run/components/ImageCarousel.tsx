@@ -11,7 +11,7 @@ export const ImageCarousel = () => {
         justifyContent: 'flex-start',
       }}>
       <Image
-        source={require('@features/run/assets/image.jpg')}
+        source={require('@assets/image.jpg')}
         style={styles.image}
         resizeMode={'cover'}
       />
