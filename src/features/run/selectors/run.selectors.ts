@@ -1,6 +1,7 @@
 import {createSelector} from '@reduxjs/toolkit';
 import {selectRunState} from '../state/run.slice';
 import {PROGRAM_MAP} from '@shared/constants';
+import {secondsIntoReadableTime} from '@shared/utils';
 
 export const selectStatus = createSelector(
   selectRunState,
@@ -10,6 +11,15 @@ export const selectStatus = createSelector(
 export const selectProgram = createSelector(
   selectRunState,
   ({program}) => program || '10-week',
+);
+
+export const selectTimer = createSelector(
+  selectRunState,
+  ({timer}) => timer || 300,
+);
+
+export const selectTimerAsFriendlyFormat = createSelector(selectTimer, timer =>
+  secondsIntoReadableTime(timer),
 );
 
 export const selectProgress = createSelector(selectRunState, ({progress}) => {

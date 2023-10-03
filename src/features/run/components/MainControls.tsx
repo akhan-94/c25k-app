@@ -3,9 +3,9 @@ import * as React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {IconButton, Text} from 'react-native-paper';
 import {useSelector} from 'react-redux';
-import {setStatus} from '../state/run.slice';
-import type {RunState} from '../types/RunState';
 import {selectStatus} from '../selectors/run.selectors';
+import {goBackToLastStep, setStatus, skipToNextStep} from '../state/run.slice';
+import type {RunState} from '../types/RunState';
 
 export const MainControls = () => {
   /** Hooks */
@@ -38,6 +38,14 @@ export const MainControls = () => {
     dispatch(setStatus('finished'));
   }, [dispatch]);
 
+  const setStep = React.useCallback(
+    (action: 'next' | 'prev') => {
+      if (action === 'next') dispatch(skipToNextStep());
+      else dispatch(goBackToLastStep());
+    },
+    [dispatch],
+  );
+
   return (
     <View style={styles.container}>
       {showInProgressButtons && (
@@ -53,7 +61,9 @@ export const MainControls = () => {
         <IconButton
           icon={status === 'waiting' ? 'run-fast' : 'chevron-double-left'}
           size={30}
-          onPress={() => console.log('Pressed')}
+          onPress={() =>
+            status === 'waiting' ? console.log('Pressed') : setStep('prev')
+          }
         />
       </View>
       <View style={styles.middle}>
@@ -65,7 +75,9 @@ export const MainControls = () => {
         <IconButton
           icon={status === 'waiting' ? 'run-fast' : 'chevron-double-right'}
           size={30}
-          onPress={() => console.log('Pressed')}
+          onPress={() =>
+            status === 'waiting' ? console.log('Pressed') : setStep('next')
+          }
         />
       </View>
       {showInProgressButtons && (

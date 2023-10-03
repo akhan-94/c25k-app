@@ -1,6 +1,11 @@
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
+import {useSelector} from 'react-redux';
+import {
+  selectProgramActiveStep,
+  selectTimerAsFriendlyFormat,
+} from '../selectors/run.selectors';
 
 const StatCell = ({label, value}: {label: string; value: number | string}) => {
   return (
@@ -13,18 +18,23 @@ const StatCell = ({label, value}: {label: string; value: number | string}) => {
 
 export const ActiveRunDetails = () => {
   /** Global State */
-  // const status = useSelector(selectStatus);
+  const timer = useSelector(selectTimerAsFriendlyFormat);
+  const currentStep = useSelector(selectProgramActiveStep);
+
+  /** Derived State */
+  const stage = React.useMemo(() => {
+    const {type} = currentStep;
+    return type;
+  }, [currentStep]);
 
   return (
     <View>
-      {/* <Text>{status}</Text>
-      <Text>{activeStep}</Text> */}
       <View style={styles.heading}>
-        <Text variant="headlineMedium">Warm up</Text>
+        <Text variant="headlineMedium">{stage}</Text>
       </View>
 
       <View style={styles.timerContainer}>
-        <Text variant="displayLarge">5:00</Text>
+        <Text variant="displayLarge">{timer}</Text>
       </View>
       <View style={styles.statRow}>
         <StatCell label="Calories" value={50} />

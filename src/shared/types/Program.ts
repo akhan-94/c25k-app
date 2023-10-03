@@ -4,10 +4,8 @@ export type ProgramStages = 'warm-up' | 'jog' | 'walk' | 'cool-down';
 
 export type ProgramDay = {
   instructions: string;
-  warmup: number;
-  cooldown: number;
   pattern: Array<{
-    type: 'jog' | 'walk';
+    type: 'warmup' | 'jog' | 'walk' | 'cooldown';
     time: number;
     distance: number;
   }>;
