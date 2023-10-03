@@ -24,7 +24,7 @@ export const GeneralSettingsScreen = () => {
       <Divider />
       <List.Section title="Account">
         <List.Item title="Push notifications" />
-        <List.Item title="Logout" onPress={signOut} />
+        <List.Item title="Logout" onPress={() => signOut() as any} />
         <List.Item title="Delete account" />
       </List.Section>
       <Divider />

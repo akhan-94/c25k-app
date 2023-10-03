@@ -34,10 +34,9 @@ export const MainControls = () => {
     dispatch(setStatus(action));
   }, [dispatch, status]);
 
-  const finish = React.useCallback(
-    () => dispatch(setStatus('finished')),
-    [dispatch],
-  );
+  const finish = React.useCallback(() => {
+    dispatch(setStatus('finished'));
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>
