@@ -21,6 +21,7 @@ export const SettingsNavigator = (): React.JSX.Element => {
       initialRouteName="General Settings"
       screenOptions={{
         headerShown: true,
+        title: 'Settings',
         header: props => <AppBarHeader {...props} />,
       }}>
       <Stack.Screen name="General Settings" component={GeneralSettingsScreen} />

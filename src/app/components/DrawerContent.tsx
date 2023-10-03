@@ -34,8 +34,8 @@ export const DrawerContent = ({
           <Drawer.Item
             label="Achievements"
             icon="bee-flower"
-            active={active === 'Guides'}
-            onPress={() => navigation.navigate('Guides')}
+            active={active === 'Achievements'}
+            onPress={() => navigation.navigate('Achievements')}
           />
           <Drawer.Item
             label="Settings"

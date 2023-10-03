@@ -42,6 +42,7 @@ export const MainNavigator = () => {
         name="Achievements"
         options={{
           headerShown: false,
+          title: 'Achievements',
         }}
         component={AchievementsNavigator}
       />

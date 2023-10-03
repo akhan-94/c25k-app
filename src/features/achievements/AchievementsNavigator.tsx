@@ -19,6 +19,7 @@ export const AchievementsNavigator = () => {
       initialRouteName="Main Achievements"
       screenOptions={{
         headerShown: true,
+        title: 'Achievements',
         header: props => <AppBarHeader {...props} />,
       }}>
       <Stack.Screen

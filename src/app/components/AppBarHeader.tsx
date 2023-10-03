@@ -30,7 +30,10 @@ export const AppBarHeader = ({
         barStyle="dark-content"
         animated
       />
-      <Appbar.Action icon="bell-outline" />
+      <Appbar.Action
+        icon="bell-outline"
+        onPress={() => navigation.navigate('Notifications')}
+      />
       <Appbar.Content title={title} />
       {noActions ? null : (
         <Appbar.Action
