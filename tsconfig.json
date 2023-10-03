@@ -5,8 +5,8 @@
     "baseUrl": ".",
     "skipLibCheck": true,
     "paths": {
-      "@assets/*": ["assets/*"],
-      "@lib/*": ["lib/*"],
+      "@assets/*": ["src/assets/*"],
+      "@lib/*": ["src/lib/*"],
       "@config": ["src/config"],
       "@features/*": ["src/features/*"],
       "@shared/*": ["src/shared/*"]
