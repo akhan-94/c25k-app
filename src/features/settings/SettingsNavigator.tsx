@@ -1,8 +1,8 @@
 import {GeneralSettingsScreen} from '@features/settings';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-import {AppBarHeader} from './AppBarHeader';
-import type {AuthStackParamList} from './AuthNavigator';
+import {AppBarHeader} from '../../app/components/AppBarHeader';
+import type {AuthStackParamList} from '../auth/AuthNavigator';
 
 export type SettingsStackParamList = {
   'General Settings': undefined;

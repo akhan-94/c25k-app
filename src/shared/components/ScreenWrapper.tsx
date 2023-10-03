@@ -9,11 +9,13 @@ type Props = ScrollViewProps & {
   children: React.ReactNode;
   withScrollView?: boolean;
   style?: StyleProp<ViewStyle>;
+  noPadding?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
 };
 export const ScreenWrapper = ({
   children,
   withScrollView = true,
+  noPadding = false,
   style,
   contentContainerStyle,
   ...rest
@@ -26,9 +28,10 @@ export const ScreenWrapper = ({
     styles.container,
     {
       backgroundColor: theme.colors.background,
-      paddingBottom: insets.bottom || 17,
-      paddingLeft: insets.left || 17,
-      paddingRight: insets.left || 17,
+      paddingTop: noPadding ? 0 : 16,
+      paddingBottom: noPadding ? 0 : insets.bottom || 16,
+      paddingLeft: noPadding ? 0 : insets.left || 16,
+      paddingRight: noPadding ? 0 : insets.left || 16,
     },
   ];
 

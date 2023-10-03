@@ -1,1 +1,1 @@
-export {ShareAppScreen} from './ShareApp.screen';
+export {ShareAppScreen} from './screens/ShareApp.screen';

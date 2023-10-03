@@ -4,12 +4,6 @@ import type {AppState} from './types/AppState';
 
 const initialState: AppState = {
   session: null,
-  settings: {
-    darkMode: false,
-    vibrate: true,
-    sound: true,
-    units: 'metric',
-  },
 };
 
 export const appSlice = createSlice({

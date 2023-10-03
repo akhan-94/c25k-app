@@ -38,12 +38,6 @@ export const DrawerContent = ({
             onPress={() => navigation.navigate('Guides')}
           />
           <Drawer.Item
-            label="Account"
-            icon="account-circle-outline"
-            active={active === 'Account'}
-            onPress={() => navigation.navigate('Account')}
-          />
-          <Drawer.Item
             label="Settings"
             icon="cog"
             active={active === 'Settings'}
@@ -55,12 +49,6 @@ export const DrawerContent = ({
           icon="share-variant"
           active={active === 'Share App'}
           onPress={() => navigation.navigate('Share App')}
-        />
-        <Drawer.Item
-          label="About"
-          active={active === 'About'}
-          icon="book-open-outline"
-          onPress={() => navigation.navigate('About')}
         />
       </ScrollView>
       <View>

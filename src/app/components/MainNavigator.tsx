@@ -1,29 +1,19 @@
 import {ShareAppScreen} from '@features/share-app';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import * as React from 'react';
-import type {AboutNavigatorParamList} from './AboutNavigator';
-import {AboutNavigator} from './AboutNavigator';
-import {
-  AccountNavigator,
-  type AccountNavigatorParamList,
-} from './AccountNavigator';
-import {DrawerContent} from './DrawerContent';
-import {
-  GuidesNavigator,
-  type GuidesNavigatorParamList,
-} from './GuidesNavigator';
-import type {RunNavigatorParamList} from '../../features/run';
-import {RunNavigator} from '../../features/run';
-import type {SettingsNavigatorParamList} from './SettingsNavigator';
-import {SettingsNavigator} from './SettingsNavigator';
+import type {RunNavigatorParamList} from '@features/run';
+import {RunNavigator} from '@features/run';
+import type {SettingsNavigatorParamList} from '@features/settings';
+import {SettingsNavigator} from '@features/settings';
 import {AppBarHeader} from './AppBarHeader';
+import {DrawerContent} from './DrawerContent';
+import type {AchievementsNavigatorParamList} from '@features/achievements';
+import {AchievementsNavigator} from '@features/achievements';
 
 export type MainStackParamList = {
-  Guides: GuidesNavigatorParamList;
+  Achievements: AchievementsNavigatorParamList;
   Run: RunNavigatorParamList;
   Settings: SettingsNavigatorParamList;
-  About: AboutNavigatorParamList;
-  Account: AccountNavigatorParamList;
   'Share App': undefined;
 };
 
@@ -49,18 +39,11 @@ export const MainNavigator = () => {
         component={RunNavigator}
       />
       <Drawer.Screen
-        name="Account"
+        name="Achievements"
         options={{
           headerShown: false,
         }}
-        component={AccountNavigator}
-      />
-      <Drawer.Screen
-        name="Guides"
-        options={{
-          headerShown: false,
-        }}
-        component={GuidesNavigator}
+        component={AchievementsNavigator}
       />
       <Drawer.Screen
         name="Settings"
@@ -74,11 +57,6 @@ export const MainNavigator = () => {
           header: props => <AppBarHeader {...props} />,
         }}
         component={ShareAppScreen}
-      />
-      <Drawer.Screen
-        name="About"
-        options={{headerShown: false}}
-        component={AboutNavigator}
       />
     </Drawer.Navigator>
   );

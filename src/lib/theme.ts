@@ -2,7 +2,7 @@ import {MD3DarkTheme} from 'react-native-paper';
 
 export const appTheme = {
   ...MD3DarkTheme,
-  roundness: 10,
+  roundness: 2,
   colors: {
     ...MD3DarkTheme.colors,
     primary: 'rgb(255, 183, 134)',

@@ -1,7 +1,7 @@
 import {PrivacyPolicyScreen, TermsScreen} from '@features/legal';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-import {AppBarHeader} from './AppBarHeader';
+import {AppBarHeader} from '../../app/components/AppBarHeader';
 
 export type LegalStackParamList = {
   'Privacy Policy': undefined;

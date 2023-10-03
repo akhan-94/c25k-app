@@ -2,10 +2,10 @@ import {ScreenWrapper} from '@shared/components';
 import * as React from 'react';
 import {Text} from 'react-native-paper';
 
-export const AccountDetailsScreen = () => {
+export const NotificationsScreen = () => {
   return (
     <ScreenWrapper>
-      <Text>asdasd</Text>
+      <Text>asasd</Text>
     </ScreenWrapper>
   );
 };

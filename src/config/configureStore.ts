@@ -1,4 +1,5 @@
 import {runReducer} from '@features/run';
+import {settingsReducer} from '@features/settings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type {
   Middleware,
@@ -25,6 +26,7 @@ import {appReducer} from 'src/app';
 
 const rootReducer = combineReducers({
   app: appReducer,
+  settings: settingsReducer,
   run: runReducer,
 });
 

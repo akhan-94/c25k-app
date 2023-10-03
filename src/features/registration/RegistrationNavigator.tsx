@@ -1,6 +1,6 @@
-import {SignUpScreen} from '@features/registration';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
+import {SignUpScreen} from './screens/SignUp.screen';
 
 export type RegistrationStackParamList = {
   'Sign Up': undefined;
