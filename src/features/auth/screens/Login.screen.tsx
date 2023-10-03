@@ -71,7 +71,7 @@ export const LoginScreen = () => {
             <Text
               style={loginStyles.text.legalLink}
               onPress={() =>
-                navigation.navigate('Legal', {screen: 'Privacy Policy'})
+                navigation.navigate('Legal', {screen: 'Privacy policy'})
               }>
               Privacy Policy
             </Text>{' '}
@@ -79,7 +79,7 @@ export const LoginScreen = () => {
             <Text
               style={loginStyles.text.legalLink}
               onPress={() =>
-                navigation.navigate('Legal', {screen: 'Terms of Service'})
+                navigation.navigate('Legal', {screen: 'Terms of service'})
               }>
               Terms of Service
             </Text>

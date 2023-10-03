@@ -4,9 +4,11 @@ import {Divider, List} from 'react-native-paper';
 import {RadioSettingItem} from '../components/RadioSettingItem';
 import {SwitchSettingItem} from '../components/SwitchSettingItem';
 import {useAuth} from '@shared/hooks/useAuth';
+import {useNavigation} from '@react-navigation/native';
 
 export const GeneralSettingsScreen = () => {
   /** Hooks */
+  const navigation = useNavigation();
   const {signOut} = useAuth();
 
   return (
@@ -29,12 +31,22 @@ export const GeneralSettingsScreen = () => {
       </List.Section>
       <Divider />
       <List.Section title="Legal">
-        <List.Item title="Privacy policy" />
-        <List.Item title="Terms of service" />
+        <List.Item
+          title="Privacy policy"
+          onPress={() =>
+            navigation.navigate('Legal', {screen: 'Privacy policy'})
+          }
+        />
+        <List.Item
+          title="Terms of service"
+          onPress={() =>
+            navigation.navigate('Legal', {screen: 'Terms of service'})
+          }
+        />
       </List.Section>
       <Divider />
       <List.Section title="Support">
-        <List.Item title="Email" />
+        <List.Item title="Email us" />
         <List.Item title="Rate app on Google Play Store" />
       </List.Section>
     </ScreenWrapper>

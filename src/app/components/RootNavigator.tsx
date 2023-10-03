@@ -82,7 +82,7 @@ export const RootNavigator = () => {
       )}
       <RootStack.Screen
         options={{
-          headerShown: true,
+          headerShown: false,
         }}
         name="Legal"
         component={LegalNavigator}

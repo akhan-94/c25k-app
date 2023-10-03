@@ -4,8 +4,8 @@ import * as React from 'react';
 import {AppBarHeader} from '../../app/components/AppBarHeader';
 
 export type LegalStackParamList = {
-  'Privacy Policy': undefined;
-  'Terms of Service': undefined;
+  'Privacy policy': undefined;
+  'Terms of service': undefined;
 };
 
 export type LegalNavigatorParamList = {
@@ -21,8 +21,8 @@ export const LegalNavigator = () => {
         headerShown: true,
         header: props => <AppBarHeader {...props} noActions />,
       }}>
-      <Stack.Screen name="Privacy Policy" component={PrivacyPolicyScreen} />
-      <Stack.Screen name="Terms of Service" component={TermsScreen} />
+      <Stack.Screen name="Privacy policy" component={PrivacyPolicyScreen} />
+      <Stack.Screen name="Terms of service" component={TermsScreen} />
     </Stack.Navigator>
   );
 };
