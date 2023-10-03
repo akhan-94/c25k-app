@@ -3,9 +3,6 @@ import {StyleSheet} from 'react-native';
 export const layout = StyleSheet.create({
   main: {
     flex: 1,
-    paddingTop: 17,
-    paddingBottom: 17,
-    backgroundColor: '#e7f1e5',
     justifyContent: 'flex-end',
   },
   footer: {

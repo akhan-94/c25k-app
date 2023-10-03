@@ -29,7 +29,7 @@ export const RunNavigator = () => {
       initialRouteName="MainRun"
       screenOptions={{
         headerShown: true,
-        title: 'Couch2Runner',
+        title: 'Run',
         header: props => <AppBarHeader {...props} />,
       }}>
       {status === 'finished' ? (
