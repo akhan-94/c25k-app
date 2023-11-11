@@ -5,10 +5,14 @@ import {List, Switch} from 'react-native-paper';
 interface SwitchSettingItemProps {
   title: string;
   description?: string;
+  value: boolean;
+  onPress: () => void;
 }
 
 export const SwitchSettingItem = ({
   title,
+  value,
+  onPress,
   description,
 }: SwitchSettingItemProps) => {
   return (
@@ -16,7 +20,8 @@ export const SwitchSettingItem = ({
       <List.Item
         title={title}
         description={description}
-        right={() => <Switch style={styles.centered} />}
+        onPress={onPress}
+        right={() => <Switch style={styles.centered} value={value} />}
       />
     </View>
   );

@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ScreenWrapper} from '@shared/components';
 import type {AuthError} from '@supabase/supabase-js';
 import * as React from 'react';
-import {StatusBar, StyleSheet, View, useWindowDimensions} from 'react-native';
+import {StatusBar, StyleSheet, View} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {supabase} from 'src/lib/supabase';
 import {authCommonStyles, loginStyles} from '../styles';
@@ -13,7 +13,6 @@ import {authCommonStyles, loginStyles} from '../styles';
 export const LoginScreen = () => {
   /** Hooks */
   const navigation = useNavigation();
-  const {height, width} = useWindowDimensions();
 
   /** Local State */
   const [email, setEmail] = React.useState('');

@@ -1,3 +1,4 @@
+import {NotificationsScreen} from '@features/notifications';
 import type {RegistrationNavigatorParamList} from '@features/registration';
 import {RegistrationNavigator} from '@features/registration';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -11,11 +12,10 @@ import {
 } from '../../features/legal/LegalNavigator';
 import {supabase} from '../../lib/supabase';
 import {useAppDispatch} from '../../shared/hooks/useAppDispatch';
-import {selectSession} from '../app.selectors';
-import {setSession} from '../app.slice';
+import {selectSession} from '../selectors/app.selectors';
+import {setSession} from '../state/app.slice';
 import type {MainNavigatorParamList} from './MainNavigator';
 import {MainNavigator} from './MainNavigator';
-import {NotificationsScreen} from '@features/notifications';
 
 export type RootStackParamList = {
   Main: MainNavigatorParamList | undefined;

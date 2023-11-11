@@ -12,6 +12,7 @@ type Props = ScrollViewProps & {
   noPadding?: boolean;
   contentContainerStyle?: StyleProp<ViewStyle>;
 };
+
 export const ScreenWrapper = ({
   children,
   withScrollView = true,

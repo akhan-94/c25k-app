@@ -4,3 +4,8 @@ export interface SettingsState {
   sound: boolean;
   units: 'metric' | 'imperial';
 }
+
+export type ToggleSettings = keyof Pick<
+  SettingsState,
+  'darkMode' | 'vibrate' | 'sound'
+>;
