@@ -4,7 +4,7 @@ import type {RootState} from 'src/config/configureStore';
 import type {SettingsState, ToggleSettings} from '../types/SettingsState';
 
 const initialState: SettingsState = {
-  darkMode: false,
+  darkMode: true,
   vibrate: true,
   sound: true,
   units: 'metric',

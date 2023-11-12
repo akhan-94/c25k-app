@@ -9,6 +9,9 @@ import * as React from 'react';
 import {StatusBar} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import type {AppBarProps} from './AppBar.types';
+import {useSelector} from 'react-redux';
+import {selectAppState} from 'src/app/state/app.slice';
+import {selectSettingsState} from '@features/settings';
 
 export const AppBar = ({
   navigation,
@@ -21,12 +24,15 @@ export const AppBar = ({
   /** Hooks */
   const title = getHeaderTitle(options, route.name);
 
+  /** Global state */
+  const {darkMode} = useSelector(selectSettingsState);
+
   return (
     <>
       <StatusBar
         translucent
         backgroundColor="rgba(0, 0, 0, 0)"
-        barStyle="dark-content"
+        barStyle={darkMode ? 'light-content' : 'dark-content'}
         animated
       />
       <Appbar.Header mode={'center-aligned'} elevated>

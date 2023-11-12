@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import {ScreenWrapper} from '@shared/components';
 import type {AuthError} from '@supabase/supabase-js';
 import * as React from 'react';
-import {StatusBar, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {supabase} from 'src/lib/supabase';
 import {authCommonStyles, loginStyles} from '../styles';
@@ -57,12 +57,6 @@ export const LoginScreen = () => {
 
   return (
     <>
-      <StatusBar
-        translucent
-        backgroundColor="rgba(255, 255, 255, 0)"
-        animated
-        barStyle="dark-content"
-      />
       <ScreenWrapper withScrollView={false} style={loginStyles.layout.main}>
         <View>
           <Text style={loginStyles.text.legal} variant="titleSmall">
