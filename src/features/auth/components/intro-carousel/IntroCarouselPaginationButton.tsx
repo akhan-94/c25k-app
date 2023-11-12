@@ -12,9 +12,8 @@ export const IntroCarouselPaginationButton: React.FC<{
   backgroundColor: string;
   length: number;
   animValue: Animated.SharedValue<number>;
-  isRotate?: boolean;
 }> = props => {
-  const {animValue, index, length, backgroundColor, isRotate} = props;
+  const {animValue, index, length} = props;
   const width = 10;
 
   const animStyle = useAnimatedStyle(() => {
@@ -47,11 +46,6 @@ export const IntroCarouselPaginationButton: React.FC<{
         height: width,
         borderRadius: 50,
         overflow: 'hidden',
-        transform: [
-          {
-            rotateZ: isRotate ? '90deg' : '0deg',
-          },
-        ],
       }}>
       <Animated.View
         style={[

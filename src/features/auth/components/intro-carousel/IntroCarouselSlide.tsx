@@ -24,19 +24,21 @@ export const IntroCarouselSlide = ({item}: {item: IntroCarouselItem}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
+    backgroundColor: '#2d5262',
+    boxShadow: '10px 10px 10px rgba(255,255,255,1)',
+    zIndex: 1,
     flex: 1,
-    padding: appTheme.spacing.medium,
+    padding: appTheme.spacing.xlarge,
     borderRadius: 10,
     display: 'flex',
     overflow: 'hidden',
     position: 'relative',
+    justifyContent: 'flex-end',
   },
   title: {
     position: 'relative',
     marginBottom: appTheme.spacing.medium,
     textAlign: 'right',
-    flex: 1,
     zIndex: 2,
   },
   image: {
@@ -47,7 +49,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     position: 'relative',
     lineHeight: 24,
-    maxWidth: '70%',
+    maxWidth: '75%',
     alignSelf: 'flex-end',
     textAlign: 'right',
   },

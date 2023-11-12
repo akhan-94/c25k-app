@@ -1,3 +1,4 @@
+import {appTheme} from '@lib/theme';
 import {StyleSheet} from 'react-native';
 import {StatusBar} from 'react-native';
 export const layout = StyleSheet.create({
@@ -16,18 +17,14 @@ export const layout = StyleSheet.create({
 
 export const button = StyleSheet.create({
   primary: {
-    marginBottom: 10,
+    marginBottom: appTheme.spacing.medium,
   },
 });
 
 export const text = StyleSheet.create({
-  title: {
-    marginBottom: 10,
-    textAlign: 'center',
-  },
   legal: {
     textAlign: 'center',
-    paddingBottom: 17,
+    paddingBottom: appTheme.spacing.medium,
   },
   legalLink: {
     textDecorationLine: 'underline',

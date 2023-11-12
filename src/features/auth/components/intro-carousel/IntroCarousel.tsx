@@ -33,8 +33,8 @@ export const IntroCarousel = ({height}: {height: number | null}) => {
         }
         mode="parallax"
         modeConfig={{
-          parallaxScrollingScale: 0.9,
-          parallaxScrollingOffset: 50,
+          parallaxScrollingScale: 0.92,
+          parallaxScrollingOffset: 38,
         }}
         data={INTRO_CAROUSEL_DATA}
         renderItem={({item}) => <IntroCarouselSlide item={item} />}
@@ -54,7 +54,6 @@ export const IntroCarousel = ({height}: {height: number | null}) => {
                 animValue={progressValue}
                 index={index}
                 key={index}
-                isRotate={false}
                 length={INTRO_CAROUSEL_DATA.length}
               />
             );
