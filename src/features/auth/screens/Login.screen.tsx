@@ -7,14 +7,22 @@ import {StyleSheet, View} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {supabase} from 'src/lib/supabase';
 import {authCommonStyles, loginStyles} from '../styles';
+import {AppLogo} from '@shared/components/app-logo';
+import {IntroCarousel} from '../components/IntroCarousel';
 
 // const image = require('../image.png');
 // import image2 from '../image.png';
 export const LoginScreen = () => {
+  /** Refs */
+  const bottomSheetRef = React.useRef<BottomSheet>(null);
+
   /** Hooks */
   const navigation = useNavigation();
 
   /** Local State */
+  const [carouselHeight, setCarouselHeight] = React.useState<number | null>(
+    null,
+  );
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
@@ -23,18 +31,13 @@ export const LoginScreen = () => {
 
   /** Derived State */
   const disableSubmitButton = !email || !password || isLoading;
-  // ref
-  const bottomSheetRef = React.useRef<BottomSheet>(null);
-
-  // variables
   const snapPoints = React.useMemo(() => ['45%'], []);
 
-  // callbacks
+  /** Functions */
   const handleSheetChanges = React.useCallback((index: number) => {
     console.log('handleSheetChanges', index);
   }, []);
 
-  /** Functions */
   const handleClosePress = () => bottomSheetRef.current?.expand();
 
   const login = React.useCallback(async () => {
@@ -57,49 +60,71 @@ export const LoginScreen = () => {
 
   return (
     <>
-      <ScreenWrapper withScrollView={false} style={loginStyles.layout.main}>
-        <View>
-          <Text style={loginStyles.text.legal} variant="titleSmall">
-            By continuing you are agreeing to our{' '}
-            <Text
-              style={loginStyles.text.legalLink}
-              onPress={() =>
-                navigation.navigate('Legal', {screen: 'Privacy policy'})
-              }>
-              Privacy Policy
-            </Text>{' '}
-            and{' '}
-            <Text
-              style={loginStyles.text.legalLink}
-              onPress={() =>
-                navigation.navigate('Legal', {screen: 'Terms of service'})
-              }>
-              Terms of Service
-            </Text>
-          </Text>
-        </View>
-        <View>
+      <ScreenWrapper
+        withScrollView={false}
+        style={loginStyles.layout.container}>
+        <View style={loginStyles.layout.main}>
           <Button
-            mode="contained"
-            onPress={() => console.log('Pressed')}
-            icon="google-plus"
-            loading={isLoading}
-            style={loginStyles.button.primary}>
-            Continue with Google
-          </Button>
-          <Button
-            mode="contained"
-            onPress={handleClosePress}
-            loading={isLoading}
-            style={loginStyles.button.primary}>
-            Login
-          </Button>
-          <Button
+            style={{alignSelf: 'flex-end'}}
             mode="text"
-            onPress={() => navigation.navigate('Registration')}
-            loading={isLoading}>
-            Don&lsquo;t have an account? Sign up
+            compact
+            onPress={() => console.log('Pressed')}>
+            Continue as guest
           </Button>
+          {/* <AppLogo /> */}
+          <View
+            style={{flex: 1}}
+            onLayout={event => {
+              const {height} = event.nativeEvent.layout;
+              setCarouselHeight(height);
+            }}>
+            <IntroCarousel height={carouselHeight} />
+          </View>
+        </View>
+        <View style={loginStyles.layout.footer}>
+          <View>
+            <Text style={loginStyles.text.legal} variant="titleSmall">
+              By continuing you are agreeing to our{'\n'}
+              <Text
+                style={loginStyles.text.legalLink}
+                onPress={() =>
+                  navigation.navigate('Legal', {screen: 'Privacy policy'})
+                }>
+                Privacy Policy
+              </Text>{' '}
+              and{' '}
+              <Text
+                style={loginStyles.text.legalLink}
+                onPress={() =>
+                  navigation.navigate('Legal', {screen: 'Terms of service'})
+                }>
+                Terms of Service
+              </Text>
+            </Text>
+          </View>
+          <View>
+            <Button
+              mode="contained"
+              onPress={() => console.log('Pressed')}
+              icon="google-plus"
+              loading={isLoading}
+              style={loginStyles.button.primary}>
+              Continue with Google
+            </Button>
+            <Button
+              mode="contained"
+              onPress={handleClosePress}
+              loading={isLoading}
+              style={loginStyles.button.primary}>
+              Login
+            </Button>
+            <Button
+              mode="text"
+              onPress={() => navigation.navigate('Registration')}
+              loading={isLoading}>
+              Don&lsquo;t have an account? Sign up
+            </Button>
+          </View>
         </View>
         <BottomSheet
           ref={bottomSheetRef}
@@ -133,7 +158,6 @@ export const LoginScreen = () => {
               onChangeText={text => setPassword(text)}
               style={authCommonStyles.inputContainer}
             />
-
             <Button
               mode="contained"
               onPress={login}

@@ -1,16 +1,17 @@
 import {StyleSheet} from 'react-native';
-
+import {StatusBar} from 'react-native';
 export const layout = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    paddingTop: StatusBar.currentHeight,
+  },
   main: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
-  footer: {
-    // flex: 0,
-    paddingBottom: 17,
-    paddingRight: 17,
-    paddingLeft: 17,
-  },
+  footer: {},
 });
 
 export const button = StyleSheet.create({

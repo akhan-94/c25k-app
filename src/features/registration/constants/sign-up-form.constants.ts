@@ -1,19 +1,13 @@
 import * as Yup from 'yup';
+import type {SignUpFormValues} from '../types/sign-up-form.types';
 
-export const FORM_INITIAL_VALUES: {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-  birthdate: Date | undefined;
-} = {
+export const SIGN_UP_FORM_INITIAL_VALUES: SignUpFormValues = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
   passwordConfirmation: '',
-  birthdate: undefined,
+  birthdate: '',
 };
 
 export const SignupSchema = Yup.object().shape({

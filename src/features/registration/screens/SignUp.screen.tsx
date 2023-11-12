@@ -1,39 +1,41 @@
+import {appTheme} from '@lib/theme';
 import {ScreenWrapper} from '@shared/components';
+import {OrDivider} from '@shared/components/or-divider';
 import {useErrorHandler} from '@shared/hooks';
 import {spacing} from '@shared/styles';
+import type {FormikHelpers, FormikProps} from 'formik';
+import {Formik} from 'formik';
 import * as React from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
-import {Button, Divider, Text, TextInput} from 'react-native-paper';
-import {supabase} from 'src/lib/supabase';
-import type {FormikProps} from 'formik';
-import {Formik, useFormikContext} from 'formik';
+import {Button, Text, TextInput} from 'react-native-paper';
 import {
-  FORM_INITIAL_VALUES,
+  DatePickerInput,
+  en,
+  registerTranslation,
+} from 'react-native-paper-dates';
+import {
+  SIGN_UP_FORM_INITIAL_VALUES,
   SignupSchema,
 } from '../constants/sign-up-form.constants';
-import {appTheme} from '@lib/theme';
-import {OrDivider} from '@shared/components/or-divider';
-import {DatePickerInput} from 'react-native-paper-dates';
-import {enGB, en, registerTranslation} from 'react-native-paper-dates';
+import type {
+  SignUpFormFields,
+  SignUpFormValues,
+} from '../types/sign-up-form.types';
 
 registerTranslation('en', en);
 
 export const SignUpScreen = () => {
   /** Hooks */
   const handleError = useErrorHandler();
-  // const { setFieldValue } = useFormikContext();
+
   /** Functions */
   const createAccount = React.useCallback(
-    async ({
-      email,
-      firstName,
-      lastName,
-      password,
-    }: typeof FORM_INITIAL_VALUES) => {
-      Alert.alert(
-        'create account',
-        JSON.stringify({email, firstName, lastName, password}, null, 2),
-      );
+    async (
+      values: SignUpFormValues,
+      actions: FormikHelpers<SignUpFormValues>,
+    ) => {
+      actions.setSubmitting(true);
+      Alert.alert('create account', JSON.stringify(values, null, 2));
       // try {
       //   const {data, error} = await supabase.auth.signUp({
       //     email,
@@ -51,7 +53,7 @@ export const SignUpScreen = () => {
   return (
     <ScreenWrapper>
       <Formik
-        initialValues={FORM_INITIAL_VALUES}
+        initialValues={SIGN_UP_FORM_INITIAL_VALUES}
         onSubmit={createAccount}
         validationSchema={SignupSchema}>
         {formikProps => (
@@ -128,8 +130,8 @@ export const InputField = ({
   formikProps,
 }: {
   label: string;
-  fieldName: keyof typeof FORM_INITIAL_VALUES;
-  formikProps: FormikProps<typeof FORM_INITIAL_VALUES>;
+  fieldName: SignUpFormFields;
+  formikProps: FormikProps<SignUpFormValues>;
 }) => {
   /** Props */
   const {values, errors, touched, handleBlur, handleChange} = formikProps;
