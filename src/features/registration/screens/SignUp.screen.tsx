@@ -6,18 +6,22 @@ import {Alert, StyleSheet, View} from 'react-native';
 import {Button, Divider, Text, TextInput} from 'react-native-paper';
 import {supabase} from 'src/lib/supabase';
 import type {FormikProps} from 'formik';
-import {Formik} from 'formik';
+import {Formik, useFormikContext} from 'formik';
 import {
   FORM_INITIAL_VALUES,
   SignupSchema,
 } from '../constants/sign-up-form.constants';
 import {appTheme} from '@lib/theme';
 import {OrDivider} from '@shared/components/or-divider';
+import {DatePickerInput} from 'react-native-paper-dates';
+import {enGB, en, registerTranslation} from 'react-native-paper-dates';
+
+registerTranslation('en', en);
 
 export const SignUpScreen = () => {
   /** Hooks */
   const handleError = useErrorHandler();
-
+  // const { setFieldValue } = useFormikContext();
   /** Functions */
   const createAccount = React.useCallback(
     async ({
@@ -68,6 +72,22 @@ export const SignUpScreen = () => {
                 />
               </View>
             </View>
+            <DatePickerInput
+              locale="en"
+              label="Birthdate"
+              mode="outlined"
+              value={
+                formikProps.values.birthdate
+                  ? new Date(formikProps.values.birthdate)
+                  : undefined
+              }
+              onChange={value => {
+                if (!value) return;
+                const handler = formikProps.handleChange('birthdate');
+                handler(value.toISOString());
+              }}
+              inputMode="start"
+            />
             <InputField
               fieldName="email"
               label="Email"
@@ -127,7 +147,7 @@ export const InputField = ({
   return (
     <View>
       <TextInput
-        dense={true}
+        mode="outlined"
         keyboardType={fieldName === 'email' ? 'email-address' : 'default'}
         label={label}
         value={values[fieldName]}
