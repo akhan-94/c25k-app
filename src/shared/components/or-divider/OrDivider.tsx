@@ -1,10 +1,14 @@
-import {spacing} from '@shared/styles';
-import type {Spacing} from '@shared/styles/spacing';
+import type {AppThemeSpacing} from '@lib/theme';
+import {appTheme} from '@lib/theme';
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
 
-export const OrDivider = ({spacing = 'medium'}: {spacing?: Spacing}) => {
+export const OrDivider = ({
+  spacing = 'medium',
+}: {
+  spacing?: AppThemeSpacing;
+}) => {
   return (
     <View style={orDividerStyles(spacing).container}>
       <View style={styles.borderElement} />
@@ -16,16 +20,16 @@ export const OrDivider = ({spacing = 'medium'}: {spacing?: Spacing}) => {
   );
 };
 
-const orDividerStyles = (spaceName: Spacing) =>
+const orDividerStyles = (spaceName: AppThemeSpacing) =>
   StyleSheet.create({
     container: {
       display: 'flex',
       width: '100%',
       flexDirection: 'row',
       alignItems: 'center',
-      paddingTop: spacing[spaceName],
-      paddingBottom: spacing[spaceName],
-      gap: spacing[spaceName],
+      paddingTop: appTheme.spacing[spaceName],
+      paddingBottom: appTheme.spacing[spaceName],
+      gap: appTheme.spacing[spaceName],
     },
   });
 

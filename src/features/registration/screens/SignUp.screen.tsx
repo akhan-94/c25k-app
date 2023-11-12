@@ -2,7 +2,6 @@ import {appTheme} from '@lib/theme';
 import {ScreenWrapper} from '@shared/components';
 import {OrDivider} from '@shared/components/or-divider';
 import {useErrorHandler} from '@shared/hooks';
-import {spacing} from '@shared/styles';
 import type {FormikHelpers, FormikProps} from 'formik';
 import {Formik} from 'formik';
 import * as React from 'react';
@@ -180,18 +179,18 @@ const styles = StyleSheet.create({
   formContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: spacing.medium,
+    gap: appTheme.spacing.medium,
   },
   nameContainer: {
     display: 'flex',
     flexDirection: 'row',
-    gap: spacing.medium,
+    gap: appTheme.spacing.medium,
   },
   cell: {
     flex: 1,
   },
   errorText: {
-    paddingTop: spacing.xsmall,
+    paddingTop: appTheme.spacing.xsmall,
     color: appTheme.colors.onErrorContainer,
   },
 });

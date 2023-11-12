@@ -2,11 +2,11 @@ import {MD3DarkTheme} from 'react-native-paper';
 
 export const appTheme = {
   ...MD3DarkTheme,
-  roundness: 2,
+  roundness: 10,
   colors: {
     ...MD3DarkTheme.colors,
-    primary: 'rgb(255, 183, 134)',
-    onPrimary: 'rgb(80, 36, 0)',
+    primary: '#00736b',
+    onPrimary: '#fff',
     primaryContainer: 'rgb(114, 54, 0)',
     onPrimaryContainer: 'rgb(255, 220, 198)',
     secondary: 'rgb(255, 181, 158)',
@@ -21,10 +21,10 @@ export const appTheme = {
     onError: 'rgb(105, 0, 5)',
     errorContainer: 'rgb(147, 0, 10)',
     onErrorContainer: 'rgb(255, 180, 171)',
-    background: 'rgb(32, 26, 23)',
+    background: '#0b0a0a',
     onBackground: 'rgb(236, 224, 218)',
-    surface: 'rgb(32, 26, 23)',
-    onSurface: 'rgb(236, 224, 218)',
+    surface: '#26262c',
+    onSurface: '#fff',
     surfaceVariant: 'rgb(82, 68, 60)',
     onSurfaceVariant: 'rgb(215, 195, 183)',
     outline: 'rgb(159, 141, 131)',
@@ -37,7 +37,7 @@ export const appTheme = {
     elevation: {
       level0: 'transparent',
       level1: 'rgb(43, 34, 29)',
-      level2: 'rgb(50, 39, 32)',
+      level2: '#26262c',
       level3: 'rgb(57, 43, 35)',
       level4: 'rgb(59, 45, 36)',
       level5: 'rgb(63, 48, 39)',
@@ -46,4 +46,13 @@ export const appTheme = {
     onSurfaceDisabled: 'rgba(236, 224, 218, 0.38)',
     backdrop: 'rgba(58, 46, 38, 0.4)',
   },
-};
+  spacing: {
+    xsmall: 5,
+    small: 10,
+    medium: 16,
+    large: 20,
+    xlarge: 30,
+  },
+} as const;
+
+export type AppThemeSpacing = keyof typeof appTheme.spacing;

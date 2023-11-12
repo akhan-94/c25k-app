@@ -1,4 +1,4 @@
-import {spacing} from '@shared/styles';
+import {appTheme} from '@lib/theme';
 import * as React from 'react';
 import type {ScrollViewProps, StyleProp, ViewStyle} from 'react-native';
 import {StyleSheet, View} from 'react-native';
@@ -30,10 +30,10 @@ export const ScreenWrapper = ({
     styles.container,
     {
       backgroundColor: theme.colors.background,
-      paddingTop: noPadding ? 0 : spacing.medium,
-      paddingBottom: noPadding ? 0 : insets.bottom || spacing.medium,
-      paddingLeft: noPadding ? 0 : insets.left || spacing.medium,
-      paddingRight: noPadding ? 0 : insets.right || spacing.medium,
+      paddingTop: noPadding ? 0 : appTheme.spacing.medium,
+      paddingBottom: noPadding ? 0 : insets.bottom || appTheme.spacing.medium,
+      paddingLeft: noPadding ? 0 : insets.left || appTheme.spacing.medium,
+      paddingRight: noPadding ? 0 : insets.right || appTheme.spacing.medium,
     },
   ];
 
