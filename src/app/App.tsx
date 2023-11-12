@@ -9,8 +9,11 @@ import {enableFreeze} from 'react-native-screens';
 import {AppMainView} from './components/AppMainView';
 import {AppNavigationContainer} from './components/AppNavigationContainer';
 import {AppProviders} from './components/AppProviders';
+import {SoundPlayer} from '@shared/utils';
 
 enableFreeze();
+
+SoundPlayer.loadSoundLibrary();
 
 const navigationRef = createNavigationContainerRef();
 

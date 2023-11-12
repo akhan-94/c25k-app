@@ -7,6 +7,7 @@ import {Button, Text} from 'react-native-paper';
 import {LoginHeader} from '../components/LoginHeader';
 import {IntroCarousel} from '../components/intro-carousel/IntroCarousel';
 import {loginStyles} from '../styles';
+import {SoundPlayer} from '@shared/utils';
 
 export const LoginScreen = () => {
   /** Hooks */
@@ -55,7 +56,7 @@ export const LoginScreen = () => {
           <LoginButton />
           <Button
             mode="contained"
-            onPress={() => console.log('Pressed')}
+            onPress={() => SoundPlayer.play('male-start-cooldown')}
             icon="google-plus"
             style={loginStyles.button.primary}>
             Continue with Google

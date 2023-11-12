@@ -13,6 +13,7 @@ import {Units} from '../components/Units';
 import {getBuildNumber, getVersion} from 'react-native-device-info';
 import {selectSettingsState, toggleSetting} from '../state/settings.slice';
 import {appTheme} from '@lib/theme';
+import {selectGuestMode} from 'src/app/selectors/app.selectors';
 
 const versionName = getVersion();
 const versionCode = getBuildNumber();
@@ -26,6 +27,7 @@ export const GeneralSettingsScreen = () => {
 
   /** Global state */
   const {darkMode, sound, vibrate} = useAppSelector(selectSettingsState);
+  const isGuest = useAppSelector(selectGuestMode);
 
   /** Functions */
   const logout = React.useCallback(async () => {
@@ -68,8 +70,12 @@ export const GeneralSettingsScreen = () => {
       <Divider />
       <List.Section title="Account">
         <List.Item title="Push notifications" />
-        <List.Item title="Logout" onPress={logout as any} />
-        <DeleteAccount />
+        {!isGuest && (
+          <>
+            <List.Item title="Logout" onPress={logout as any} />
+            <DeleteAccount />
+          </>
+        )}
       </List.Section>
       <Divider />
       <List.Section title="Legal">

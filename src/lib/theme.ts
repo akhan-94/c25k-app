@@ -25,7 +25,7 @@ export const appTheme = {
     onBackground: 'rgb(236, 224, 218)',
     surface: '#26262c',
     onSurface: '#fff',
-    surfaceVariant: 'rgb(82, 68, 60)',
+    surfaceVariant: '#0b0b0c',
     onSurfaceVariant: 'rgb(215, 195, 183)',
     outline: 'rgb(159, 141, 131)',
     outlineVariant: 'rgb(82, 68, 60)',

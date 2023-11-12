@@ -6,6 +6,7 @@ import {
   selectProgramActiveStep,
   selectTimerAsFriendlyFormat,
 } from '../selectors/run.selectors';
+import {appTheme} from '@lib/theme';
 
 const StatCell = ({label, value}: {label: string; value: number | string}) => {
   return (
@@ -28,7 +29,7 @@ export const ActiveRunDetails = () => {
   }, [currentStep]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.heading}>
         <Text variant="headlineMedium">{stage}</Text>
       </View>
@@ -49,6 +50,11 @@ export const ActiveRunDetails = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 0,
+    paddingTop: appTheme.spacing.medium,
+    paddingBottom: appTheme.spacing.medium,
+  },
   heading: {
     display: 'flex',
     justifyContent: 'center',

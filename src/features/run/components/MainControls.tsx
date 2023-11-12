@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux';
 import {selectStatus} from '../selectors/run.selectors';
 import {goBackToLastStep, setStatus, skipToNextStep} from '../state/run.slice';
 import type {RunState} from '../types/RunState';
+import {appTheme} from '@lib/theme';
 
 export const MainControls = () => {
   /** Hooks */
@@ -57,29 +58,29 @@ export const MainControls = () => {
           />
         </View>
       )}
-      <View style={styles.buttonContainer}>
-        <IconButton
-          icon={status === 'waiting' ? 'run-fast' : 'chevron-double-left'}
-          size={30}
-          onPress={() =>
-            status === 'waiting' ? console.log('Pressed') : setStep('prev')
-          }
-        />
-      </View>
+      {status !== 'waiting' && (
+        <View style={styles.buttonContainer}>
+          <IconButton
+            icon="chevron-double-left"
+            size={30}
+            onPress={() => setStep('prev')}
+          />
+        </View>
+      )}
       <View style={styles.middle}>
         <Pressable style={styles.mainButton} onPress={start}>
-          <Text style={{color: '#000'}}>{mainButtonText}</Text>
+          <Text style={{color: '#fff'}}>{mainButtonText}</Text>
         </Pressable>
       </View>
-      <View style={styles.buttonContainer}>
-        <IconButton
-          icon={status === 'waiting' ? 'run-fast' : 'chevron-double-right'}
-          size={30}
-          onPress={() =>
-            status === 'waiting' ? console.log('Pressed') : setStep('next')
-          }
-        />
-      </View>
+      {status !== 'waiting' && (
+        <View style={styles.buttonContainer}>
+          <IconButton
+            icon="chevron-double-right"
+            size={30}
+            onPress={() => setStep('next')}
+          />
+        </View>
+      )}
       {showInProgressButtons && (
         <View style={styles.buttonContainer}>
           <IconButton icon="close-octagon-outline" size={30} onPress={finish} />
@@ -91,6 +92,12 @@ export const MainControls = () => {
 
 const styles = StyleSheet.create({
   container: {
+    borderTopLeftRadius: appTheme.roundness,
+    borderTopRightRadius: appTheme.roundness,
+    flexShrink: 1,
+    paddingBottom: 17,
+    paddingTop: 17,
+    backgroundColor: appTheme.colors.surfaceVariant,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -103,7 +110,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   mainButton: {
-    backgroundColor: 'white',
+    backgroundColor: appTheme.colors.primary,
     borderRadius: 200,
     width: 75,
     height: 75,

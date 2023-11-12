@@ -1,3 +1,4 @@
+import {supabase} from '@lib/supabase';
 import {appTheme} from '@lib/theme';
 import {ScreenWrapper} from '@shared/components';
 import {OrDivider} from '@shared/components/or-divider';
@@ -5,7 +6,7 @@ import {useErrorHandler} from '@shared/hooks';
 import type {FormikHelpers, FormikProps} from 'formik';
 import {Formik} from 'formik';
 import * as React from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Button, Text, TextInput} from 'react-native-paper';
 import {
   DatePickerInput,
@@ -30,21 +31,34 @@ export const SignUpScreen = () => {
   /** Functions */
   const createAccount = React.useCallback(
     async (
-      values: SignUpFormValues,
+      {email, birthdate, firstName, lastName, password}: SignUpFormValues,
       actions: FormikHelpers<SignUpFormValues>,
     ) => {
-      actions.setSubmitting(true);
-      Alert.alert('create account', JSON.stringify(values, null, 2));
-      // try {
-      //   const {data, error} = await supabase.auth.signUp({
-      //     email,
-      //     password,
-      //   });
-      //   console.log(JSON.stringify(data, null, 2));
-      //   if (error) console.log(error);
-      // } catch (error) {
-      //   handleError('failed to create account', error);
-      // }
+      try {
+        actions.setSubmitting(true);
+        const {error} = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              first_name: firstName,
+              last_name: lastName,
+              birthdate: birthdate,
+            },
+          },
+        });
+        const {
+          data: {user},
+        } = await supabase.auth.getUser();
+        if (user) {
+          const metadata = user.user_metadata;
+        }
+        if (error) {
+          handleError(error.message);
+        }
+      } catch (error) {
+        handleError('failed to create account', error);
+      }
     },
     [handleError],
   );
@@ -179,12 +193,12 @@ const styles = StyleSheet.create({
   formContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: appTheme.spacing.medium,
+    gap: appTheme.spacing.xsmall,
   },
   nameContainer: {
     display: 'flex',
     flexDirection: 'row',
-    gap: appTheme.spacing.medium,
+    gap: appTheme.spacing.xsmall,
   },
   cell: {
     flex: 1,

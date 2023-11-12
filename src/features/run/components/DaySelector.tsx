@@ -12,9 +12,9 @@ import {
 import type {ICarouselInstance} from 'react-native-reanimated-carousel';
 import Carousel from 'react-native-reanimated-carousel';
 
-import Animated from 'react-native-reanimated';
 import {TEN_WEEK_PROGRAM} from '@shared/constants';
-import {DayInstructions} from './DayInstructions';
+import Animated from 'react-native-reanimated';
+import {appTheme} from '@lib/theme';
 
 const PAGE_WIDTH = 80;
 const PAGE_HEIGHT = 60;
@@ -40,8 +40,6 @@ export const DaySelector = () => {
 
   return (
     <View style={styles.container}>
-      <DayInstructions />
-
       <Carousel
         key={`${loop}`}
         ref={r}
@@ -155,6 +153,7 @@ const Item: React.FC<Props> = props => {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 16,
+    paddingTop: appTheme.spacing.medium,
+    paddingBottom: appTheme.spacing.medium,
   },
 });

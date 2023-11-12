@@ -85,14 +85,14 @@ const ProfileSection = ({
             </Text>
           </View>
           <View>
-            <Text>0 runs completed</Text>
+            <Text variant="labelSmall">0 runs completed</Text>
           </View>
         </View>
         <View>
           <IconButton
             icon="account-cog"
-            mode={active === 'Profile' ? 'contained' : 'outlined'}
-            size={20}
+            mode="outlined"
+            size={30}
             onPress={() => navigation.navigate('Profile')}
           />
         </View>
