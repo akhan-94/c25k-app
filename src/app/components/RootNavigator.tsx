@@ -1,4 +1,3 @@
-import {NotificationsScreen} from '@features/notifications';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
 import {useSelector} from 'react-redux';
@@ -22,7 +21,6 @@ import {MainNavigator} from './MainNavigator';
 
 export type RootStackParamList = {
   Main: MainNavigatorParamList;
-  Notifications: undefined;
   Loading: undefined;
   Auth: AuthNavigatorParamList;
   Legal: LegalNavigatorParamList;
@@ -69,16 +67,7 @@ export const RootNavigator = () => {
       ) : (
         <RootStack.Group>
           {isGuestMode || session ? (
-            <RootStack.Group>
-              <RootStack.Screen name="Main" component={MainNavigator} />
-              <RootStack.Screen
-                options={{
-                  headerShown: true,
-                }}
-                name="Notifications"
-                component={NotificationsScreen}
-              />
-            </RootStack.Group>
+            <RootStack.Screen name="Main" component={MainNavigator} />
           ) : (
             <RootStack.Screen name="Auth" component={AuthNavigator} />
           )}

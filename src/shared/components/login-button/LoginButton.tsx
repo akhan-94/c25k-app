@@ -65,7 +65,7 @@ export const LoginButton = () => {
           index={-1}
           snapPoints={snapPoints}
           backgroundComponent={BottomSheetBackground}
-          // backdropComponent={BottomSheetBackdrop}
+          backdropComponent={BottomSheetBackdrop}
           enablePanDownToClose>
           <View style={styles.contentContainer}>
             {error && <Text>{error.message}</Text>}
