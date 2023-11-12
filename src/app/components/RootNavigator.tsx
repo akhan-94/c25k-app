@@ -12,14 +12,16 @@ import {
 } from '../../features/legal/LegalNavigator';
 import {supabase} from '../../lib/supabase';
 import {useAppDispatch} from '../../shared/hooks/useAppDispatch';
-import {selectSession} from '../selectors/app.selectors';
+import {selectLoading, selectSession} from '../selectors/app.selectors';
 import {setSession} from '../state/app.slice';
+import {LoadingScreen} from './LoadingScreen';
 import type {MainNavigatorParamList} from './MainNavigator';
 import {MainNavigator} from './MainNavigator';
 
 export type RootStackParamList = {
   Main: MainNavigatorParamList | undefined;
   Notifications: any;
+  Loading: undefined;
   Auth: AuthNavigatorParamList | undefined;
   Registration: RegistrationNavigatorParamList | undefined;
   Legal: LegalNavigatorParamList;
@@ -41,6 +43,7 @@ export const RootNavigator = () => {
 
   /** Global State */
   const session = useSelector(selectSession);
+  const isLoading = useSelector(selectLoading);
 
   /** Side Effects */
   React.useEffect(() => {
@@ -59,34 +62,40 @@ export const RootNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      {session ? (
-        <RootStack.Group>
-          <RootStack.Screen name="Main" component={MainNavigator} />
-          <RootStack.Screen
-            options={{
-              headerShown: true,
-            }}
-            name="Notifications"
-            component={NotificationsScreen}
-          />
-        </RootStack.Group>
+      {isLoading ? (
+        <RootStack.Screen name="Loading" component={LoadingScreen} />
       ) : (
         <RootStack.Group>
-          <RootStack.Screen name="Auth" component={AuthNavigator} />
+          {session ? (
+            <RootStack.Group>
+              <RootStack.Screen name="Main" component={MainNavigator} />
+              <RootStack.Screen
+                options={{
+                  headerShown: true,
+                }}
+                name="Notifications"
+                component={NotificationsScreen}
+              />
+            </RootStack.Group>
+          ) : (
+            <RootStack.Group>
+              <RootStack.Screen name="Auth" component={AuthNavigator} />
+              <RootStack.Screen
+                name="Registration"
+                options={{headerShown: false}}
+                component={RegistrationNavigator}
+              />
+            </RootStack.Group>
+          )}
           <RootStack.Screen
-            name="Registration"
-            options={{headerShown: false}}
-            component={RegistrationNavigator}
+            options={{
+              headerShown: false,
+            }}
+            name="Legal"
+            component={LegalNavigator}
           />
         </RootStack.Group>
       )}
-      <RootStack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="Legal"
-        component={LegalNavigator}
-      />
     </RootStack.Navigator>
   );
 };

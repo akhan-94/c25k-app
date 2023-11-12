@@ -1,14 +1,13 @@
+import {useAppTheme} from '@shared/hooks/useAppTheme';
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {DayInstructions} from '../components/DayInstructions';
+import {useSelector} from 'react-redux';
+import {ActiveRunDetails} from '../components/ActiveRunDetails';
 import {DaySelector} from '../components/DaySelector';
+import {ImageCarousel} from '../components/ImageCarousel';
 import {MainControls} from '../components/MainControls';
 import {MotivationImage} from '../components/MotivationImage';
-import {ActiveRunDetails} from '../components/ActiveRunDetails';
-import {useSelector} from 'react-redux';
-import {ImageCarousel} from '../components/ImageCarousel';
-import {useAppTheme} from '@shared/hooks/useAppTheme';
 import {selectStatus} from '../selectors/run.selectors';
 
 export const MainRunScreen = () => {
@@ -23,7 +22,7 @@ export const MainRunScreen = () => {
   const insetSafetyStyles = [
     {
       paddingLeft: insets.left || 16,
-      paddingRight: insets.left || 16,
+      paddingRight: insets.right || 16,
     },
   ];
 
@@ -31,21 +30,11 @@ export const MainRunScreen = () => {
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <View style={[insetSafetyStyles, styles.mainContent]}>
-          {status === 'waiting' ? (
-            <>
-              <DaySelector />
-              <MotivationImage />
-              <View style={styles.dayContainer}>
-                <DayInstructions />
-              </View>
-            </>
-          ) : (
-            <>
-              <ImageCarousel />
-            </>
-          )}
+          {status === 'waiting' ? <MotivationImage /> : <ImageCarousel />}
         </View>
-        {status !== 'waiting' && (
+        {status === 'waiting' ? (
+          <DaySelector />
+        ) : (
           <View style={[insetSafetyStyles, styles.detailsContainer]}>
             <ActiveRunDetails />
           </View>
@@ -83,11 +72,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 16,
   },
-  dayContainer: {
-    flexShrink: 1,
-    marginTop: 10,
-    marginBottom: 10,
-  },
+  dayContainer: {},
   buttonContainer: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

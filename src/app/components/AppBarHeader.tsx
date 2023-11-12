@@ -23,28 +23,30 @@ export const AppBarHeader = ({
   /** Hooks */
   const title = getHeaderTitle(options, route.name);
   return (
-    <Appbar.Header mode="center-aligned" elevated>
+    <>
       <StatusBar
         translucent
         backgroundColor="rgba(0, 0, 0, 0)"
         barStyle="dark-content"
         animated
       />
-      {!noActions && (
-        <Appbar.Action
-          icon="bell-outline"
-          onPress={() => navigation.navigate('Notifications')}
-        />
-      )}
-      <Appbar.Content title={title} />
-      {!noActions && (
-        <Appbar.Action
-          icon="menu"
-          onPress={() =>
-            (navigation as any as DrawerNavigationProp<any>).openDrawer()
-          }
-        />
-      )}
-    </Appbar.Header>
+      <Appbar.Header mode={'center-aligned'} elevated>
+        {!noActions && (
+          <Appbar.Action
+            icon="bell-outline"
+            onPress={() => navigation.navigate('Notifications')}
+          />
+        )}
+        <Appbar.Content title={title} />
+        {!noActions && (
+          <Appbar.Action
+            icon="menu"
+            onPress={() =>
+              (navigation as any as DrawerNavigationProp<any>).openDrawer()
+            }
+          />
+        )}
+      </Appbar.Header>
+    </>
   );
 };

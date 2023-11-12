@@ -4,7 +4,6 @@ import {
   useReduxDevToolsExtension,
 } from '@react-navigation/devtools';
 import {
-  DefaultTheme,
   NavigationContainer,
   createNavigationContainerRef,
 } from '@react-navigation/native';
@@ -12,19 +11,18 @@ import * as React from 'react';
 import {View} from 'react-native';
 import 'react-native-gesture-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {PaperProvider, adaptNavigationTheme} from 'react-native-paper';
+import {PaperProvider} from 'react-native-paper';
 import {enableFreeze} from 'react-native-screens';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {appTheme} from 'src/lib/theme';
 import {persistor, store} from '../config/configureStore';
-import {AppGate} from './components/AppLoading';
 import {AppSnackBar} from './components/AppSnackBar';
 import {RootNavigator} from './components/RootNavigator';
+import {containers} from './styles';
+import {DarkTheme} from './utils/theme';
 
 enableFreeze();
-
-const {DarkTheme} = adaptNavigationTheme({reactNavigationDark: DefaultTheme});
 
 const navigationRef = createNavigationContainerRef();
 
@@ -40,8 +38,8 @@ export const App = (): JSX.Element => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <PaperProvider theme={appTheme}>
-          <GestureHandlerRootView style={{flex: 1, position: 'relative'}}>
-            <View style={{flex: 1, position: 'relative'}}>
+          <GestureHandlerRootView style={containers.gestureHandler}>
+            <View style={containers.main}>
               <AppSnackBar />
               <NavigationContainer
                 ref={navigationRef}
@@ -62,9 +60,7 @@ export const App = (): JSX.Element => {
                   }
                   routeNameRef.current = currentRouteName;
                 }}>
-                <AppGate>
-                  <RootNavigator />
-                </AppGate>
+                <RootNavigator />
               </NavigationContainer>
             </View>
           </GestureHandlerRootView>

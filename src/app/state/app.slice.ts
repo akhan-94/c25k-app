@@ -6,6 +6,11 @@ import type {RootState} from 'src/config/configureStore';
 const initialState: AppState = {
   session: null,
   loading: false,
+  appRating: {
+    hasRated: false,
+    dateRated: null,
+  },
+  guestMode: false,
   snackbar: {
     isVisible: false,
     type: undefined,
@@ -17,9 +22,16 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    toggleGuestMode: state => {
+      state.guestMode = !state.guestMode;
+    },
     setSession: (state, action: PayloadAction<AppState['session']>) => {
       const {payload} = action;
       state.session = payload;
+    },
+    setAppRating: (state, action: PayloadAction<AppState['appRating']>) => {
+      const {payload} = action;
+      state.appRating = payload;
     },
     openSnackBar: (
       state,
@@ -44,7 +56,13 @@ export const appSlice = createSlice({
   },
 });
 
-export const {setSession, closeSnackBar, openSnackBar} = appSlice.actions;
+export const {
+  setSession,
+  closeSnackBar,
+  openSnackBar,
+  toggleGuestMode,
+  setAppRating,
+} = appSlice.actions;
 
 export const appReducer = appSlice.reducer;
 
