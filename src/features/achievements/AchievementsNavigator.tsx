@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-import {AppBarHeader} from '../../app/components/AppBarHeader';
+import {AppBar} from '@shared/components/app-bar';
 import {MainAchievementsScreen} from './screens/MainAchievements.screen';
 
 export type AchievementsNavigatorStackParamList = {
@@ -20,7 +20,7 @@ export const AchievementsNavigator = () => {
       screenOptions={{
         headerShown: true,
         title: 'Achievements',
-        header: props => <AppBarHeader {...props} />,
+        header: props => <AppBar {...props} />,
       }}>
       <Stack.Screen
         name="Main Achievements"

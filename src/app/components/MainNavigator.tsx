@@ -5,7 +5,7 @@ import type {RunNavigatorParamList} from '@features/run';
 import {RunNavigator} from '@features/run';
 import type {SettingsNavigatorParamList} from '@features/settings';
 import {SettingsNavigator} from '@features/settings';
-import {AppBarHeader} from './AppBarHeader';
+import {AppBar} from '@shared/components/app-bar';
 import {DrawerContent} from './DrawerContent';
 import type {AchievementsNavigatorParamList} from '@features/achievements';
 import {AchievementsNavigator} from '@features/achievements';
@@ -55,7 +55,7 @@ export const MainNavigator = () => {
         name="Share App"
         options={{
           headerShown: true,
-          header: props => <AppBarHeader {...props} />,
+          header: props => <AppBar {...props} />,
         }}
         component={ShareAppScreen}
       />

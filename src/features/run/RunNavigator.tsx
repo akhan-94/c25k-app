@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {AppBarHeader} from '../../app/components/AppBarHeader';
+import {AppBar} from '@shared/components/app-bar';
 
+import {useSelector} from 'react-redux';
+import './listeners/run.listener';
 import {MainRunScreen} from './screens/MainRun.screen';
 import {SummaryScreen} from './screens/Summary.screen';
-import {useSelector} from 'react-redux';
 import {selectStatus} from './selectors/run.selectors';
-import './listeners/run.listener';
 
 export type RunStackParamList = {
   MainRun: undefined;
@@ -30,7 +30,7 @@ export const RunNavigator = () => {
       screenOptions={{
         headerShown: true,
         title: 'Run',
-        header: props => <AppBarHeader {...props} />,
+        header: props => <AppBar {...props} />,
       }}>
       {status === 'finished' ? (
         <Stack.Screen name="Summary" component={SummaryScreen} />

@@ -1,7 +1,7 @@
 import {GeneralSettingsScreen} from '@features/settings';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-import {AppBarHeader} from '../../app/components/AppBarHeader';
+import {AppBar} from '@shared/components/app-bar';
 import type {AuthStackParamList} from '../auth/AuthNavigator';
 import {NotificationsSettingsScreen} from './screens/NotificationsSettings.screen';
 
@@ -23,7 +23,7 @@ export const SettingsNavigator = (): React.JSX.Element => {
       screenOptions={{
         headerShown: true,
         title: 'Settings',
-        header: props => <AppBarHeader {...props} />,
+        header: props => <AppBar {...props} />,
       }}>
       <Stack.Screen name="General Settings" component={GeneralSettingsScreen} />
       <Stack.Screen

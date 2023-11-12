@@ -8,20 +8,19 @@ import type {NativeStackHeaderProps} from '@react-navigation/native-stack';
 import * as React from 'react';
 import {StatusBar} from 'react-native';
 import {Appbar} from 'react-native-paper';
+import type {AppBarProps} from './AppBar.types';
 
-export interface AppbarHeaderProps {
-  noActions?: boolean;
-}
-
-export const AppBarHeader = ({
+export const AppBar = ({
   navigation,
   route,
   options,
   noActions,
+  closeAction,
 }: (NativeStackHeaderProps | BottomTabHeaderProps | DrawerHeaderProps) &
-  AppbarHeaderProps) => {
+  AppBarProps) => {
   /** Hooks */
   const title = getHeaderTitle(options, route.name);
+
   return (
     <>
       <StatusBar
@@ -31,6 +30,9 @@ export const AppBarHeader = ({
         animated
       />
       <Appbar.Header mode={'center-aligned'} elevated>
+        {closeAction && (
+          <Appbar.Action icon="window-close" onPress={closeAction} />
+        )}
         {!noActions && (
           <Appbar.Action
             icon="bell-outline"

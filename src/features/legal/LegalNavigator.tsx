@@ -1,7 +1,7 @@
 import {PrivacyPolicyScreen, TermsScreen} from '@features/legal';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-import {AppBarHeader} from '../../app/components/AppBarHeader';
+import {AppBar} from '@shared/components/app-bar';
 
 export type LegalStackParamList = {
   'Privacy policy': undefined;
@@ -19,7 +19,7 @@ export const LegalNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: true,
-        header: props => <AppBarHeader {...props} noActions />,
+        header: props => <AppBar {...props} noActions />,
       }}>
       <Stack.Screen name="Privacy policy" component={PrivacyPolicyScreen} />
       <Stack.Screen name="Terms of service" component={TermsScreen} />

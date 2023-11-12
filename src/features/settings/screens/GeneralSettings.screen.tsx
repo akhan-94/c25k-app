@@ -63,7 +63,7 @@ export const GeneralSettingsScreen = () => {
       <Divider />
       <List.Section title="Account">
         <List.Item title="Push notifications" />
-        <List.Item title="Logout" onPress={() => logout()} />
+        <List.Item title="Logout" onPress={logout as any} />
         <DeleteAccount />
       </List.Section>
       <Divider />
@@ -83,7 +83,7 @@ export const GeneralSettingsScreen = () => {
       </List.Section>
       <Divider />
       <List.Section title="Support">
-        <List.Item title="Email us" onPress={openEmailClient} />
+        <List.Item title="Email us" onPress={openEmailClient as any} />
         <RateApp />
       </List.Section>
     </ScreenWrapper>
