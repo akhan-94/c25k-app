@@ -15,3 +15,8 @@ export const selectLoading = createSelector(
   selectAppState,
   appState => appState.loading,
 );
+
+export const selectGuestMode = createSelector(
+  selectAppState,
+  appState => appState.guestMode,
+);

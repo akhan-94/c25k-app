@@ -26,7 +26,7 @@ export const LegalNavigator = ({
         header: props => (
           <AppBar
             {...props}
-            noActions
+            disableMenu
             closeAction={() => navigation.goBack()}
           />
         ),

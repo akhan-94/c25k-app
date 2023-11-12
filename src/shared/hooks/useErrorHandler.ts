@@ -8,8 +8,9 @@ export const useErrorHandler = () => {
   const dispatch = useAppDispatch();
 
   return React.useCallback(
-    (message: string, error: any) => {
+    (message: string, error?: any) => {
       dispatch(openSnackBar(['error', message]));
+      if (!error) return;
       if (__DEV__) console.error(error);
       else crashlytics().recordError(error);
     },

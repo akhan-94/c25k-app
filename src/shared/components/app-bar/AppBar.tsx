@@ -10,14 +10,13 @@ import {StatusBar} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import type {AppBarProps} from './AppBar.types';
 import {useSelector} from 'react-redux';
-import {selectAppState} from 'src/app/state/app.slice';
 import {selectSettingsState} from '@features/settings';
 
 export const AppBar = ({
   navigation,
   route,
   options,
-  noActions,
+  disableMenu = false,
   closeAction,
 }: (NativeStackHeaderProps | BottomTabHeaderProps | DrawerHeaderProps) &
   AppBarProps) => {
@@ -39,14 +38,8 @@ export const AppBar = ({
         {closeAction && (
           <Appbar.Action icon="window-close" onPress={closeAction} />
         )}
-        {!noActions && (
-          <Appbar.Action
-            icon="bell-outline"
-            onPress={() => navigation.navigate('Notifications')}
-          />
-        )}
         <Appbar.Content title={title} />
-        {!noActions && (
+        {!disableMenu && (
           <Appbar.Action
             icon="menu"
             onPress={() =>

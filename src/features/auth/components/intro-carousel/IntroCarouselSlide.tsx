@@ -24,7 +24,7 @@ export const IntroCarouselSlide = ({item}: {item: IntroCarouselItem}) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#2d5262',
+    backgroundColor: 'rgba(255, 255, 255, .06)',
     boxShadow: '10px 10px 10px rgba(255,255,255,1)',
     zIndex: 1,
     flex: 1,

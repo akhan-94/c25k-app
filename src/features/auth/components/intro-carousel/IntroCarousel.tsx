@@ -17,7 +17,7 @@ export const IntroCarousel = ({height}: {height: number | null}) => {
         alignItems: 'center',
       }}>
       <Carousel
-        height={height - 50}
+        height={height - 28}
         width={PAGE_WIDTH}
         vertical={false}
         style={{
@@ -26,8 +26,8 @@ export const IntroCarousel = ({height}: {height: number | null}) => {
         loop
         pagingEnabled={true}
         snapEnabled={true}
-        autoPlay={false}
-        autoPlayInterval={5000}
+        autoPlay={true}
+        autoPlayInterval={7000}
         onProgressChange={(_, absoluteProgress) =>
           (progressValue.value = absoluteProgress)
         }

@@ -1,4 +1,4 @@
 export interface AppBarProps {
-  noActions?: boolean;
+  disableMenu?: boolean;
   closeAction?: (args?: any) => void;
 }

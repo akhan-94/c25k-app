@@ -5,6 +5,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 import {DarkTheme} from '../utils/theme';
 import {AppSnackBar} from './AppSnackBar';
+import {Portal} from 'react-native-paper';
 
 export const AppMainView = ({children}: {children: JSX.Element}) => {
   /** Global state */
@@ -13,14 +14,16 @@ export const AppMainView = ({children}: {children: JSX.Element}) => {
   return (
     <GestureHandlerRootView style={containers.gestureHandler}>
       <View style={containers.main}>
-        <AppSnackBar />
-        <StatusBar
-          translucent
-          backgroundColor="rgba(255, 255, 255, 0)"
-          barStyle={darkMode ? 'light-content' : 'dark-content'}
-          animated
-        />
-        {children}
+        <Portal.Host>
+          <AppSnackBar />
+          <StatusBar
+            translucent
+            backgroundColor="rgba(255, 255, 255, 0)"
+            barStyle={darkMode ? 'light-content' : 'dark-content'}
+            animated
+          />
+          {children}
+        </Portal.Host>
       </View>
     </GestureHandlerRootView>
   );

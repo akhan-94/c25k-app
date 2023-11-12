@@ -11,7 +11,7 @@ export const appTheme = {
     onPrimaryContainer: 'rgb(255, 220, 198)',
     secondary: 'rgb(255, 181, 158)',
     onSecondary: 'rgb(93, 24, 0)',
-    secondaryContainer: 'rgb(124, 45, 18)',
+    secondaryContainer: '#61707d',
     onSecondaryContainer: 'rgb(255, 219, 208)',
     tertiary: 'rgb(255, 177, 194)',
     onTertiary: 'rgb(102, 0, 43)',

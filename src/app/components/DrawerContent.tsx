@@ -1,13 +1,14 @@
 import type {DrawerContentComponentProps} from '@react-navigation/drawer';
+import {LoginButton} from '@shared/components/login-button';
 import * as React from 'react';
 import {StatusBar, View} from 'react-native';
-import {getBuildNumber, getVersion} from 'react-native-device-info';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Avatar, Drawer, Text} from 'react-native-paper';
+import {Drawer, IconButton, Text, TouchableRipple} from 'react-native-paper';
+import {useSelector} from 'react-redux';
+import {selectGuestMode} from '../selectors/app.selectors';
 import {drawerStyles} from '../styles';
-
-const versionName = getVersion();
-const versionCode = getBuildNumber();
+import {useAppDispatch} from '@shared/hooks';
+import {toggleGuestMode} from '../state/app.slice';
 
 export const DrawerContent = ({
   navigation,
@@ -20,9 +21,10 @@ export const DrawerContent = ({
         flex: 1,
         position: 'relative',
         paddingTop: StatusBar.currentHeight,
+        backgroundColor: '#111111',
       }}>
       <ScrollView>
-        <ProfileSection />
+        <ProfileSection navigation={navigation} active={active} />
         <Drawer.Section>
           <Drawer.Item
             label="Run"
@@ -30,47 +32,90 @@ export const DrawerContent = ({
             active={active === 'Run'}
             onPress={() => navigation.navigate('Run')}
           />
-
+          <Drawer.Item
+            label="History"
+            icon="chart-bell-curve"
+            active={active === 'History'}
+            onPress={() => navigation.navigate('History')}
+          />
+        </Drawer.Section>
+        <Drawer.Section>
+          <Drawer.Item
+            label="Reminders"
+            icon="bell-circle-outline"
+            active={active === 'Reminders'}
+            onPress={() => navigation.navigate('Reminders')}
+          />
           <Drawer.Item
             label="Achievements"
             icon="trophy-outline"
             active={active === 'Achievements'}
             onPress={() => navigation.navigate('Achievements')}
           />
-          <Drawer.Item
-            label="Settings"
-            icon="cog-outline"
-            active={active === 'Settings'}
-            onPress={() => navigation.navigate('Settings')}
-          />
-          <Drawer.Item
-            label="Share App"
-            icon="share-variant-outline"
-            active={active === 'Share App'}
-            onPress={() => navigation.navigate('Share App')}
-          />
         </Drawer.Section>
+        <Drawer.Item
+          label="Settings"
+          icon="cog-outline"
+          active={active === 'Settings'}
+          onPress={() => navigation.navigate('Settings')}
+        />
       </ScrollView>
-      <View>
-        <Text variant="labelSmall" style={drawerStyles.text.versionDetails}>
-          v{versionName} ({versionCode})
-        </Text>
-      </View>
     </View>
   );
 };
 
 const {profileSectionStyles} = drawerStyles;
 
-const ProfileSection = () => {
+const ProfileSection = ({
+  navigation,
+  active,
+}: {
+  navigation: DrawerContentComponentProps['navigation'];
+  active: string;
+}) => {
+  /** Hooks */
+  const dispatch = useAppDispatch();
+
+  /** Global state */
+  const isGuestMode = useSelector(selectGuestMode);
+
   return (
     <View style={profileSectionStyles.container}>
-      <View style={profileSectionStyles.avatarContainer}>
-        <Avatar.Text size={50} label="U" />
+      <View style={{display: 'flex', flexDirection: 'row', gap: 10}}>
+        <View style={{flex: 1}}>
+          <View style={profileSectionStyles.nameContainer}>
+            <Text variant="headlineSmall">
+              {isGuestMode ? 'Guest' : 'User'}
+            </Text>
+          </View>
+          <View>
+            <Text>0 runs completed</Text>
+          </View>
+        </View>
+        <View>
+          <IconButton
+            icon="account-cog"
+            mode={active === 'Profile' ? 'contained' : 'outlined'}
+            size={20}
+            onPress={() => navigation.navigate('Profile')}
+          />
+        </View>
       </View>
-      <View style={profileSectionStyles.nameContainer}>
-        <Text variant="headlineSmall">User</Text>
-      </View>
+
+      {isGuestMode && (
+        <View style={profileSectionStyles.guestContainer}>
+          <LoginButton />
+          <TouchableRipple
+            onPress={() => dispatch(toggleGuestMode())}
+            style={profileSectionStyles.signUpButton}
+            rippleColor="rgba(255, 255, 255, .32)">
+            <Text variant="labelSmall">
+              No account?{' '}
+              <Text style={profileSectionStyles.signUpLabel}>Sign Up</Text>
+            </Text>
+          </TouchableRipple>
+        </View>
+      )}
     </View>
   );
 };

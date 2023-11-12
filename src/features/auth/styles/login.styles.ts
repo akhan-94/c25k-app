@@ -6,7 +6,7 @@ export const layout = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    paddingTop: StatusBar.currentHeight,
+    paddingTop: (StatusBar.currentHeight || 0) + appTheme.spacing.medium,
   },
   main: {
     flex: 1,
@@ -17,13 +17,14 @@ export const layout = StyleSheet.create({
 
 export const button = StyleSheet.create({
   primary: {
-    marginBottom: appTheme.spacing.medium,
+    marginTop: appTheme.spacing.small,
   },
 });
 
 export const text = StyleSheet.create({
   legal: {
     textAlign: 'center',
+    lineHeight: 20,
     paddingBottom: appTheme.spacing.medium,
   },
   legalLink: {

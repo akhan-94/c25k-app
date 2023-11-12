@@ -3,14 +3,19 @@ import {ScreenWrapper} from '@shared/components';
 import {useAppDispatch, useAppSelector, useErrorHandler} from '@shared/hooks';
 import {useAuth} from '@shared/hooks/useAuth';
 import * as React from 'react';
-import {Linking} from 'react-native';
+import {Linking, StyleSheet} from 'react-native';
 import Config from 'react-native-config';
-import {Divider, List} from 'react-native-paper';
+import {Divider, List, Text} from 'react-native-paper';
 import {DeleteAccount} from '../components/DeleteAccount';
 import {RateApp} from '../components/RateApp';
 import {SwitchSettingItem} from '../components/SwitchSettingItem';
 import {Units} from '../components/Units';
+import {getBuildNumber, getVersion} from 'react-native-device-info';
 import {selectSettingsState, toggleSetting} from '../state/settings.slice';
+import {appTheme} from '@lib/theme';
+
+const versionName = getVersion();
+const versionCode = getBuildNumber();
 
 export const GeneralSettingsScreen = () => {
   /** Hooks */
@@ -86,6 +91,17 @@ export const GeneralSettingsScreen = () => {
         <List.Item title="Email us" onPress={openEmailClient as any} />
         <RateApp />
       </List.Section>
+      <Divider />
+      <Text variant="labelSmall" style={styles.versionContainer}>
+        v{versionName} ({versionCode})
+      </Text>
     </ScreenWrapper>
   );
 };
+
+const styles = StyleSheet.create({
+  versionContainer: {
+    padding: appTheme.spacing.medium,
+    textAlign: 'right',
+  },
+});

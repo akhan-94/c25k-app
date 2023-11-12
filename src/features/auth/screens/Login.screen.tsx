@@ -1,19 +1,14 @@
-import type BottomSheet from '@gorhom/bottom-sheet';
 import {useNavigation} from '@react-navigation/native';
 import {ScreenWrapper} from '@shared/components';
+import {LoginButton} from '@shared/components/login-button';
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
+import {LoginHeader} from '../components/LoginHeader';
 import {IntroCarousel} from '../components/intro-carousel/IntroCarousel';
-import {LoginSheet} from '../components/LoginSheet';
 import {loginStyles} from '../styles';
-import {AppLogo} from '@shared/components/app-logo';
-import {OrDivider} from '@shared/components/or-divider';
 
 export const LoginScreen = () => {
-  /** Refs */
-  const bottomSheetRef = React.useRef<BottomSheet>(null);
-
   /** Hooks */
   const navigation = useNavigation();
 
@@ -25,7 +20,7 @@ export const LoginScreen = () => {
   return (
     <ScreenWrapper withScrollView={false} style={loginStyles.layout.container}>
       <View style={loginStyles.layout.main}>
-        <Header />
+        <LoginHeader />
         <View
           style={{flex: 1}}
           onLayout={event => {
@@ -57,6 +52,7 @@ export const LoginScreen = () => {
           </Text>
         </View>
         <View>
+          <LoginButton />
           <Button
             mode="contained"
             onPress={() => console.log('Pressed')}
@@ -66,46 +62,18 @@ export const LoginScreen = () => {
           </Button>
           <Button
             mode="contained"
-            onPress={() => bottomSheetRef.current?.expand()}
+            onPress={() => console.log('Pressed')}
+            icon="apple"
             style={loginStyles.button.primary}>
-            Login
+            Continue with Apple
           </Button>
           <Button
             mode="text"
-            onPress={() => navigation.navigate('Registration')}>
+            onPress={() => navigation.navigate('Auth', {screen: 'Sign Up'})}>
             Don&lsquo;t have an account? Sign up
           </Button>
         </View>
       </View>
-      <LoginSheet sheetRef={bottomSheetRef} />
     </ScreenWrapper>
   );
 };
-
-const Header = () => {
-  return (
-    <View style={styles.header}>
-      <View>
-        <AppLogo />
-      </View>
-      <View>
-        <Button
-          style={{alignSelf: 'flex-end'}}
-          mode="text"
-          compact
-          onPress={() => console.log('Pressed')}>
-          Skip
-        </Button>
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  header: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-});

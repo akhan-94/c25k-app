@@ -3,27 +3,24 @@ import type {
   BottomSheetBackgroundProps,
 } from '@gorhom/bottom-sheet';
 import BottomSheet from '@gorhom/bottom-sheet';
-import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, Text, TextInput} from 'react-native-paper';
-import {authCommonStyles} from '../styles';
-import {supabase} from 'src/lib/supabase';
-import type {AuthError} from '@supabase/supabase-js';
-import type {BottomSheetMethods} from '@gorhom/bottom-sheet/lib/typescript/types';
-import Animated, {
-  useAnimatedStyle,
-  interpolateColor,
-  interpolate,
-  Extrapolate,
-} from 'react-native-reanimated';
+import {supabase} from '@lib/supabase';
 import {appTheme} from '@lib/theme';
 import {useErrorHandler} from '@shared/hooks';
+import type {AuthError} from '@supabase/supabase-js';
+import * as React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Button, Portal, Text, TextInput} from 'react-native-paper';
+import Animated, {
+  Extrapolate,
+  interpolate,
+  interpolateColor,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 
-export const LoginSheet = ({
-  sheetRef,
-}: {
-  sheetRef: React.Ref<BottomSheetMethods> | undefined;
-}) => {
+export const LoginButton = () => {
+  /** Refs */
+  const bottomSheetRef = React.useRef<BottomSheet>(null);
+
   /** Hooks */
   const handleError = useErrorHandler();
 
@@ -47,7 +44,7 @@ export const LoginSheet = ({
         email,
         password,
       });
-      if (error) setError(error);
+      if (error) handleError(error.message);
     } catch (error) {
       handleError('failed to login', error);
     } finally {
@@ -58,48 +55,53 @@ export const LoginSheet = ({
   }, [email, password, handleError]);
 
   return (
-    <BottomSheet
-      ref={sheetRef}
-      index={-1}
-      snapPoints={snapPoints}
-      backgroundComponent={BottomSheetBackground}
-      // backdropComponent={BottomSheetBackdrop}
-      enablePanDownToClose>
-      <View style={styles.contentContainer}>
-        {error && <Text>{error.message}</Text>}
-        <TextInput
-          dense
-          placeholder="Email"
-          value={email}
-          mode="outlined"
-          onChangeText={text => setEmail(text)}
-          style={authCommonStyles.inputContainer}
-        />
-        <TextInput
-          dense
-          placeholder="Password"
-          value={password}
-          mode="outlined"
-          secureTextEntry={flatTextSecureEntry}
-          right={
-            <TextInput.Icon
-              icon={flatTextSecureEntry ? 'eye' : 'eye-off'}
-              onPress={() => setFlatTextSecureEntry(!flatTextSecureEntry)}
-              forceTextInputFocus={false}
+    <>
+      <Button mode="contained" onPress={() => bottomSheetRef.current?.expand()}>
+        Login
+      </Button>
+      <Portal>
+        <BottomSheet
+          ref={bottomSheetRef}
+          index={-1}
+          snapPoints={snapPoints}
+          backgroundComponent={BottomSheetBackground}
+          // backdropComponent={BottomSheetBackdrop}
+          enablePanDownToClose>
+          <View style={styles.contentContainer}>
+            {error && <Text>{error.message}</Text>}
+            <TextInput
+              dense
+              placeholder="Email"
+              value={email}
+              mode="outlined"
+              onChangeText={text => setEmail(text)}
             />
-          }
-          onChangeText={text => setPassword(text)}
-          style={authCommonStyles.inputContainer}
-        />
-        <Button
-          mode="contained"
-          onPress={login}
-          loading={isLoading}
-          disabled={disableSubmitButton}>
-          Login
-        </Button>
-      </View>
-    </BottomSheet>
+            <TextInput
+              dense
+              placeholder="Password"
+              value={password}
+              mode="outlined"
+              secureTextEntry={flatTextSecureEntry}
+              right={
+                <TextInput.Icon
+                  icon={flatTextSecureEntry ? 'eye' : 'eye-off'}
+                  onPress={() => setFlatTextSecureEntry(!flatTextSecureEntry)}
+                  forceTextInputFocus={false}
+                />
+              }
+              onChangeText={text => setPassword(text)}
+            />
+            <Button
+              mode="contained"
+              onPress={login}
+              loading={isLoading}
+              disabled={disableSubmitButton}>
+              Login
+            </Button>
+          </View>
+        </BottomSheet>
+      </Portal>
+    </>
   );
 };
 
