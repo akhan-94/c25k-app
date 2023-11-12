@@ -28,6 +28,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "@react-navigation/stack": "^6.2.0",
     "@reduxjs/toolkit": "^1.9.5",
+    "@ronradtke/react-native-markdown-display": "^8.0.0",
     "@supabase/supabase-js": "^2.24.0",
     "dayjs": "^1.11.7",
     "formik": "^2.4.5",
