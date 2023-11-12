@@ -1,3 +1,4 @@
+import {appTheme} from '@lib/theme';
 import * as React from 'react';
 import {View} from 'react-native';
 import Animated, {
@@ -41,7 +42,7 @@ export const IntroCarouselPaginationButton: React.FC<{
   return (
     <View
       style={{
-        backgroundColor: 'white',
+        backgroundColor: 'rgba(255,255,255,0.25)',
         width,
         height: width,
         borderRadius: 50,
@@ -56,7 +57,7 @@ export const IntroCarouselPaginationButton: React.FC<{
         style={[
           {
             borderRadius: 50,
-            backgroundColor,
+            backgroundColor: appTheme.colors.primary,
             flex: 1,
           },
           animStyle,

@@ -50,7 +50,7 @@ export const IntroCarousel = ({height}: {height: number | null}) => {
           {INTRO_CAROUSEL_DATA.map((backgroundColor, index) => {
             return (
               <IntroCarouselPaginationButton
-                backgroundColor={'#fff'}
+                backgroundColor={'red'}
                 animValue={progressValue}
                 index={index}
                 key={index}
