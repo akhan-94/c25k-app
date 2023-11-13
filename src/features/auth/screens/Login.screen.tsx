@@ -1,13 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
-import {ScreenWrapper} from '@shared/components';
 import {LoginButton} from '@shared/components/login-button';
+import {SoundPlayer} from '@shared/utils';
 import * as React from 'react';
 import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {LoginHeader} from '../components/LoginHeader';
 import {IntroCarousel} from '../components/intro-carousel/IntroCarousel';
 import {loginStyles} from '../styles';
-import {SoundPlayer} from '@shared/utils';
 
 export const LoginScreen = () => {
   /** Hooks */

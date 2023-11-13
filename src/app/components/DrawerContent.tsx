@@ -104,7 +104,7 @@ const ProfileSection = ({
 
       {isGuestMode && (
         <View style={profileSectionStyles.guestContainer}>
-          <LoginButton />
+          <LoginButton enableThirdPartyLogin />
           <TouchableRipple
             onPress={disableGuestMode}
             style={profileSectionStyles.signUpButton}

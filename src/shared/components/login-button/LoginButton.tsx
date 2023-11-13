@@ -4,17 +4,24 @@ import {useErrorHandler} from '@shared/hooks';
 import type {FormikHelpers} from 'formik';
 import {Formik} from 'formik';
 import * as React from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {FormikInput} from '../formik-input';
-import {ModalContainer} from './components/ModalContainer';
-import type {LoginFormValues} from './LoginButton.types';
+import {OrDivider} from '../or-divider';
 import {
   LOGIN_FORM_INITIAL_VALUES,
   LOGIN_FORM_SCHEMA,
 } from './LoginButton.constants';
+import type {LoginFormValues} from './LoginButton.types';
+import {ModalContainer} from './components/ModalContainer';
 
-export const LoginButton = () => {
+export interface LoginButtonProps {
+  enableThirdPartyLogin?: boolean;
+}
+
+export const LoginButton = ({
+  enableThirdPartyLogin = false,
+}: LoginButtonProps) => {
   /** Refs */
   const bottomSheetRef = React.useRef<BottomSheetModal>(null);
 
@@ -52,13 +59,15 @@ export const LoginButton = () => {
         }}>
         Login
       </Button>
-      <ModalContainer sheetRef={bottomSheetRef}>
+      <ModalContainer
+        sheetRef={bottomSheetRef}
+        enableThirdPartyLogin={enableThirdPartyLogin}>
         <Formik
           initialValues={LOGIN_FORM_INITIAL_VALUES}
           validationSchema={LOGIN_FORM_SCHEMA}
           onSubmit={login}>
           {formikProps => (
-            <View>
+            <View style={styles.container}>
               <FormikInput<LoginFormValues> name="email" label="Email" />
               <FormikInput<LoginFormValues>
                 name="password"
@@ -68,9 +77,18 @@ export const LoginButton = () => {
               <Button
                 mode="contained"
                 onPress={() => formikProps.handleSubmit()}
-                loading={formikProps.isSubmitting}>
+                loading={formikProps.isSubmitting}
+                style={styles.submitButton}>
                 Login
               </Button>
+              {enableThirdPartyLogin && (
+                <>
+                  <OrDivider spacing="small" />
+                  <Button mode="contained" icon="google-plus">
+                    Continue with Google
+                  </Button>
+                </>
+              )}
             </View>
           )}
         </Formik>
@@ -78,3 +96,14 @@ export const LoginButton = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 5,
+  },
+  submitButton: {
+    marginTop: 7,
+  },
+});

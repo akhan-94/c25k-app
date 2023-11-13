@@ -19,12 +19,20 @@ import Animated, {
 
 export interface ModalContainerProps {
   children: React.ReactNode;
+  enableThirdPartyLogin: boolean;
   sheetRef: React.RefObject<BottomSheetModalMethods>;
 }
 
-export const ModalContainer = ({children, sheetRef}: ModalContainerProps) => {
+export const ModalContainer = ({
+  children,
+  sheetRef,
+  enableThirdPartyLogin,
+}: ModalContainerProps) => {
   /** Derived State */
-  const snapPoints = React.useMemo(() => [300], []);
+  const snapPoints = React.useMemo(
+    () => [enableThirdPartyLogin ? '40%' : 300],
+    [enableThirdPartyLogin],
+  );
 
   /** Functions */
   const renderBackdrop = React.useCallback(
