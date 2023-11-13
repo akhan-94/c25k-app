@@ -1,5 +1,5 @@
 import {useTheme} from 'react-native-paper';
-import type {appTheme} from 'src/lib/theme';
+import type {appTheme} from '@lib/theme';
 
 export type AppTheme = typeof appTheme;
 

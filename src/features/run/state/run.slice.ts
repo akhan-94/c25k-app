@@ -1,9 +1,8 @@
+import type {RootState} from '@lib/redux';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
-import type {RootState} from 'src/config/configureStore';
-import type {RunState} from '../types/RunState';
 import {PROGRAM_MAP} from '@shared/constants';
-import {SoundPlayer} from '@shared/utils';
+import type {RunState} from '../types/RunState';
 
 const initialState: RunState = {
   program: '10-week',
@@ -83,11 +82,6 @@ export const runSlice = createSlice({
     decrementTimer: state => {
       state.timer--;
     },
-  },
-  extraReducers: builder => {
-    builder.addCase(skipToNextStep, (state, action) => {
-      SoundPlayer.play('bell');
-    });
   },
 });
 

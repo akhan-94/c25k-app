@@ -1,5 +1,6 @@
 import {createSelector} from '@reduxjs/toolkit';
 import {selectAppState} from '../state/app.slice';
+import {selectLoadingState} from '../state/loading.slice';
 
 export const selectSession = createSelector(
   selectAppState,
@@ -12,8 +13,8 @@ export const selectSnackBar = createSelector(
 );
 
 export const selectLoading = createSelector(
-  selectAppState,
-  appState => appState.loading,
+  selectLoadingState,
+  state => state.startup,
 );
 
 export const selectGuestMode = createSelector(

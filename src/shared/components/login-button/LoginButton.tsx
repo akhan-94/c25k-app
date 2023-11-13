@@ -40,7 +40,7 @@ export const LoginButton = ({
           email,
           password,
         });
-        if (error) handleError(error.message);
+        if (error) handleError(error.message, error);
       } catch (error) {
         handleError('failed to login', error);
       } finally {

@@ -1,6 +1,6 @@
 import {PROGRAM_MAP} from '@shared/constants';
 import type {ProgramDay} from '@shared/types';
-import {startAppListening} from 'src/config/configureStore';
+import {startAppListening} from '@lib/redux';
 import {decrementTimer, setStatus, setStep, setTimer} from '../state/run.slice';
 import {SoundPlayer} from '@shared/utils';
 

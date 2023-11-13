@@ -1,20 +1,16 @@
 import analytics from '@react-native-firebase/analytics';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer as RNNavigationContainer} from '@react-navigation/native';
 import * as React from 'react';
 import 'react-native-gesture-handler';
-import {DarkTheme} from '../utils/theme';
+import {DarkTheme} from '@lib/theme';
 import {RootNavigator} from './RootNavigator';
 
-export const AppNavigationContainer = ({
-  navigationRef,
-}: {
-  navigationRef: any;
-}) => {
+export const NavigationContainer = ({navigationRef}: {navigationRef: any}) => {
   /** Refs */
   const routeNameRef = React.useRef<string | undefined>();
 
   return (
-    <NavigationContainer
+    <RNNavigationContainer
       ref={navigationRef}
       onReady={() => {
         routeNameRef.current = navigationRef?.current?.getCurrentRoute()?.name;
@@ -33,6 +29,6 @@ export const AppNavigationContainer = ({
         routeNameRef.current = currentRouteName;
       }}>
       <RootNavigator />
-    </NavigationContainer>
+    </RNNavigationContainer>
   );
 };

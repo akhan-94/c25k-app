@@ -24,9 +24,10 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist';
-import {appReducer} from 'src/app';
+import {appReducer, loadingReducer} from '@app/state';
 
 const rootReducer = combineReducers({
+  loading: loadingReducer,
   app: appReducer,
   profile: profileReducer,
   run: runReducer,
@@ -38,6 +39,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
+  blacklist: ['loading'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

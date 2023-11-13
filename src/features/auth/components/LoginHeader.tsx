@@ -3,7 +3,7 @@ import {useAppDispatch} from '@shared/hooks';
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-paper';
-import {toggleGuestMode} from 'src/app/state/app.slice';
+import {appActions} from '@app/state';
 
 export const LoginHeader = () => {
   /** Hooks */
@@ -11,7 +11,7 @@ export const LoginHeader = () => {
 
   /** Functions */
   const skipLogin = () => {
-    dispatch(toggleGuestMode());
+    dispatch(appActions.toggleGuestMode());
   };
 
   return (

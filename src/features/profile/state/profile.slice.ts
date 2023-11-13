@@ -1,6 +1,6 @@
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
-import type {RootState} from 'src/config/configureStore';
+import type {RootState} from '@lib/redux';
 import type {ProfileState} from '../types/ProfileState';
 
 const initialState: ProfileState = {
@@ -14,13 +14,17 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    setState: (state, action: PayloadAction<ProfileState>) => {
-      state = {...state, ...action.payload};
+    setProfileState: (state, action: PayloadAction<Partial<ProfileState>>) => {
+      const {payload} = action;
+      state.birthdate = payload.birthdate ?? state.birthdate;
+      state.email = payload.email ?? state.email;
+      state.firstName = payload.firstName ?? state.firstName;
+      state.lastName = payload.lastName ?? state.lastName;
     },
   },
 });
 
-export const {setState} = profileSlice.actions;
+export const {setProfileState} = profileSlice.actions;
 
 export const profileReducer = profileSlice.reducer;
 

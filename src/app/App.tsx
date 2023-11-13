@@ -5,12 +5,10 @@ import {
 import {createNavigationContainerRef} from '@react-navigation/native';
 import * as React from 'react';
 import 'react-native-gesture-handler';
-import {AppMainView} from './components/AppMainView';
-import {AppNavigationContainer} from './components/AppNavigationContainer';
-import {AppProviders} from './components/AppProviders';
-import StartUpManager from './utils/StartUpManger';
-
-StartUpManager.initialize();
+import {MainView} from './components/MainView';
+import {NavigationContainer} from './components/NavigationContainer';
+import {Providers} from './components/Providers';
+import {GlobalListeners} from './components/GlobalListeners';
 
 const navigationRef = createNavigationContainerRef();
 
@@ -20,10 +18,12 @@ export const App = (): JSX.Element => {
   useReduxDevToolsExtension(navigationRef);
 
   return (
-    <AppProviders>
-      <AppMainView>
-        <AppNavigationContainer navigationRef={navigationRef} />
-      </AppMainView>
-    </AppProviders>
+    <Providers>
+      <GlobalListeners>
+        <MainView>
+          <NavigationContainer navigationRef={navigationRef} />
+        </MainView>
+      </GlobalListeners>
+    </Providers>
   );
 };

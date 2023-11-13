@@ -4,6 +4,7 @@ export interface AppState {
   session: Session | null;
   loading: boolean;
   guestMode: boolean;
+  offline: boolean | null;
   appRating: {
     hasRated: boolean;
     dateRated: string | null;

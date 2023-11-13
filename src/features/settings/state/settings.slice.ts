@@ -1,6 +1,6 @@
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
-import type {RootState} from 'src/config/configureStore';
+import type {RootState} from '@lib/redux';
 import type {SettingsState, ToggleSettings} from '../types/SettingsState';
 
 const initialState: SettingsState = {

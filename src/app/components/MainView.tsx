@@ -4,18 +4,21 @@ import {StatusBar, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Portal} from 'react-native-paper';
 import {useSelector} from 'react-redux';
-import {DarkTheme} from '../utils/theme';
-import {AppSnackBar} from './AppSnackBar';
+import {SnackBar} from './SnackBar';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import AuthManager from '@lib/auth';
+import {DarkTheme} from '@lib/theme';
 
-export const AppMainView = ({children}: {children: JSX.Element}) => {
+AuthManager.initialize();
+
+export const MainView = ({children}: {children: JSX.Element}) => {
   /** Global state */
   const {darkMode} = useSelector(selectSettingsState);
 
   return (
     <GestureHandlerRootView style={containers.gestureHandler}>
       <BottomSheetModalProvider>
-        <AppSnackBar />
+        <SnackBar />
         <StatusBar
           translucent
           backgroundColor="rgba(255, 255, 255, 0)"

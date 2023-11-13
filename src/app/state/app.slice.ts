@@ -1,9 +1,10 @@
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
 import type {AppState} from '../types/AppState';
-import type {RootState} from 'src/config/configureStore';
+import type {RootState} from '@lib/redux';
 
 const initialState: AppState = {
+  offline: null,
   session: null,
   loading: false,
   appRating: {
@@ -49,6 +50,9 @@ export const appSlice = createSlice({
         message: payload[1] || null,
       };
     },
+    setOfflineStatus: (state, action: PayloadAction<boolean>) => {
+      state.offline = action.payload;
+    },
     closeSnackBar: state => {
       state.snackbar = {
         isVisible: false,
@@ -59,14 +63,7 @@ export const appSlice = createSlice({
   },
 });
 
-export const {
-  setSession,
-  closeSnackBar,
-  openSnackBar,
-  toggleGuestMode,
-  setAppRating,
-  setGlobalLoading,
-} = appSlice.actions;
+export const appActions = appSlice.actions;
 
 export const appReducer = appSlice.reducer;
 

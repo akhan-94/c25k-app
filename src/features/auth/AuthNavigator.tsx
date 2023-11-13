@@ -3,8 +3,8 @@ import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AppBar} from '@shared/components/app-bar';
 import * as React from 'react';
-import type {RootStackParamList} from 'src/app/components/RootNavigator';
 import {SignUpScreen} from './screens/Signup.screen';
+import type {RootStackParamList} from '@app/types';
 
 export type AuthStackParamList = {
   Login: undefined;

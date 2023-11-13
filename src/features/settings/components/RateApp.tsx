@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import {List} from 'react-native-paper';
 import InAppReview from 'react-native-in-app-review';
 import {useAppDispatch, useErrorHandler} from '@shared/hooks';
-import {setAppRating} from 'src/app/state/app.slice';
+import {appActions} from '@app/state';
 
 export const RateApp = () => {
   /** Hooks */
@@ -23,7 +23,10 @@ export const RateApp = () => {
         );
         if (hasFlowFinishedSuccessfully) {
           dispatch(
-            setAppRating({hasRated: true, dateRated: new Date().toISOString()}),
+            appActions.setAppRating({
+              hasRated: true,
+              dateRated: new Date().toISOString(),
+            }),
           );
         }
       })

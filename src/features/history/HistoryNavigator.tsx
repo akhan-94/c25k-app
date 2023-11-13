@@ -2,8 +2,8 @@ import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AppBar} from '@shared/components/app-bar';
 import * as React from 'react';
-import type {MainStackParamList} from 'src/app/components/MainNavigator';
 import {RunHistoryScreen} from './screens/RunHistory.screen';
+import type {MainStackParamList} from '@app/types';
 
 export type HistoryStackParamList = {
   'Run History': undefined;

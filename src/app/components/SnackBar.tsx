@@ -1,13 +1,13 @@
 import {useAppDispatch} from '@shared/hooks';
 import * as React from 'react';
-import {Snackbar} from 'react-native-paper';
+import {Snackbar as RNPSnackBar} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {selectSnackBar} from '../selectors/app.selectors';
-import {closeSnackBar} from '../state/app.slice';
+import {appActions} from '../state';
 import {View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-export const AppSnackBar = () => {
+export const SnackBar = () => {
   /** Hooks */
   const dispatch = useAppDispatch();
   const insets = useSafeAreaInsets();
@@ -16,7 +16,7 @@ export const AppSnackBar = () => {
 
   /** Functions */
   const onDismissSnackBar = React.useCallback(() => {
-    dispatch(closeSnackBar());
+    dispatch(appActions.closeSnackBar());
   }, [dispatch]);
 
   return (
@@ -24,13 +24,13 @@ export const AppSnackBar = () => {
       style={{
         zIndex: 999,
       }}>
-      <Snackbar
+      <RNPSnackBar
         visible={snackbar?.isVisible}
         wrapperStyle={{top: insets.top}}
         duration={3000}
         onDismiss={() => onDismissSnackBar()}>
         {snackbar?.message}
-      </Snackbar>
+      </RNPSnackBar>
     </View>
   );
 };
