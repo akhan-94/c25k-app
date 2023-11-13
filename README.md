@@ -14,3 +14,9 @@ yarn start -- --reset-cache
 ```
 cd android &&./gradlew clean
 ```
+
+## Test account
+```
+testing@idlebyte.ca
+laNFSLWxXN
+```

@@ -2,7 +2,7 @@ import Sound from 'react-native-sound';
 import {AUDIO_SOURCES} from './constants/audio-sources.constant';
 import type {AudioSourceName} from './types/SoundManager.types';
 
-class SoundPlayer {
+class SoundManager {
   private readonly _soundMap = new Map<AudioSourceName, Sound>();
 
   constructor() {}
@@ -31,6 +31,6 @@ class SoundPlayer {
   }
 }
 
-const soundPlayer = new SoundPlayer();
+const soundManager = new SoundManager();
 
-export default soundPlayer;
+export default soundManager;

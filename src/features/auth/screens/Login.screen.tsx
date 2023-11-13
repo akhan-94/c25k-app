@@ -6,6 +6,7 @@ import {Button, Text} from 'react-native-paper';
 import {LoginHeader} from '../components/LoginHeader';
 import {IntroCarousel} from '../components/intro-carousel/IntroCarousel';
 import {loginStyles} from '../styles';
+import NotificationManager from '@lib/notification';
 
 export const LoginScreen = () => {
   /** Hooks */
@@ -55,6 +56,7 @@ export const LoginScreen = () => {
           <Button
             mode="contained"
             icon="google-plus"
+            onPress={() => NotificationManager.test()}
             style={loginStyles.button.primary}>
             Continue with Google
           </Button>

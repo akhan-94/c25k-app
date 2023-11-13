@@ -2,7 +2,8 @@ import {PROGRAM_MAP} from '@shared/constants';
 import type {ProgramDay} from '@shared/types';
 import {startAppListening} from '@lib/redux';
 import {decrementTimer, setStatus, setStep, setTimer} from '../state/run.slice';
-import SoundPlayer from '@lib/sound';
+import SoundManager from '@lib/sound';
+import VibrationManager from '@lib/vibration';
 
 let localInterval: NodeJS.Timeout;
 let details: ProgramDay;
@@ -41,9 +42,11 @@ startAppListening({
         const {time, type} = details.pattern[step + 1];
         listenerApi.dispatch(setStep(step + 1));
         if (state.settings.sound) playStepSound(type);
+        if (state.settings.vibrate) VibrationManager.vibrate();
         listenerApi.dispatch(setTimer(time));
       } else {
-        if (state.settings.sound) SoundPlayer.play('bell');
+        if (state.settings.sound) SoundManager.play('bell');
+        if (state.settings.vibrate) VibrationManager.vibrate();
         listenerApi.dispatch(setStep(0));
         listenerApi.dispatch(setStatus('finished'));
       }
@@ -52,18 +55,18 @@ startAppListening({
 });
 
 const playStepSound = (type: ProgramDay['pattern'][0]['type']) => {
-  SoundPlayer.play('bell');
+  SoundManager.play('bell');
   switch (type) {
     case 'walk': {
-      SoundPlayer.play('male-start-walking');
+      SoundManager.play('male-start-walking');
       break;
     }
     case 'jog': {
-      SoundPlayer.play('male-start-runnng');
+      SoundManager.play('male-start-runnng');
       break;
     }
     case 'cooldown': {
-      SoundPlayer.play('male-start-cooldown');
+      SoundManager.play('male-start-cooldown');
       break;
     }
   }

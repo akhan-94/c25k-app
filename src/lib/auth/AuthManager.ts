@@ -3,7 +3,7 @@ import {supabase} from '@lib/supabase';
 import {store} from '@lib/redux';
 import {appActions, loadingActions} from '@app/state';
 
-export class AuthManager {
+class AuthManager {
   constructor() {}
 
   public async initialize() {

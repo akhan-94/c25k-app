@@ -1,36 +1,26 @@
 {
   "project_info": {
-    "project_number": "918249019166",
-    "project_id": "couch2runner-1ba68",
-    "storage_bucket": "couch2runner-1ba68.appspot.com"
+    "project_number": "640031171222",
+    "project_id": "ib-couch2runner",
+    "storage_bucket": "ib-couch2runner.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:918249019166:android:bbcf316843d00a377a5b0f",
+        "mobilesdk_app_id": "1:640031171222:android:32ca9723b059f63a8858b7",
         "android_client_info": {
           "package_name": "com.idlebyte.couch2runner"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "918249019166-gr4ct54p09eh58cagaant5ccc8ac3k5u.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCVd6fTNAimVvK8L5sH2IfiezIoJOHRvmI"
+          "current_key": "AIzaSyAgvsPIcekQLYr-q0nQmEOXbZAI3T3pjZs"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "918249019166-gr4ct54p09eh58cagaant5ccc8ac3k5u.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
