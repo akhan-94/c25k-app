@@ -22,6 +22,9 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
+    setGlobalLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
     toggleGuestMode: state => {
       state.guestMode = !state.guestMode;
     },
@@ -62,6 +65,7 @@ export const {
   openSnackBar,
   toggleGuestMode,
   setAppRating,
+  setGlobalLoading,
 } = appSlice.actions;
 
 export const appReducer = appSlice.reducer;

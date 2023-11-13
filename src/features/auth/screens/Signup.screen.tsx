@@ -1,28 +1,20 @@
 import {supabase} from '@lib/supabase';
 import {appTheme} from '@lib/theme';
 import {ScreenWrapper} from '@shared/components';
+import {FormikInput} from '@shared/components/formik-input';
 import {OrDivider} from '@shared/components/or-divider';
 import {useErrorHandler} from '@shared/hooks';
-import type {FormikHelpers, FormikProps} from 'formik';
+import type {FormikHelpers} from 'formik';
 import {Formik} from 'formik';
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Button, Text, TextInput} from 'react-native-paper';
-import {
-  DatePickerInput,
-  en,
-  registerTranslation,
-} from 'react-native-paper-dates';
+import {Button} from 'react-native-paper';
+import {DatePickerInput} from 'react-native-paper-dates';
 import {
   SIGN_UP_FORM_INITIAL_VALUES,
   SignupSchema,
 } from '../constants/sign-up-form.constants';
-import type {
-  SignUpFormFields,
-  SignUpFormValues,
-} from '../types/sign-up-form.types';
-
-registerTranslation('en', en);
+import type {SignUpFormValues} from '../types/sign-up-form.types';
 
 export const SignUpScreen = () => {
   /** Hooks */
@@ -73,17 +65,15 @@ export const SignUpScreen = () => {
           <View style={styles.formContainer}>
             <View style={styles.nameContainer}>
               <View style={styles.cell}>
-                <InputField
-                  fieldName="firstName"
+                <FormikInput<SignUpFormValues>
+                  name="firstName"
                   label="First name"
-                  formikProps={formikProps}
                 />
               </View>
               <View style={styles.cell}>
-                <InputField
-                  fieldName="lastName"
+                <FormikInput<SignUpFormValues>
+                  name="lastName"
                   label="Last name"
-                  formikProps={formikProps}
                 />
               </View>
             </View>
@@ -103,20 +93,11 @@ export const SignUpScreen = () => {
               }}
               inputMode="start"
             />
-            <InputField
-              fieldName="email"
-              label="Email"
-              formikProps={formikProps}
-            />
-            <InputField
-              fieldName="password"
-              label="Password"
-              formikProps={formikProps}
-            />
-            <InputField
-              fieldName="passwordConfirmation"
-              label="Confirm Password"
-              formikProps={formikProps}
+            <FormikInput<SignUpFormValues> name="email" label="Email" />
+            <FormikInput<SignUpFormValues> name="password" label="Pasword" />
+            <FormikInput<SignUpFormValues>
+              name="passwordConfirmation"
+              label="Confirm password"
             />
             <Button
               mode="contained"
@@ -135,57 +116,6 @@ export const SignUpScreen = () => {
         Sign up with Google
       </Button>
     </ScreenWrapper>
-  );
-};
-export const InputField = ({
-  label,
-  fieldName,
-  formikProps,
-}: {
-  label: string;
-  fieldName: SignUpFormFields;
-  formikProps: FormikProps<SignUpFormValues>;
-}) => {
-  /** Props */
-  const {values, errors, touched, handleBlur, handleChange} = formikProps;
-
-  /** Derived state */
-  const hasError = Boolean(errors[fieldName] && touched[fieldName]);
-  const isPassword =
-    fieldName === 'password' || fieldName === 'passwordConfirmation';
-  const errorMessage = errors[fieldName];
-
-  /** Local state */
-  const [flatTextSecureEntry, setFlatTextSecureEntry] =
-    React.useState(isPassword);
-
-  return (
-    <View>
-      <TextInput
-        mode="outlined"
-        keyboardType={fieldName === 'email' ? 'email-address' : 'default'}
-        label={label}
-        value={values[fieldName]}
-        error={hasError}
-        onBlur={handleBlur(fieldName)}
-        onChangeText={handleChange(fieldName)}
-        secureTextEntry={flatTextSecureEntry}
-        right={
-          isPassword && (
-            <TextInput.Icon
-              icon={flatTextSecureEntry ? 'eye' : 'eye-off'}
-              onPress={() => setFlatTextSecureEntry(!flatTextSecureEntry)}
-              forceTextInputFocus={false}
-            />
-          )
-        }
-      />
-      {hasError && (
-        <Text variant="bodySmall" style={styles.errorText}>
-          {errorMessage}
-        </Text>
-      )}
-    </View>
   );
 };
 

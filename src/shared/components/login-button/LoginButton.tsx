@@ -1,184 +1,80 @@
-import type {
-  BottomSheetBackdropProps,
-  BottomSheetBackgroundProps,
-} from '@gorhom/bottom-sheet';
-import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
+import type {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {supabase} from '@lib/supabase';
-import {appTheme} from '@lib/theme';
 import {useErrorHandler} from '@shared/hooks';
-import type {AuthError} from '@supabase/supabase-js';
+import type {FormikHelpers} from 'formik';
+import {Formik} from 'formik';
 import * as React from 'react';
-import {Keyboard, StyleSheet, View} from 'react-native';
-import {Button, Portal, Text, TextInput} from 'react-native-paper';
-import Animated, {
-  Extrapolate,
-  interpolate,
-  interpolateColor,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
+import {View} from 'react-native';
+import {Button} from 'react-native-paper';
+import {FormikInput} from '../formik-input';
+import {ModalContainer} from './components/ModalContainer';
+import type {LoginFormValues} from './LoginButton.types';
+import {
+  LOGIN_FORM_INITIAL_VALUES,
+  LOGIN_FORM_SCHEMA,
+} from './LoginButton.constants';
 
 export const LoginButton = () => {
   /** Refs */
-  const bottomSheetRef = React.useRef<BottomSheet>(null);
+  const bottomSheetRef = React.useRef<BottomSheetModal>(null);
 
   /** Hooks */
   const handleError = useErrorHandler();
 
-  /** Local state */
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [flatTextSecureEntry, setFlatTextSecureEntry] = React.useState(true);
-  const [error, setError] = React.useState<AuthError | null>(null);
-
-  /** Derived State */
-  const disableSubmitButton = !email || !password || isLoading;
-  const snapPoints = React.useMemo(() => ['45%'], []);
-
   /** Functions */
-  const login = React.useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const {error} = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (error) handleError(error.message);
-    } catch (error) {
-      handleError('failed to login', error);
-    } finally {
-      setEmail('');
-      setPassword('');
-      setIsLoading(false);
-    }
-  }, [email, password, handleError]);
-
-  const handleSheetChanges = React.useCallback((index: number) => {
-    if (index === -1) {
-      Keyboard.dismiss();
-    }
-  }, []);
-
-  // renders
-  const renderBackdrop = React.useCallback(
-    (props: any) => (
-      <BottomSheetBackdrop
-        {...props}
-        disappearsOnIndex={-1}
-        appearsOnIndex={0}
-        opacity={0.75}
-        enableTouchThrough={false}
-        pressBehavior="close"
-      />
-    ),
-    [],
+  const login = React.useCallback(
+    async (
+      {email, password}: LoginFormValues,
+      actions: FormikHelpers<LoginFormValues>,
+    ) => {
+      try {
+        actions.setSubmitting(true);
+        const {error} = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (error) handleError(error.message);
+      } catch (error) {
+        handleError('failed to login', error);
+      } finally {
+        actions.setSubmitting(false);
+      }
+    },
+    [handleError],
   );
 
   return (
     <>
-      <Button mode="contained" onPress={() => bottomSheetRef.current?.expand()}>
+      <Button
+        mode="contained"
+        onPress={() => {
+          bottomSheetRef.current?.present();
+        }}>
         Login
       </Button>
-      <Portal>
-        <BottomSheet
-          ref={bottomSheetRef}
-          index={-1}
-          snapPoints={snapPoints}
-          backgroundComponent={BottomSheetBackground}
-          backdropComponent={renderBackdrop}
-          onChange={handleSheetChanges}
-          enablePanDownToClose>
-          <View style={styles.contentContainer}>
-            {error && <Text>{error.message}</Text>}
-            <TextInput
-              dense
-              placeholder="Email"
-              value={email}
-              mode="outlined"
-              onChangeText={text => setEmail(text)}
-            />
-            <TextInput
-              dense
-              placeholder="Password"
-              value={password}
-              mode="outlined"
-              secureTextEntry={flatTextSecureEntry}
-              right={
-                <TextInput.Icon
-                  icon={flatTextSecureEntry ? 'eye' : 'eye-off'}
-                  onPress={() => setFlatTextSecureEntry(!flatTextSecureEntry)}
-                  forceTextInputFocus={false}
-                />
-              }
-              onChangeText={text => setPassword(text)}
-            />
-            <Button
-              mode="contained"
-              onPress={login}
-              loading={isLoading}
-              disabled={disableSubmitButton}>
-              Login
-            </Button>
-          </View>
-        </BottomSheet>
-      </Portal>
+      <ModalContainer sheetRef={bottomSheetRef}>
+        <Formik
+          initialValues={LOGIN_FORM_INITIAL_VALUES}
+          validationSchema={LOGIN_FORM_SCHEMA}
+          onSubmit={login}>
+          {formikProps => (
+            <View>
+              <FormikInput<LoginFormValues> name="email" label="Email" />
+              <FormikInput<LoginFormValues>
+                name="password"
+                label="Password"
+                type="password"
+              />
+              <Button
+                mode="contained"
+                onPress={() => formikProps.handleSubmit()}
+                loading={formikProps.isSubmitting}>
+                Login
+              </Button>
+            </View>
+          )}
+        </Formik>
+      </ModalContainer>
     </>
   );
 };
-
-const BottomSheetBackground = ({
-  style,
-  animatedIndex,
-}: BottomSheetBackgroundProps) => {
-  const containerAnimatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      animatedIndex.value,
-      [0, 1],
-      [appTheme.colors.surface, appTheme.colors.surface],
-    ),
-  }));
-  const containerStyle = React.useMemo(
-    () => [style, containerAnimatedStyle, styles.sheetBackground],
-    [style, containerAnimatedStyle],
-  );
-  return <Animated.View pointerEvents="none" style={containerStyle} />;
-};
-
-const styles = StyleSheet.create({
-  sheetBackground: {
-    borderRadius: 10,
-  },
-  contentContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    paddingRight: 17,
-    paddingLeft: 17,
-  },
-});
-
-// const BottomSheetBackdrop = ({
-//   animatedIndex,
-//   style,
-// }: BottomSheetBackdropProps) => {
-//   const containerAnimatedStyle = useAnimatedStyle(() => ({
-//     opacity: interpolate(
-//       animatedIndex.value,
-//       [0, 1],
-//       [0, 1],
-//       Extrapolate.CLAMP,
-//     ),
-//   }));
-//   const containerStyle = React.useMemo(
-//     () => [
-//       style,
-//       {
-//         backgroundColor: '#fff',
-//       },
-//       containerAnimatedStyle,
-//     ],
-//     [style, containerAnimatedStyle],
-//   );
-
-//   return <Animated.View style={containerStyle} />;
-// };

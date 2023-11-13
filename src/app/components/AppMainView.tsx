@@ -1,11 +1,12 @@
 import {selectSettingsState} from '@features/settings';
 import * as React from 'react';
-import {StatusBar, StyleSheet, View} from 'react-native';
+import {StatusBar, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {Portal} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {DarkTheme} from '../utils/theme';
 import {AppSnackBar} from './AppSnackBar';
-import {Portal} from 'react-native-paper';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 export const AppMainView = ({children}: {children: JSX.Element}) => {
   /** Global state */
@@ -13,7 +14,7 @@ export const AppMainView = ({children}: {children: JSX.Element}) => {
 
   return (
     <GestureHandlerRootView style={containers.gestureHandler}>
-      <View style={containers.main}>
+      <BottomSheetModalProvider>
         <AppSnackBar />
         <StatusBar
           translucent
@@ -22,16 +23,12 @@ export const AppMainView = ({children}: {children: JSX.Element}) => {
           animated
         />
         <Portal.Host>{children}</Portal.Host>
-      </View>
+      </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
 };
 export const containers = StyleSheet.create({
   gestureHandler: {
-    flex: 1,
-    position: 'relative',
-  },
-  main: {
     flex: 1,
     position: 'relative',
     backgroundColor: DarkTheme.colors.background,

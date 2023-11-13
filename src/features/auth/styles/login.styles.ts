@@ -1,5 +1,5 @@
 import {appTheme} from '@lib/theme';
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {StatusBar} from 'react-native';
 export const layout = StyleSheet.create({
   container: {
@@ -7,6 +7,9 @@ export const layout = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     paddingTop: (StatusBar.currentHeight || 0) + appTheme.spacing.medium,
+    paddingBottom: appTheme.spacing.medium + 5,
+    paddingHorizontal: appTheme.spacing.medium,
+    minHeight: Dimensions.get('screen').height - appTheme.spacing.medium,
   },
   main: {
     flex: 1,

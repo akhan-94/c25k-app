@@ -5,15 +5,12 @@ import {
 import {createNavigationContainerRef} from '@react-navigation/native';
 import * as React from 'react';
 import 'react-native-gesture-handler';
-import {enableFreeze} from 'react-native-screens';
 import {AppMainView} from './components/AppMainView';
 import {AppNavigationContainer} from './components/AppNavigationContainer';
 import {AppProviders} from './components/AppProviders';
-import {SoundPlayer} from '@shared/utils';
+import StartUpManager from './utils/StartUpManger';
 
-enableFreeze();
-
-SoundPlayer.loadSoundLibrary();
+StartUpManager.initialize();
 
 const navigationRef = createNavigationContainerRef();
 

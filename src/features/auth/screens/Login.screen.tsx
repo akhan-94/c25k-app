@@ -19,7 +19,7 @@ export const LoginScreen = () => {
   );
 
   return (
-    <ScreenWrapper withScrollView={false} style={loginStyles.layout.container}>
+    <View style={loginStyles.layout.container}>
       <View style={loginStyles.layout.main}>
         <LoginHeader />
         <View
@@ -70,11 +70,12 @@ export const LoginScreen = () => {
           </Button>
           <Button
             mode="text"
+            style={loginStyles.button.primary}
             onPress={() => navigation.navigate('Auth', {screen: 'Sign Up'})}>
             Don&lsquo;t have an account? Sign up
           </Button>
         </View>
       </View>
-    </ScreenWrapper>
+    </View>
   );
 };

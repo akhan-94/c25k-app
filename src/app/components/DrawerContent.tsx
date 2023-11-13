@@ -64,7 +64,6 @@ const {profileSectionStyles} = drawerStyles;
 
 const ProfileSection = ({
   navigation,
-  active,
 }: {
   navigation: DrawerContentComponentProps['navigation'];
   active: string;
@@ -74,6 +73,11 @@ const ProfileSection = ({
 
   /** Global state */
   const isGuestMode = useSelector(selectGuestMode);
+
+  /** Funtions */
+  const disableGuestMode = () => {
+    dispatch(toggleGuestMode());
+  };
 
   return (
     <View style={profileSectionStyles.container}>
@@ -102,7 +106,7 @@ const ProfileSection = ({
         <View style={profileSectionStyles.guestContainer}>
           <LoginButton />
           <TouchableRipple
-            onPress={() => dispatch(toggleGuestMode())}
+            onPress={disableGuestMode}
             style={profileSectionStyles.signUpButton}
             rippleColor="rgba(255, 255, 255, .32)">
             <Text variant="labelSmall">
