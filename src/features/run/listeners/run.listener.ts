@@ -2,7 +2,7 @@ import {PROGRAM_MAP} from '@shared/constants';
 import type {ProgramDay} from '@shared/types';
 import {startAppListening} from '@lib/redux';
 import {decrementTimer, setStatus, setStep, setTimer} from '../state/run.slice';
-import {SoundPlayer} from '@shared/utils';
+import SoundPlayer from '@lib/sound';
 
 let localInterval: NodeJS.Timeout;
 let details: ProgramDay;

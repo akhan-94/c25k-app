@@ -1,6 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
 import {LoginButton} from '@shared/components/login-button';
-import {SoundPlayer} from '@shared/utils';
 import * as React from 'react';
 import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
@@ -55,14 +54,12 @@ export const LoginScreen = () => {
           <LoginButton />
           <Button
             mode="contained"
-            onPress={() => SoundPlayer.play('bell')}
             icon="google-plus"
             style={loginStyles.button.primary}>
             Continue with Google
           </Button>
           <Button
             mode="contained"
-            onPress={() => console.log('Pressed')}
             icon="apple"
             style={loginStyles.button.primary}>
             Continue with Apple

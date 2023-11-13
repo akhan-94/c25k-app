@@ -1,4 +1,4 @@
-import {SoundPlayer} from '@shared/utils';
+import SoundPlayer from '@lib/sound';
 import {en, registerTranslation} from 'react-native-paper-dates';
 import {enableFreeze} from 'react-native-screens';
 
@@ -8,7 +8,7 @@ export class StartUpManager {
   public initialize() {
     enableFreeze();
     registerTranslation('en', en);
-    SoundPlayer.loadSoundLibrary();
+    SoundPlayer.initialize();
   }
 }
 
