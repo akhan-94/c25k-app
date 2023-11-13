@@ -2,13 +2,13 @@ import type {
   BottomSheetBackdropProps,
   BottomSheetBackgroundProps,
 } from '@gorhom/bottom-sheet';
-import BottomSheet from '@gorhom/bottom-sheet';
+import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 import {supabase} from '@lib/supabase';
 import {appTheme} from '@lib/theme';
 import {useErrorHandler} from '@shared/hooks';
 import type {AuthError} from '@supabase/supabase-js';
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Keyboard, StyleSheet, View} from 'react-native';
 import {Button, Portal, Text, TextInput} from 'react-native-paper';
 import Animated, {
   Extrapolate,
@@ -54,6 +54,27 @@ export const LoginButton = () => {
     }
   }, [email, password, handleError]);
 
+  const handleSheetChanges = React.useCallback((index: number) => {
+    if (index === -1) {
+      Keyboard.dismiss();
+    }
+  }, []);
+
+  // renders
+  const renderBackdrop = React.useCallback(
+    (props: any) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        opacity={0.75}
+        enableTouchThrough={false}
+        pressBehavior="close"
+      />
+    ),
+    [],
+  );
+
   return (
     <>
       <Button mode="contained" onPress={() => bottomSheetRef.current?.expand()}>
@@ -65,7 +86,8 @@ export const LoginButton = () => {
           index={-1}
           snapPoints={snapPoints}
           backgroundComponent={BottomSheetBackground}
-          backdropComponent={BottomSheetBackdrop}
+          backdropComponent={renderBackdrop}
+          onChange={handleSheetChanges}
           enablePanDownToClose>
           <View style={styles.contentContainer}>
             {error && <Text>{error.message}</Text>}
@@ -135,28 +157,28 @@ const styles = StyleSheet.create({
   },
 });
 
-const BottomSheetBackdrop = ({
-  animatedIndex,
-  style,
-}: BottomSheetBackdropProps) => {
-  const containerAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      animatedIndex.value,
-      [0, 1],
-      [0, 1],
-      Extrapolate.CLAMP,
-    ),
-  }));
-  const containerStyle = React.useMemo(
-    () => [
-      style,
-      {
-        backgroundColor: '#fff',
-      },
-      containerAnimatedStyle,
-    ],
-    [style, containerAnimatedStyle],
-  );
+// const BottomSheetBackdrop = ({
+//   animatedIndex,
+//   style,
+// }: BottomSheetBackdropProps) => {
+//   const containerAnimatedStyle = useAnimatedStyle(() => ({
+//     opacity: interpolate(
+//       animatedIndex.value,
+//       [0, 1],
+//       [0, 1],
+//       Extrapolate.CLAMP,
+//     ),
+//   }));
+//   const containerStyle = React.useMemo(
+//     () => [
+//       style,
+//       {
+//         backgroundColor: '#fff',
+//       },
+//       containerAnimatedStyle,
+//     ],
+//     [style, containerAnimatedStyle],
+//   );
 
-  return <Animated.View pointerEvents="none" style={containerStyle} />;
-};
+//   return <Animated.View style={containerStyle} />;
+// };

@@ -14,16 +14,14 @@ export const AppMainView = ({children}: {children: JSX.Element}) => {
   return (
     <GestureHandlerRootView style={containers.gestureHandler}>
       <View style={containers.main}>
-        <Portal.Host>
-          <AppSnackBar />
-          <StatusBar
-            translucent
-            backgroundColor="rgba(255, 255, 255, 0)"
-            barStyle={darkMode ? 'light-content' : 'dark-content'}
-            animated
-          />
-          {children}
-        </Portal.Host>
+        <AppSnackBar />
+        <StatusBar
+          translucent
+          backgroundColor="rgba(255, 255, 255, 0)"
+          barStyle={darkMode ? 'light-content' : 'dark-content'}
+          animated
+        />
+        <Portal.Host>{children}</Portal.Host>
       </View>
     </GestureHandlerRootView>
   );

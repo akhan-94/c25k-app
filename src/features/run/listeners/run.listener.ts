@@ -2,6 +2,7 @@ import {PROGRAM_MAP} from '@shared/constants';
 import type {ProgramDay} from '@shared/types';
 import {startAppListening} from 'src/config/configureStore';
 import {decrementTimer, setStatus, setStep, setTimer} from '../state/run.slice';
+import {SoundPlayer} from '@shared/utils';
 
 let localInterval: NodeJS.Timeout;
 let details: ProgramDay;
@@ -34,16 +35,36 @@ startAppListening({
   },
   effect: (action, listenerApi) => {
     const state = listenerApi.getState();
-    if (state.run.timer <= 0) {
+    if (state.run.timer < 1) {
       const step = state.run.progress[2];
       if (details.pattern[step + 1]) {
-        const {time} = details.pattern[step + 1];
+        const {time, type} = details.pattern[step + 1];
         listenerApi.dispatch(setStep(step + 1));
+        if (state.settings.sound) playStepSound(type);
         listenerApi.dispatch(setTimer(time));
       } else {
+        if (state.settings.sound) SoundPlayer.play('bell');
         listenerApi.dispatch(setStep(0));
         listenerApi.dispatch(setStatus('finished'));
       }
     }
   },
 });
+
+const playStepSound = (type: ProgramDay['pattern'][0]['type']) => {
+  SoundPlayer.play('bell');
+  switch (type) {
+    case 'walk': {
+      SoundPlayer.play('male-start-walking');
+      break;
+    }
+    case 'jog': {
+      SoundPlayer.play('male-start-runnng');
+      break;
+    }
+    case 'cooldown': {
+      SoundPlayer.play('male-start-cooldown');
+      break;
+    }
+  }
+};

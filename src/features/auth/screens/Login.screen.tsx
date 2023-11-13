@@ -56,7 +56,7 @@ export const LoginScreen = () => {
           <LoginButton />
           <Button
             mode="contained"
-            onPress={() => SoundPlayer.play('male-start-cooldown')}
+            onPress={() => SoundPlayer.play('bell')}
             icon="google-plus"
             style={loginStyles.button.primary}>
             Continue with Google
