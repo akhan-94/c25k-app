@@ -9,6 +9,7 @@ import {
 } from '@gorhom/bottom-sheet';
 import type {BottomSheetModalMethods} from '@gorhom/bottom-sheet/lib/typescript/types';
 import {appTheme} from '@lib/theme';
+import {useBottomSheetBackHandler} from '@shared/hooks';
 import * as React from 'react';
 import {Keyboard, StyleSheet} from 'react-native';
 import {IconButton} from 'react-native-paper';
@@ -34,6 +35,8 @@ export const ModalContainer = ({
     [enableThirdPartyLogin],
   );
 
+  const {handleSheetPositionChange} = useBottomSheetBackHandler(sheetRef);
+
   /** Functions */
   const renderBackdrop = React.useCallback(
     (props: BottomSheetBackdropProps) => (
@@ -49,9 +52,13 @@ export const ModalContainer = ({
     [],
   );
 
-  const handleSheetChanges = React.useCallback((index: number) => {
-    if (index === -1) Keyboard.dismiss();
-  }, []);
+  const handleSheetChanges = React.useCallback(
+    (...args: any) => {
+      handleSheetPositionChange(args);
+      if (args[0] === -1) Keyboard.dismiss();
+    },
+    [handleSheetPositionChange],
+  );
 
   return (
     <BottomSheetModal

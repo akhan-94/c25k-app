@@ -5,3 +5,4 @@ export {useAuth} from './useAuth';
 export {useCountDownTimer} from './useCountDownTimer';
 export {useEventTracking} from './useEventTracking';
 export {useErrorHandler} from './useErrorHandler';
+export {useBottomSheetBackHandler} from './useBottomSheetBackHandler';

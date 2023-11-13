@@ -1,12 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
+import {GoogleSignOnButton} from '@shared/components/google-signon-button';
 import {LoginButton} from '@shared/components/login-button';
 import * as React from 'react';
 import {View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {LoginHeader} from '../components/LoginHeader';
 import {IntroCarousel} from '../components/intro-carousel/IntroCarousel';
 import {loginStyles} from '../styles';
-import NotificationManager from '@lib/notification';
+import FeatureFlagManager, {FeatureFlag} from '@lib/feature-flag';
 
 export const LoginScreen = () => {
   /** Hooks */
@@ -18,7 +20,7 @@ export const LoginScreen = () => {
   );
 
   return (
-    <View style={loginStyles.layout.container}>
+    <SafeAreaView style={loginStyles.layout.container}>
       <View style={loginStyles.layout.main}>
         <LoginHeader />
         <View
@@ -51,29 +53,25 @@ export const LoginScreen = () => {
             </Text>
           </Text>
         </View>
-        <View>
+        <View style={loginStyles.button.buttonGroup}>
           <LoginButton />
-          <Button
-            mode="contained"
-            icon="google-plus"
-            onPress={() => NotificationManager.test()}
-            style={loginStyles.button.primary}>
-            Continue with Google
-          </Button>
-          <Button
-            mode="contained"
-            icon="apple"
-            style={loginStyles.button.primary}>
-            Continue with Apple
-          </Button>
-          <Button
-            mode="text"
-            style={loginStyles.button.primary}
-            onPress={() => navigation.navigate('Auth', {screen: 'Sign Up'})}>
-            Don&lsquo;t have an account? Sign up
-          </Button>
+          {FeatureFlagManager.isEnabled([FeatureFlag.GOOGLE_SIGNON]) && (
+            <GoogleSignOnButton />
+          )}
+          {FeatureFlagManager.isEnabled([FeatureFlag.APPLE_SIGNON]) && (
+            <Button mode="contained" icon="apple">
+              Continue with Apple
+            </Button>
+          )}
+          {FeatureFlagManager.isEnabled([FeatureFlag.SIGN_UP]) && (
+            <Button
+              mode="text"
+              onPress={() => navigation.navigate('Auth', {screen: 'Sign Up'})}>
+              Don&lsquo;t have an account? Sign up
+            </Button>
+          )}
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };

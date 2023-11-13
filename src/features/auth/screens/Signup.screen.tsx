@@ -15,6 +15,8 @@ import {
   SignupSchema,
 } from '../constants/sign-up-form.constants';
 import type {SignUpFormValues} from '../types/sign-up-form.types';
+import FeatureFlagManager, {FeatureFlag} from '@lib/feature-flag';
+import {GoogleSignOnButton} from '@shared/components/google-signon-button';
 
 export const SignUpScreen = () => {
   /** Hooks */
@@ -94,27 +96,35 @@ export const SignUpScreen = () => {
               inputMode="start"
             />
             <FormikInput<SignUpFormValues> name="email" label="Email" />
-            <FormikInput<SignUpFormValues> name="password" label="Pasword" />
+            <FormikInput<SignUpFormValues>
+              name="password"
+              label="Pasword"
+              type="password"
+            />
             <FormikInput<SignUpFormValues>
               name="passwordConfirmation"
               label="Confirm password"
+              type="password"
             />
             <Button
               mode="contained"
               onPress={() => formikProps.handleSubmit()}
-              loading={formikProps.isSubmitting}>
+              loading={formikProps.isSubmitting}
+              style={styles.submitButton}>
               Create account
             </Button>
           </View>
         )}
       </Formik>
-      <OrDivider spacing="large" />
-      <Button
-        mode="contained"
-        onPress={() => console.log('Pressed')}
-        icon="google-plus">
-        Sign up with Google
-      </Button>
+      {FeatureFlagManager.isEnabled([
+        FeatureFlag.GOOGLE_SIGNON,
+        FeatureFlag.APPLE_SIGNON,
+      ]) && (
+        <>
+          <OrDivider spacing="large" />
+          <GoogleSignOnButton />
+        </>
+      )}
     </ScreenWrapper>
   );
 };
@@ -133,8 +143,7 @@ const styles = StyleSheet.create({
   cell: {
     flex: 1,
   },
-  errorText: {
-    paddingTop: appTheme.spacing.xsmall,
-    color: appTheme.colors.onErrorContainer,
+  submitButton: {
+    marginTop: appTheme.spacing.medium,
   },
 });

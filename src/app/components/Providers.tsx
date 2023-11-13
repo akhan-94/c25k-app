@@ -5,12 +5,15 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {appTheme} from '@lib/theme';
 import {persistor, store} from '@lib/redux';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 export const Providers = ({children}: {children: JSX.Element}) => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <PaperProvider theme={appTheme}>{children}</PaperProvider>
+        <SafeAreaProvider>
+          <PaperProvider theme={appTheme}>{children}</PaperProvider>
+        </SafeAreaProvider>
       </PersistGate>
     </Provider>
   );

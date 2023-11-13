@@ -4,6 +4,8 @@ import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {appActions} from '@app/state';
+import {appTheme} from '@lib/theme';
+import FeatureFlagManager, {FeatureFlag} from '@lib/feature-flag';
 
 export const LoginHeader = () => {
   /** Hooks */
@@ -19,15 +21,17 @@ export const LoginHeader = () => {
       <View>
         <AppLogo />
       </View>
-      <View>
-        <Button
-          style={{alignSelf: 'flex-end'}}
-          mode="text"
-          compact
-          onPress={() => skipLogin()}>
-          Skip
-        </Button>
-      </View>
+      {FeatureFlagManager.isEnabled([FeatureFlag.GUEST_MODE]) && (
+        <View>
+          <Button
+            style={{alignSelf: 'flex-end'}}
+            mode="text"
+            compact
+            onPress={() => skipLogin()}>
+            Skip
+          </Button>
+        </View>
+      )}
     </View>
   );
 };
@@ -37,6 +41,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal: appTheme.spacing.medium,
     alignItems: 'center',
   },
 });

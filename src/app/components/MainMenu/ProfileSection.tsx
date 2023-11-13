@@ -32,22 +32,18 @@ export const ProfileSection = ({
 
   return (
     <View style={profileSectionStyles.container}>
-      <View style={{display: 'flex', flexDirection: 'row', gap: 10}}>
-        <View style={{flex: 1}}>
-          <View style={profileSectionStyles.nameContainer}>
-            <Text variant="headlineSmall" style={{textTransform: 'capitalize'}}>
-              {isGuestMode ? 'Guest' : fullName}
-            </Text>
-          </View>
-          <View>
-            <Text variant="labelSmall">0 runs completed</Text>
-          </View>
+      <View style={profileSectionStyles.detailsContainer}>
+        <View style={profileSectionStyles.nameContainer}>
+          <Text variant="headlineSmall" style={{textTransform: 'capitalize'}}>
+            {isGuestMode ? 'Guest' : fullName}
+          </Text>
+          <Text variant="labelSmall">0 runs completed</Text>
         </View>
         <View>
           <IconButton
             icon="account-cog"
             mode="outlined"
-            size={30}
+            size={50}
             onPress={() => navigation.navigate('Profile')}
           />
         </View>

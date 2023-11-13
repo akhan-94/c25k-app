@@ -1,26 +1,28 @@
 import {appTheme} from '@lib/theme';
-import {Dimensions, StyleSheet} from 'react-native';
-import {StatusBar} from 'react-native';
+import {Dimensions, StatusBar, StyleSheet} from 'react-native';
+
 export const layout = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    paddingTop: (StatusBar.currentHeight || 0) + appTheme.spacing.medium,
-    paddingBottom: appTheme.spacing.medium + 5,
-    paddingHorizontal: appTheme.spacing.medium,
-    minHeight: Dimensions.get('screen').height - appTheme.spacing.medium,
+    minHeight: Dimensions.get('screen').height - (StatusBar.currentHeight || 0),
   },
   main: {
     flex: 1,
     justifyContent: 'flex-start',
   },
-  footer: {},
+  footer: {
+    paddingBottom: appTheme.spacing.large,
+    paddingHorizontal: appTheme.spacing.medium,
+  },
 });
 
 export const button = StyleSheet.create({
-  primary: {
-    marginTop: appTheme.spacing.small,
+  buttonGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: appTheme.spacing.small,
   },
 });
 

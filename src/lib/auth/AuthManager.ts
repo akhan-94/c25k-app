@@ -13,9 +13,7 @@ class AuthManager {
       store.dispatch(loadingActions.setStartupLoading(false));
     });
     supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (_event === 'TOKEN_REFRESHED') {
-        store.dispatch(appActions.setSession(session));
-      }
+      store.dispatch(appActions.setSession(session));
     });
   }
 
