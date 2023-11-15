@@ -52,6 +52,7 @@ export const appTheme = {
     medium: 16,
     large: 20,
     xlarge: 30,
+    xxlarge: 40,
   },
 } as const;
 

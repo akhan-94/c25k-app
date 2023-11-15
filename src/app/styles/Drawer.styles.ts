@@ -45,6 +45,7 @@ export const profileSectionStyles = StyleSheet.create({
   detailsContainer: {
     display: 'flex',
     flexDirection: 'row',
+    marginTop: appTheme.spacing.medium,
     alignItems: 'center',
     gap: 10,
   },

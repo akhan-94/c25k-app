@@ -56,7 +56,7 @@ export const LoginScreen = () => {
         <View style={loginStyles.button.buttonGroup}>
           <LoginButton />
           {FeatureFlagManager.isEnabled([FeatureFlag.GOOGLE_SIGNON]) && (
-            <GoogleSignOnButton />
+            <GoogleSignOnButton type="login" />
           )}
           {FeatureFlagManager.isEnabled([FeatureFlag.APPLE_SIGNON]) && (
             <Button mode="contained" icon="apple">

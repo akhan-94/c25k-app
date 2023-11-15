@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
-// Google Service
-apply plugin: "com.google.gms.google-services"
+
 // Additional Google Firebase SDKs
 apply plugin: "com.google.firebase.crashlytics"
 apply plugin: "com.google.firebase.firebase-perf"
@@ -180,6 +179,13 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-perf-ktx")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    // Google signin
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation("com.facebook.react:react-native:+")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
 
     // Flipper Debug
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
@@ -198,3 +204,6 @@ dependencies {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
+// Google Service
+apply plugin: "com.google.gms.google-services"

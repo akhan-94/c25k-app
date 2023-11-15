@@ -12,7 +12,20 @@
           "package_name": "com.idlebyte.couch2runner"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "640031171222-7fibh86nhpj40776c5ulk2pogp50n1n4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idlebyte.couch2runner",
+            "certificate_hash": "b7f97c05896c8a41336e6a87bd3f7cc424f3d3c6"
+          }
+        },
+        {
+          "client_id": "640031171222-0jed0gbhght3lqpfga1d9kr4hia2vl02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAgvsPIcekQLYr-q0nQmEOXbZAI3T3pjZs"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640031171222-0jed0gbhght3lqpfga1d9kr4hia2vl02.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

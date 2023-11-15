@@ -11,9 +11,10 @@ export const layout = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: 'flex-start',
+    paddingTop: appTheme.spacing.xxlarge,
   },
   footer: {
-    paddingBottom: appTheme.spacing.large,
+    paddingBottom: appTheme.spacing.xxlarge + appTheme.spacing.small,
     paddingHorizontal: appTheme.spacing.medium,
   },
 });

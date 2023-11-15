@@ -14,7 +14,9 @@ class StartUpManager {
     FeatureFlag.GUEST_MODE,
     FeatureFlag.SIGN_UP,
   ];
-  public static readonly devFeatureFlags: FeatureFlag[] = [];
+  public static readonly devFeatureFlags: FeatureFlag[] = [
+    FeatureFlag.GOOGLE_SIGNON,
+  ];
 
   constructor() {}
 
@@ -32,10 +34,9 @@ class StartUpManager {
   }
 
   private _configGoogleSignIn() {
-    if (!Config.OAUTH_ANDROID_CLIENT_ID) return;
     GoogleSignin.configure({
-      webClientId: Config.OAUTH_ANDROID_CLIENT_ID,
-      offlineAccess: true,
+      webClientId:
+        '640031171222-0jed0gbhght3lqpfga1d9kr4hia2vl02.apps.googleusercontent.com',
     });
   }
 }

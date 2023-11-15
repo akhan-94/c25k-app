@@ -43,5 +43,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: appTheme.spacing.medium,
     alignItems: 'center',
+    marginBottom: appTheme.spacing.medium,
   },
 });

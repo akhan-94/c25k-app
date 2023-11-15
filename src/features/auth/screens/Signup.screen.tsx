@@ -122,7 +122,7 @@ export const SignUpScreen = () => {
       ]) && (
         <>
           <OrDivider spacing="large" />
-          <GoogleSignOnButton />
+          <GoogleSignOnButton type="signup" />
         </>
       )}
     </ScreenWrapper>
