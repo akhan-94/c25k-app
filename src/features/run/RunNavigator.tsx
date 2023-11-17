@@ -8,6 +8,8 @@ import './listeners/run.listener';
 import {MainRunScreen} from './screens/MainRun.screen';
 import {SummaryScreen} from './screens/Summary.screen';
 import {selectStatus} from './selectors/run.selectors';
+import {useAppDispatch} from '@shared/hooks';
+import {setTimerFromActiveStep} from './state/run.slice';
 
 export type RunStackParamList = {
   MainRun: undefined;
@@ -21,8 +23,16 @@ export type RunNavigatorParamList = {
 const Stack = createNativeStackNavigator<RunStackParamList>();
 
 export const RunNavigator = () => {
+  /** Hooks */
+  const dispatch = useAppDispatch();
+
   /** Global State */
   const status = useSelector(selectStatus);
+
+  /** Side effects */
+  React.useEffect(() => {
+    dispatch(setTimerFromActiveStep());
+  }, [dispatch]);
 
   return (
     <Stack.Navigator

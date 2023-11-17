@@ -4,11 +4,13 @@
     "types": ["node"],
     "baseUrl": ".",
     "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@app/*": ["src/app/*"],
       "@lib/*": ["src/lib/*"],
-      "@config": ["src/config"],
+      "@services/*": ["src/services/*"],
       "@features/*": ["src/features/*"],
       "@shared/*": ["src/shared/*"]
     }

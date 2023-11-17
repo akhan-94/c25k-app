@@ -15,35 +15,62 @@ import Carousel from 'react-native-reanimated-carousel';
 import {TEN_WEEK_PROGRAM} from '@shared/constants';
 import Animated from 'react-native-reanimated';
 import {appTheme} from '@lib/theme';
+import {useSelector} from 'react-redux';
+import {selectProgress, selectStatus} from '../selectors/run.selectors';
 
 const PAGE_WIDTH = 80;
 const PAGE_HEIGHT = 60;
 
-export const DaySelector = () => {
-  const r = React.useRef<ICarouselInstance>(null);
-  const [loop, setLoop] = React.useState(false);
+const dayOptions = Object.keys(TEN_WEEK_PROGRAM).reduce((result, _, index) => {
+  const days = [] as any;
+  for (const day in TEN_WEEK_PROGRAM[index]) {
+    days.push({
+      week: index + 1,
+      day: Number(day) + 1,
+    });
+  }
+  return [...result, ...days];
+}, [] as {week: number; day: number}[]);
 
-  /** Derived state */
-  const dayOptions = React.useMemo(() => {
-    const weeks = Object.keys(TEN_WEEK_PROGRAM);
-    return weeks.reduce((result, _, index) => {
-      const days = [] as any;
-      for (const day in TEN_WEEK_PROGRAM[index]) {
-        days.push({
-          week: index + 1,
-          day: Number(day) + 1,
-        });
-      }
-      return [...result, ...days];
-    }, [] as {week: number; day: number}[]);
-  }, []);
+export const DaySelector = ({
+  setPreviewDay,
+}: {
+  setPreviewDay: React.Dispatch<
+    React.SetStateAction<{
+      week: number;
+      day: number;
+    } | null>
+  >;
+}) => {
+  /** Refs */
+  const r = React.useRef<ICarouselInstance>(null);
+
+  /** Global state */
+  const {week, day} = useSelector(selectProgress);
+  const status = useSelector(selectStatus);
+
+  const defaultIndex = React.useMemo(() => {
+    return week * 7 + day;
+  }, [week, day]);
+
+  /** Functions */
+  const onSnapToItem = React.useCallback(
+    (index: number) => {
+      const selectedDay = dayOptions[index];
+      if (selectedDay.day === day && selectedDay.week === week)
+        setPreviewDay(null);
+      else setPreviewDay(dayOptions[index]);
+    },
+    [week, day, setPreviewDay],
+  );
 
   return (
     <View style={styles.container}>
       <Carousel
-        key={`${loop}`}
         ref={r}
-        loop={loop}
+        loop={false}
+        enabled={status === 'waiting'}
+        defaultIndex={defaultIndex}
         style={{
           width: Dimensions.get('window').width,
           position: 'relative',
@@ -55,18 +82,20 @@ export const DaySelector = () => {
         width={PAGE_WIDTH}
         height={PAGE_HEIGHT}
         data={dayOptions}
+        onSnapToItem={onSnapToItem}
         renderItem={({item, animationValue}) => {
           return (
             <Item
               animationValue={animationValue}
               week={item.week.toString()}
               day={item.day.toString()}
-              onPress={() =>
+              onPress={() => {
+                if (status !== 'waiting') return;
                 r.current?.scrollTo({
                   count: animationValue.value,
                   animated: true,
-                })
-              }
+                });
+              }}
             />
           );
         }}

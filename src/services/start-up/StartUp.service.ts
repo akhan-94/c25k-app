@@ -1,36 +1,37 @@
-import FeatureFlagManager from '@lib/feature-flag';
-import {FeatureFlag} from '@lib/feature-flag/feature-flag.constants';
-import SoundManager from '@lib/sound';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import Config from 'react-native-config';
+import {FeatureFlag, FeatureFlagService} from '@services/feature-flag';
+import {SoundService} from '@services/sound';
 import {en, registerTranslation} from 'react-native-paper-dates';
 import {enableFreeze} from 'react-native-screens';
+import Container, {Service} from 'typedi';
 
-class StartUpManager {
-  public static readonly prodFeatureFlags: FeatureFlag[] = [
+@Service()
+export class StartUpService {
+  public readonly soundService = Container.get(SoundService);
+  public readonly featureFlag = Container.get(FeatureFlagService);
+
+  public readonly prodFeatureFlags: FeatureFlag[] = [
     FeatureFlag.RUN,
     FeatureFlag.PROFILE,
     FeatureFlag.SETTINGS,
     FeatureFlag.GUEST_MODE,
     FeatureFlag.SIGN_UP,
   ];
-  public static readonly devFeatureFlags: FeatureFlag[] = [
-    FeatureFlag.GOOGLE_SIGNON,
-  ];
+  public readonly devFeatureFlags: FeatureFlag[] = [FeatureFlag.GOOGLE_SIGNON];
 
   constructor() {}
 
   public initialize() {
     enableFreeze();
     registerTranslation('en', en);
-    SoundManager.initialize();
+    this.soundService.initialize();
     this._setFeatureFlags();
     this._configGoogleSignIn();
   }
 
   private _setFeatureFlags() {
-    FeatureFlagManager.addFlags(StartUpManager.prodFeatureFlags);
-    if (__DEV__) FeatureFlagManager.addFlags(StartUpManager.devFeatureFlags);
+    this.featureFlag.addFlags(this.prodFeatureFlags);
+    if (__DEV__) this.featureFlag.addFlags(this.devFeatureFlags);
   }
 
   private _configGoogleSignIn() {
@@ -40,7 +41,3 @@ class StartUpManager {
     });
   }
 }
-
-const startUpManager = new StartUpManager();
-
-export default startUpManager;

@@ -1,3 +1,4 @@
+import {SupabaseClient} from '@lib/supabase';
 import {
   GoogleSignin,
   statusCodes,
@@ -5,16 +6,6 @@ import {
 import {useErrorHandler} from '@shared/hooks';
 import * as React from 'react';
 import {Button} from 'react-native-paper';
-
-const signIn = async () => {
-  try {
-    await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    console.log(userInfo);
-  } catch (error: any) {
-    console.log(error);
-  }
-};
 
 export interface GoogleSignOnButtonProps {
   type: 'signup' | 'login';
@@ -30,8 +21,12 @@ export const GoogleSignOnButton = ({
   const login = React.useCallback(async () => {
     try {
       await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo);
+      const {idToken} = await GoogleSignin.signIn();
+      if (!idToken) return;
+      await SupabaseClient.auth.signInWithIdToken({
+        provider: 'google',
+        token: idToken,
+      });
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         handleError('User cancelled login', error);
@@ -46,15 +41,13 @@ export const GoogleSignOnButton = ({
   }, [handleError]);
 
   return (
-    <>
-      <Button
-        mode="contained"
-        icon="google-plus"
-        onPress={() => {
-          login();
-        }}>
-        {type === 'login' ? 'Continue with Google' : 'Sign up with Google'}
-      </Button>
-    </>
+    <Button
+      mode="contained"
+      icon="google-plus"
+      onPress={() => {
+        login();
+      }}>
+      {type === 'login' ? 'Continue with Google' : 'Sign up with Google'}
+    </Button>
   );
 };

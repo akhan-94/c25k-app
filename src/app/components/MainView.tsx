@@ -1,15 +1,19 @@
 import {selectSettingsState} from '@features/settings';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import {DarkTheme} from '@lib/theme';
+import {AuthService} from '@services/auth';
 import * as React from 'react';
 import {StatusBar, StyleSheet} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Portal} from 'react-native-paper';
 import {useSelector} from 'react-redux';
+import Container from 'typedi';
 import {SnackBar} from './SnackBar';
-import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
-import AuthManager from '@lib/auth';
-import {DarkTheme} from '@lib/theme';
 
-AuthManager.initialize();
+const auth = Container.get(AuthService);
+
+auth.getSession();
+auth.watchSessionChange();
 
 export const MainView = ({children}: {children: JSX.Element}) => {
   /** Global state */

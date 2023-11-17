@@ -1,6 +1,8 @@
 import notifee from '@notifee/react-native';
+import {Service} from 'typedi';
 
-class NotificationManager {
+@Service()
+export class NotificationService {
   constructor() {}
 
   public async test() {
@@ -26,7 +28,3 @@ class NotificationManager {
     });
   }
 }
-
-const notificationManager = new NotificationManager();
-
-export default notificationManager;

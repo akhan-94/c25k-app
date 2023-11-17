@@ -2,7 +2,7 @@ import {MD3DarkTheme} from 'react-native-paper';
 
 export const appTheme = {
   ...MD3DarkTheme,
-  roundness: 10,
+  roundness: 2,
   colors: {
     ...MD3DarkTheme.colors,
     primary: '#00736b',
@@ -55,5 +55,3 @@ export const appTheme = {
     xxlarge: 40,
   },
 } as const;
-
-export type AppThemeSpacing = keyof typeof appTheme.spacing;

@@ -6,4 +6,7 @@ export interface RunState {
   stage: ProgramStages;
   timer: number;
   progress: [number, number, number];
+  speed: number | null;
+  calories: number | null;
+  distance: number | null;
 }

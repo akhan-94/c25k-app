@@ -1,13 +1,11 @@
 import {Vibration} from 'react-native';
+import {Service} from 'typedi';
 
-class VibrationManager {
+@Service()
+export class VibrationService {
   constructor() {}
 
   public vibrate() {
     Vibration.vibrate(1000);
   }
 }
-
-const vibrationManager = new VibrationManager();
-
-export default vibrationManager;

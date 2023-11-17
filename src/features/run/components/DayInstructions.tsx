@@ -4,8 +4,9 @@ import {Text} from 'react-native-paper';
 import {useSelector} from 'react-redux';
 import {selectProgramActiveDay} from '../selectors/run.selectors';
 import {appTheme} from '@lib/theme';
+import type {PreviewDay} from '../types/run.types';
 
-export const DayInstructions = () => {
+export const DayInstructions = ({previewDay}: {previewDay: PreviewDay}) => {
   /** Global state */
   const {instructions} = useSelector(selectProgramActiveDay);
 

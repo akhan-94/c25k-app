@@ -1,19 +1,19 @@
+import {appTheme} from '@lib/theme';
 import {useNavigation} from '@react-navigation/native';
 import {ScreenWrapper} from '@shared/components';
+import {SwitchListItem} from '@shared/components/switch-list-item';
 import {useAppDispatch, useAppSelector, useErrorHandler} from '@shared/hooks';
 import {useAuth} from '@shared/hooks/useAuth';
 import * as React from 'react';
 import {Linking, StyleSheet} from 'react-native';
 import Config from 'react-native-config';
+import {getBuildNumber, getVersion} from 'react-native-device-info';
 import {Divider, List, Text} from 'react-native-paper';
+import {selectGuestMode} from 'src/app/selectors/app.selectors';
 import {DeleteAccount} from '../components/DeleteAccount';
 import {RateApp} from '../components/RateApp';
-import {SwitchSettingItem} from '../components/SwitchSettingItem';
 import {Units} from '../components/Units';
-import {getBuildNumber, getVersion} from 'react-native-device-info';
 import {selectSettingsState, toggleSetting} from '../state/settings.slice';
-import {appTheme} from '@lib/theme';
-import {selectGuestMode} from 'src/app/selectors/app.selectors';
 
 const versionName = getVersion();
 const versionCode = getBuildNumber();
@@ -51,17 +51,17 @@ export const GeneralSettingsScreen = () => {
     <ScreenWrapper noPadding>
       <List.Section title="Preferences">
         <Units />
-        <SwitchSettingItem
+        <SwitchListItem
           title="Vibrate"
           value={vibrate}
           onPress={() => dispatch(toggleSetting('vibrate'))}
         />
-        <SwitchSettingItem
+        <SwitchListItem
           title="Sound"
           value={sound}
           onPress={() => dispatch(toggleSetting('sound'))}
         />
-        <SwitchSettingItem
+        <SwitchListItem
           title="Dark mode"
           value={darkMode}
           onPress={() => dispatch(toggleSetting('darkMode'))}
@@ -108,6 +108,6 @@ export const GeneralSettingsScreen = () => {
 const styles = StyleSheet.create({
   versionContainer: {
     padding: appTheme.spacing.medium,
-    textAlign: 'right',
+    textAlign: 'left',
   },
 });

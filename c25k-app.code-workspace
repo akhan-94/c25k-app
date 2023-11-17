@@ -1,6 +1,10 @@
 {
   "folders": [
     {
+      "name": "project-root",
+      "path": "./"
+    },
+    {
       "name": "supabase-functions",
       "path": "supabase/functions"
     }

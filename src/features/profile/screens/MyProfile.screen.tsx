@@ -1,4 +1,4 @@
-import {supabase} from '@lib/supabase';
+import {SupabaseClient} from '@lib/supabase';
 import {ScreenWrapper} from '@shared/components';
 import * as React from 'react';
 import {Text} from 'react-native-paper';
@@ -9,7 +9,7 @@ export const MyProfileScreen = () => {
   const getShit = React.useCallback(async () => {
     const {
       data: {user},
-    } = await supabase.auth.getUser();
+    } = await SupabaseClient.auth.getUser();
     if (!user) return;
     const metadata = user.user_metadata;
     setTestData(metadata);

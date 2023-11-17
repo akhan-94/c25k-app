@@ -21,7 +21,7 @@ export const Units = () => {
         <>
           <List.Item
             title="Metric"
-            right={() => (
+            left={() => (
               <RadioButton
                 value="metric"
                 status={units === 'metric' ? 'checked' : 'unchecked'}
@@ -34,7 +34,7 @@ export const Units = () => {
           />
           <List.Item
             title="Imperial"
-            right={() => (
+            left={() => (
               <RadioButton
                 value="imperial"
                 status={units === 'imperial' ? 'checked' : 'unchecked'}

@@ -10,6 +10,9 @@ const initialState: RunState = {
   stage: 'warm-up',
   timer: 300,
   progress: [0, 0, 0],
+  speed: null,
+  calories: null,
+  distance: null,
 };
 
 export const runSlice = createSlice({
@@ -79,8 +82,31 @@ export const runSlice = createSlice({
       const {payload} = action;
       state.timer = payload;
     },
+    setTimerFromActiveStep(state) {
+      const [week, day, step] = state.progress;
+      const program = state.program;
+      const {time} = PROGRAM_MAP[program][week][day].pattern[step];
+      state.timer = time;
+    },
+    incrementDay: state => {
+      state.progress[1]++;
+    },
     decrementTimer: state => {
       state.timer--;
+    },
+    resetMetrics: state => {
+      state.speed = null;
+      state.calories = null;
+      state.distance = null;
+    },
+    setMetricValue: (
+      state,
+      action: PayloadAction<
+        [keyof Pick<RunState, 'calories' | 'distance' | 'speed'>, number]
+      >,
+    ) => {
+      const [metric, value] = action.payload;
+      state[metric] = value;
     },
   },
 });
@@ -98,6 +124,8 @@ export const {
   setProgress,
   skipToNextStep,
   goBackToLastStep,
+  setTimerFromActiveStep,
+  incrementDay,
 } = runSlice.actions;
 
 export const runReducer = runSlice.reducer;

@@ -8,11 +8,12 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {LoginHeader} from '../components/LoginHeader';
 import {IntroCarousel} from '../components/intro-carousel/IntroCarousel';
 import {loginStyles} from '../styles';
-import FeatureFlagManager, {FeatureFlag} from '@lib/feature-flag';
+import {FeatureFlag, useFeatureFlag} from '@services/feature-flag';
 
 export const LoginScreen = () => {
   /** Hooks */
   const navigation = useNavigation();
+  const featureFlag = useFeatureFlag();
 
   /** Local State */
   const [carouselHeight, setCarouselHeight] = React.useState<number | null>(
@@ -55,15 +56,15 @@ export const LoginScreen = () => {
         </View>
         <View style={loginStyles.button.buttonGroup}>
           <LoginButton />
-          {FeatureFlagManager.isEnabled([FeatureFlag.GOOGLE_SIGNON]) && (
+          {featureFlag.isEnabled([FeatureFlag.GOOGLE_SIGNON]) && (
             <GoogleSignOnButton type="login" />
           )}
-          {FeatureFlagManager.isEnabled([FeatureFlag.APPLE_SIGNON]) && (
+          {featureFlag.isEnabled([FeatureFlag.APPLE_SIGNON]) && (
             <Button mode="contained" icon="apple">
               Continue with Apple
             </Button>
           )}
-          {FeatureFlagManager.isEnabled([FeatureFlag.SIGN_UP]) && (
+          {featureFlag.isEnabled([FeatureFlag.SIGN_UP]) && (
             <Button
               mode="text"
               onPress={() => navigation.navigate('Auth', {screen: 'Sign Up'})}>

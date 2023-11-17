@@ -1,19 +1,22 @@
 import type {DrawerContentComponentProps} from '@react-navigation/drawer';
+import {FeatureFlag, useFeatureFlag} from '@services/feature-flag';
 import * as React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Drawer} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ProfileSection} from './ProfileSection';
-import FeatureFlagManager from '@lib/feature-flag';
-import {FeatureFlag} from '@lib/feature-flag/feature-flag.constants';
 
 export const MainMenu = ({navigation, state}: DrawerContentComponentProps) => {
+  /** Hooks */
+  const featureFlag = useFeatureFlag();
+
+  /** Local state */
   const active = state.routes[state.index].name;
   return (
     <SafeAreaView style={styles.container}>
       <ProfileSection navigation={navigation} active={active} />
       <View>
-        {FeatureFlagManager.isEnabled([FeatureFlag.RUN]) && (
+        {featureFlag.isEnabled([FeatureFlag.RUN]) && (
           <Drawer.Item
             label="Run"
             icon="run"
@@ -21,7 +24,7 @@ export const MainMenu = ({navigation, state}: DrawerContentComponentProps) => {
             onPress={() => navigation.navigate('Run')}
           />
         )}
-        {FeatureFlagManager.isEnabled([FeatureFlag.RUNNING_HISTORY]) && (
+        {featureFlag.isEnabled([FeatureFlag.RUNNING_HISTORY]) && (
           <Drawer.Item
             label="History"
             icon="chart-bell-curve"
@@ -29,7 +32,7 @@ export const MainMenu = ({navigation, state}: DrawerContentComponentProps) => {
             onPress={() => navigation.navigate('History')}
           />
         )}
-        {FeatureFlagManager.isEnabled([FeatureFlag.RUNNING_HISTORY]) && (
+        {featureFlag.isEnabled([FeatureFlag.RUNNING_HISTORY]) && (
           <Drawer.Item
             label="Reminders"
             icon="bell-circle-outline"
@@ -37,7 +40,7 @@ export const MainMenu = ({navigation, state}: DrawerContentComponentProps) => {
             onPress={() => navigation.navigate('Reminders')}
           />
         )}
-        {FeatureFlagManager.isEnabled([FeatureFlag.ACHIEVEMENTS]) && (
+        {featureFlag.isEnabled([FeatureFlag.ACHIEVEMENTS]) && (
           <Drawer.Item
             label="Achievements"
             icon="trophy-outline"
@@ -45,7 +48,7 @@ export const MainMenu = ({navigation, state}: DrawerContentComponentProps) => {
             onPress={() => navigation.navigate('Achievements')}
           />
         )}
-        {FeatureFlagManager.isEnabled([FeatureFlag.SETTINGS]) && (
+        {featureFlag.isEnabled([FeatureFlag.SETTINGS]) && (
           <Drawer.Item
             label="Settings"
             icon="cog-outline"

@@ -1,8 +1,10 @@
 import Sound from 'react-native-sound';
-import {AUDIO_SOURCES} from './constants/audio-sources.constant';
-import type {AudioSourceName} from './types/SoundManager.types';
+import {AUDIO_SOURCES} from './sound-service.constants';
+import type {AudioSourceName} from './sound-service.types';
+import {Service} from 'typedi';
 
-class SoundManager {
+@Service()
+export class SoundService {
   private readonly _soundMap = new Map<AudioSourceName, Sound>();
 
   constructor() {}
@@ -30,7 +32,3 @@ class SoundManager {
     });
   }
 }
-
-const soundManager = new SoundManager();
-
-export default soundManager;

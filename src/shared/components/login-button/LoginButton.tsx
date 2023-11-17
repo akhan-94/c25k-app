@@ -1,5 +1,5 @@
 import type {BottomSheetModal} from '@gorhom/bottom-sheet';
-import {supabase} from '@lib/supabase';
+import {SupabaseClient} from '@lib/supabase';
 import {useErrorHandler} from '@shared/hooks';
 import type {FormikHelpers} from 'formik';
 import {Formik} from 'formik';
@@ -36,7 +36,7 @@ export const LoginButton = ({
     ) => {
       try {
         actions.setSubmitting(true);
-        const {error} = await supabase.auth.signInWithPassword({
+        const {error} = await SupabaseClient.auth.signInWithPassword({
           email,
           password,
         });

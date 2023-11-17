@@ -47,3 +47,28 @@ export const selectActiveStage = createSelector(
   selectRunState,
   ({stage}) => stage || 'warm-up',
 );
+
+export const selectRemainingTime = createSelector(
+  selectProgram,
+  selectProgress,
+  (program, {week, day, step}) => {
+    return PROGRAM_MAP[program][week][day].pattern
+      .slice(step + 1)
+      .reduce((acc, step) => {
+        return acc + step.time;
+      }, 0);
+  },
+);
+
+export const selectRemainingTimer = createSelector(
+  selectRemainingTime,
+  selectTimer,
+  (remainingStepsTime, timer) => {
+    return remainingStepsTime + timer;
+  },
+);
+
+export const selectRunMetrics = createSelector(selectRunState, run => {
+  const {speed, calories, distance} = run;
+  return {speed, calories, distance} as const;
+});

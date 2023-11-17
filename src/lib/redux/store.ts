@@ -1,19 +1,5 @@
-import {achievementsReducer} from '@features/achievements';
-import {profileReducer} from '@features/profile';
-import {runReducer} from '@features/run';
-import {settingsReducer} from '@features/settings';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import type {
-  Middleware,
-  TypedAddListener,
-  TypedStartListening,
-} from '@reduxjs/toolkit';
-import {
-  addListener,
-  combineReducers,
-  configureStore,
-  createListenerMiddleware,
-} from '@reduxjs/toolkit';
+import type {Middleware} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import {
   FLUSH,
   PAUSE,
@@ -24,27 +10,10 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist';
-import {appReducer, loadingReducer} from '@app/state';
-
-const rootReducer = combineReducers({
-  loading: loadingReducer,
-  app: appReducer,
-  profile: profileReducer,
-  run: runReducer,
-  achievements: achievementsReducer,
-  settings: settingsReducer,
-});
-
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage: AsyncStorage,
-  blacklist: ['loading'],
-};
+import {persistConfig, rootReducer} from './store.constants';
+import {listenerMiddleware} from './store.utils';
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const listenerMiddleware = createListenerMiddleware<RootState>();
 
 const extraMiddleware: Middleware[] = [];
 
@@ -66,15 +35,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppDispatch = typeof store.dispatch;
-export type AppStartListening = TypedStartListening<RootState, AppDispatch>;
-
-export const startAppListening =
-  listenerMiddleware.startListening as AppStartListening;
-
-export const addAppListener = addListener as TypedAddListener<
-  RootState,
-  AppDispatch
->;

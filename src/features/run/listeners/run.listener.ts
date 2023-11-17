@@ -1,19 +1,26 @@
+import {startAppListening} from '@lib/redux';
+import {SoundService} from '@services/sound';
+import {VibrationService} from '@services/vibration';
 import {PROGRAM_MAP} from '@shared/constants';
 import type {ProgramDay} from '@shared/types';
-import {startAppListening} from '@lib/redux';
-import {decrementTimer, setStatus, setStep, setTimer} from '../state/run.slice';
-import SoundManager from '@lib/sound';
-import VibrationManager from '@lib/vibration';
+import {
+  decrementTimer,
+  incrementDay,
+  setStatus,
+  setStep,
+  setTimer,
+} from '../state/run.slice';
+import Container from 'typedi';
+
+const vibrations = Container.get(VibrationService);
+const sound = Container.get(SoundService);
 
 let localInterval: NodeJS.Timeout;
 let details: ProgramDay;
 
 startAppListening({
   predicate: (action, currentState, previousState) => {
-    return (
-      // previousState.run.status === 'waiting' &&
-      previousState.run.status !== currentState.run.status
-    );
+    return previousState.run.status !== currentState.run.status;
   },
   effect: (action, listenerApi) => {
     const state = listenerApi.getState();
@@ -42,12 +49,13 @@ startAppListening({
         const {time, type} = details.pattern[step + 1];
         listenerApi.dispatch(setStep(step + 1));
         if (state.settings.sound) playStepSound(type);
-        if (state.settings.vibrate) VibrationManager.vibrate();
+        if (state.settings.vibrate) vibrations.vibrate();
         listenerApi.dispatch(setTimer(time));
       } else {
-        if (state.settings.sound) SoundManager.play('bell');
-        if (state.settings.vibrate) VibrationManager.vibrate();
+        if (state.settings.sound) sound.play('bell');
+        if (state.settings.vibrate) vibrations.vibrate();
         listenerApi.dispatch(setStep(0));
+        listenerApi.dispatch(incrementDay());
         listenerApi.dispatch(setStatus('finished'));
       }
     }
@@ -55,18 +63,18 @@ startAppListening({
 });
 
 const playStepSound = (type: ProgramDay['pattern'][0]['type']) => {
-  SoundManager.play('bell');
+  sound.play('bell');
   switch (type) {
     case 'walk': {
-      SoundManager.play('male-start-walking');
+      sound.play('male-start-walking');
       break;
     }
     case 'jog': {
-      SoundManager.play('male-start-runnng');
+      sound.play('male-start-runnng');
       break;
     }
     case 'cooldown': {
-      SoundManager.play('male-start-cooldown');
+      sound.play('male-start-cooldown');
       break;
     }
   }

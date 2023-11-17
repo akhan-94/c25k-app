@@ -1,4 +1,4 @@
-import {supabase} from '@lib/supabase';
+import {SupabaseClient} from '@lib/supabase';
 import {appTheme} from '@lib/theme';
 import {ScreenWrapper} from '@shared/components';
 import {FormikInput} from '@shared/components/formik-input';
@@ -15,12 +15,13 @@ import {
   SignupSchema,
 } from '../constants/sign-up-form.constants';
 import type {SignUpFormValues} from '../types/sign-up-form.types';
-import FeatureFlagManager, {FeatureFlag} from '@lib/feature-flag';
 import {GoogleSignOnButton} from '@shared/components/google-signon-button';
+import {FeatureFlag, useFeatureFlag} from '@services/feature-flag';
 
 export const SignUpScreen = () => {
   /** Hooks */
   const handleError = useErrorHandler();
+  const featureFlag = useFeatureFlag();
 
   /** Functions */
   const createAccount = React.useCallback(
@@ -30,7 +31,7 @@ export const SignUpScreen = () => {
     ) => {
       try {
         actions.setSubmitting(true);
-        const {error} = await supabase.auth.signUp({
+        const {error} = await SupabaseClient.auth.signUp({
           email,
           password,
           options: {
@@ -43,7 +44,7 @@ export const SignUpScreen = () => {
         });
         const {
           data: {user},
-        } = await supabase.auth.getUser();
+        } = await SupabaseClient.auth.getUser();
         if (user) {
           const metadata = user.user_metadata;
         }
@@ -116,7 +117,7 @@ export const SignUpScreen = () => {
           </View>
         )}
       </Formik>
-      {FeatureFlagManager.isEnabled([
+      {featureFlag.isEnabled([
         FeatureFlag.GOOGLE_SIGNON,
         FeatureFlag.APPLE_SIGNON,
       ]) && (

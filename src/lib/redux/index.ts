@@ -1,8 +1,7 @@
-export type {AppDispatch, AppStartListening, RootState} from './store';
+export {persistor, store} from './store';
+export type {AppDispatch, AppStartListening, RootState} from './store.types';
 export {
   addAppListener,
   listenerMiddleware,
-  persistor,
   startAppListening,
-  store,
-} from './store';
+} from './store.utils';

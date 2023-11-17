@@ -5,11 +5,12 @@ import {StyleSheet, View} from 'react-native';
 import {Button} from 'react-native-paper';
 import {appActions} from '@app/state';
 import {appTheme} from '@lib/theme';
-import FeatureFlagManager, {FeatureFlag} from '@lib/feature-flag';
+import {useFeatureFlag, FeatureFlag} from '@services/feature-flag';
 
 export const LoginHeader = () => {
   /** Hooks */
   const dispatch = useAppDispatch();
+  const featureFlag = useFeatureFlag();
 
   /** Functions */
   const skipLogin = () => {
@@ -21,7 +22,7 @@ export const LoginHeader = () => {
       <View>
         <AppLogo />
       </View>
-      {FeatureFlagManager.isEnabled([FeatureFlag.GUEST_MODE]) && (
+      {featureFlag.isEnabled([FeatureFlag.GUEST_MODE]) && (
         <View>
           <Button
             style={{alignSelf: 'flex-end'}}

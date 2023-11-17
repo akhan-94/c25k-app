@@ -1,6 +1,8 @@
+import {Service} from 'typedi';
 import type {FeatureFlag} from './feature-flag.constants';
 
-class FeatureFlagManager {
+@Service()
+export class FeatureFlagService {
   private readonly _enabledFeatures = new Set<FeatureFlag>();
 
   constructor() {}
@@ -13,7 +15,3 @@ class FeatureFlagManager {
     return flags.some(flag => this._enabledFeatures.has(flag));
   }
 }
-
-const featureFlagManager = new FeatureFlagManager();
-
-export default featureFlagManager;

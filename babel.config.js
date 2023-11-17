@@ -6,6 +6,8 @@ module.exports = {
     },
   },
   plugins: [
+    ['@babel/plugin-proposal-decorators', {legacy: true}],
+    ['@babel/plugin-transform-class-static-block', {loose: true}],
     [
       'module-resolver',
       {
@@ -15,8 +17,8 @@ module.exports = {
           '@assets': './src/assets',
           '@app': './src/app',
           '@lib': './src/lib',
+          '@services': './src/services',
           '@features': './src/features',
-          '@config': './src/config',
           '@shared': './src/shared',
         },
       },

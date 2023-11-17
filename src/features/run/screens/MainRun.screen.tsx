@@ -6,11 +6,16 @@ import {DaySelector} from '../components/DaySelector';
 import {MainControls} from '../components/MainControls';
 
 export const MainRunScreen = () => {
+  const [previewDay, setPreviewDay] = React.useState<null | {
+    week: number;
+    day: number;
+  }>(null);
+
   return (
     <View style={styles.container}>
-      <DaySelector />
-      <DayInstructions />
-      <ActiveRunDetails />
+      <DaySelector setPreviewDay={setPreviewDay} />
+      <DayInstructions previewDay={previewDay} />
+      <ActiveRunDetails previewDay={previewDay} />
       <MainControls />
     </View>
   );
