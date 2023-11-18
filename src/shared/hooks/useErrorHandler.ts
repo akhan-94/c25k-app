@@ -1,7 +1,10 @@
-import * as React from 'react';
-import {useAppDispatch} from './useAppDispatch';
 import {appActions} from '@app/state';
-import crashlytics from '@react-native-firebase/crashlytics';
+import {LoggerService} from '@services/logger';
+import * as React from 'react';
+import Container from 'typedi';
+import {useAppDispatch} from './useAppDispatch';
+
+const logger = Container.get(LoggerService);
 
 export const useErrorHandler = () => {
   /** Hooks */
@@ -11,8 +14,7 @@ export const useErrorHandler = () => {
     (message: string, error?: any) => {
       dispatch(appActions.openSnackBar(['error', message]));
       if (!error) return;
-      if (__DEV__) console.error(error);
-      else crashlytics().recordError(error);
+      logger.recordError(error);
     },
     [dispatch],
   );

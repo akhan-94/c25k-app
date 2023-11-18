@@ -1,5 +1,1 @@
-export type {
-  HistoryNavigatorParamList,
-  HistoryStackParamList,
-} from './HistoryNavigator';
-export {HistoryNavigator} from './HistoryNavigator';
+export {History} from './History';

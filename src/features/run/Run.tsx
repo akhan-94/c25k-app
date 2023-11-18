@@ -1,28 +1,17 @@
 import * as React from 'react';
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AppBar} from '@shared/components/app-bar';
 
+import {RunStack} from '@lib/navigation/navigation';
+import {useAppDispatch} from '@shared/hooks';
 import {useSelector} from 'react-redux';
 import './listeners/run.listener';
 import {MainRunScreen} from './screens/MainRun.screen';
 import {SummaryScreen} from './screens/Summary.screen';
 import {selectStatus} from './selectors/run.selectors';
-import {useAppDispatch} from '@shared/hooks';
 import {setTimerFromActiveStep} from './state/run.slice';
 
-export type RunStackParamList = {
-  MainRun: undefined;
-  Summary: undefined;
-};
-
-export type RunNavigatorParamList = {
-  screen?: keyof RunStackParamList;
-};
-
-const Stack = createNativeStackNavigator<RunStackParamList>();
-
-export const RunNavigator = () => {
+export const Run = () => {
   /** Hooks */
   const dispatch = useAppDispatch();
 
@@ -35,7 +24,7 @@ export const RunNavigator = () => {
   }, [dispatch]);
 
   return (
-    <Stack.Navigator
+    <RunStack.Navigator
       initialRouteName="MainRun"
       screenOptions={{
         headerShown: true,
@@ -43,10 +32,10 @@ export const RunNavigator = () => {
         header: props => <AppBar {...props} />,
       }}>
       {status === 'finished' ? (
-        <Stack.Screen name="Summary" component={SummaryScreen} />
+        <RunStack.Screen name="Summary" component={SummaryScreen} />
       ) : (
-        <Stack.Screen name="MainRun" component={MainRunScreen} />
+        <RunStack.Screen name="MainRun" component={MainRunScreen} />
       )}
-    </Stack.Navigator>
+    </RunStack.Navigator>
   );
 };

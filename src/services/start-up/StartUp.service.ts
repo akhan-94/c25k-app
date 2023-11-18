@@ -4,11 +4,16 @@ import {SoundService} from '@services/sound';
 import {en, registerTranslation} from 'react-native-paper-dates';
 import {enableFreeze} from 'react-native-screens';
 import Container, {Service} from 'typedi';
+import {checkVersion} from 'react-native-check-version';
+import {LoggerService} from '@services/logger';
+import {store} from '@lib/redux';
+import {appActions} from '@app/state';
 
 @Service()
 export class StartUpService {
   public readonly soundService = Container.get(SoundService);
   public readonly featureFlag = Container.get(FeatureFlagService);
+  public readonly logger = Container.get(LoggerService);
 
   public readonly prodFeatureFlags: FeatureFlag[] = [
     FeatureFlag.RUN,
@@ -21,12 +26,22 @@ export class StartUpService {
 
   constructor() {}
 
-  public initialize() {
+  public async initialize() {
     enableFreeze();
     registerTranslation('en', en);
     this.soundService.initialize();
     this._setFeatureFlags();
     this._configGoogleSignIn();
+    await this._checkForStoreUpdates();
+  }
+
+  private async _checkForStoreUpdates() {
+    try {
+      const version = await checkVersion();
+      store.dispatch(appActions.setUpdateRequired(version.needsUpdate));
+    } catch (error) {
+      this.logger.recordError(error);
+    }
   }
 
   private _setFeatureFlags() {

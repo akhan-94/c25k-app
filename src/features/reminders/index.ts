@@ -1,5 +1,1 @@
-export type {
-  RemindersNavigatorParamList,
-  RemindersStackParamList,
-} from './RemindersNavigator';
-export {RemindersNavigator} from './RemindersNavigator';
+export {Reminders} from './Reminders';

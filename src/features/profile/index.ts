@@ -1,8 +1,4 @@
-export type {
-  ProfileNavigatorParamList,
-  ProfileStackParamList,
-} from './ProfileNavigator';
-export {ProfileNavigator} from './ProfileNavigator';
+export {Profile} from './Profile';
 export {
   profileReducer,
   profileSlice,

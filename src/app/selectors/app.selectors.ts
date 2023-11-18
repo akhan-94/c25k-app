@@ -17,6 +17,11 @@ export const selectLoading = createSelector(
   state => state.startup,
 );
 
+export const selectUpdateRequired = createSelector(
+  selectAppState,
+  state => state.updateRequired,
+);
+
 export const selectGuestMode = createSelector(
   selectAppState,
   appState => appState.guestMode,

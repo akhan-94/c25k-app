@@ -1,5 +1,4 @@
-export type {RunNavigatorParamList, RunStackParamList} from './RunNavigator';
-export {RunNavigator} from './RunNavigator';
+export {Run} from './Run';
 export {runReducer, runSlice} from './state/run.slice';
 export {
   selectActiveStage,

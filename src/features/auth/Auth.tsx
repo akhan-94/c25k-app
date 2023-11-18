@@ -1,34 +1,22 @@
+import type {RootStackParamList} from '@app/types';
 import {LoginScreen} from '@features/auth';
+import {AuthStack} from '@lib/navigation';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AppBar} from '@shared/components/app-bar';
 import * as React from 'react';
 import {SignUpScreen} from './screens/Signup.screen';
-import type {RootStackParamList} from '@app/types';
 
-export type AuthStackParamList = {
-  Login: undefined;
-  'Sign Up': undefined;
-  'Forgot Password': undefined;
-};
-
-export type AuthNavigatorParamList = {
-  screen?: keyof AuthStackParamList;
-};
-
-const Stack = createNativeStackNavigator<AuthStackParamList>();
-
-export const AuthNavigator = ({
+export const Auth = ({
   navigation,
 }: NativeStackScreenProps<RootStackParamList, 'Auth'>): React.JSX.Element => {
   return (
-    <Stack.Navigator
+    <AuthStack.Navigator
       initialRouteName="Login"
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen
+      <AuthStack.Screen name="Login" component={LoginScreen} />
+      <AuthStack.Screen
         name="Sign Up"
         component={SignUpScreen}
         options={{
@@ -43,6 +31,6 @@ export const AuthNavigator = ({
           ),
         }}
       />
-    </Stack.Navigator>
+    </AuthStack.Navigator>
   );
 };

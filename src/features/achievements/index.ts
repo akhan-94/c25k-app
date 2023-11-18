@@ -1,8 +1,4 @@
-export type {
-  AchievementsNavigatorParamList,
-  AchievementsNavigatorStackParamList,
-} from './AchievementsNavigator';
-export {AchievementsNavigator} from './AchievementsNavigator';
+export {Achievements} from './Achievements';
 export {
   achievementsReducer,
   achievementsSlice,

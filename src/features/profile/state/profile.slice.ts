@@ -1,6 +1,6 @@
+import type {RootState} from '@lib/redux';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
-import type {RootState} from '@lib/redux';
 import type {ProfileState} from '../types/ProfileState';
 
 const initialState: ProfileState = {

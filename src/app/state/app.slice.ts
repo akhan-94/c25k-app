@@ -2,6 +2,10 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 import {createSlice} from '@reduxjs/toolkit';
 import type {AppState} from '../types/AppState';
 import type {RootState} from '@lib/redux';
+import Container from 'typedi';
+import {LoggerService} from '@services/logger';
+
+const logger = Container.get(LoggerService);
 
 const initialState: AppState = {
   offline: null,
@@ -17,6 +21,7 @@ const initialState: AppState = {
     type: undefined,
     message: null,
   },
+  updateRequired: false,
 };
 
 export const appSlice = createSlice({
@@ -60,6 +65,21 @@ export const appSlice = createSlice({
         message: null,
       };
     },
+    setUpdateRequired: (state, action: PayloadAction<boolean>) => {
+      state.updateRequired = action.payload;
+    },
+  },
+  extraReducers: builder => {
+    builder.addCase(appActions.setSession, (state, action) => {
+      if (!action.payload) return;
+      const {
+        payload: {user},
+      } = action;
+      logger.setUserDetails({
+        uid: user.id,
+        email: user.email,
+      });
+    });
   },
 });
 

@@ -1,37 +1,34 @@
-import {AchievementsNavigator} from '@features/achievements';
-import {HistoryNavigator} from '@features/history';
-import {ProfileNavigator} from '@features/profile';
-import {RemindersNavigator} from '@features/reminders';
-import {RunNavigator} from '@features/run';
-import {SettingsNavigator} from '@features/settings';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {Achievements} from '@features/achievements';
+import {History} from '@features/history';
+import {Profile} from '@features/profile';
+import {Reminders} from '@features/reminders';
+import {Run} from '@features/run';
+import {Settings} from '@features/settings';
+import {MainStack} from '@lib/navigation';
 import * as React from 'react';
 import {MainMenu} from './MainMenu/MainMenu';
-import type {MainStackParamList} from '../types';
-
-const Drawer = createDrawerNavigator<MainStackParamList>();
 
 export const MainNavigator = () => {
   return (
-    <Drawer.Navigator
+    <MainStack.Navigator
       initialRouteName="Run"
       screenOptions={{
         drawerPosition: 'right',
         headerShown: false,
       }}
       drawerContent={MainMenu}>
-      <Drawer.Screen name="Run" component={RunNavigator} />
-      <Drawer.Screen name="Profile" component={ProfileNavigator} />
-      <Drawer.Screen name="History" component={HistoryNavigator} />
-      <Drawer.Screen
+      <MainStack.Screen name="Run" component={Run} />
+      <MainStack.Screen name="Profile" component={Profile} />
+      <MainStack.Screen name="History" component={History} />
+      <MainStack.Screen
         name="Achievements"
         options={{
           title: 'Achievements',
         }}
-        component={AchievementsNavigator}
+        component={Achievements}
       />
-      <Drawer.Screen name="Settings" component={SettingsNavigator} />
-      <Drawer.Screen name="Reminders" component={RemindersNavigator} />
-    </Drawer.Navigator>
+      <MainStack.Screen name="Settings" component={Settings} />
+      <MainStack.Screen name="Reminders" component={Reminders} />
+    </MainStack.Navigator>
   );
 };

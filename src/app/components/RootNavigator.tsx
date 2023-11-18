@@ -1,27 +1,20 @@
-import {AuthNavigator} from '@features/auth';
-import {LegalNavigator} from '@features/legal';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Auth} from '@features/auth';
+import {Legal} from '@features/legal';
+import type {RootNavigatorProps} from '@lib/navigation';
+import {RootStack} from '@lib/navigation';
 import * as React from 'react';
 import {useSelector} from 'react-redux';
-import {selectGuestMode, selectLoading, selectSession} from '../selectors';
 import {LoadingScreen} from '../screens/Loading.screen';
+import {selectGuestMode, selectLoading, selectSession} from '../selectors';
 import {MainNavigator} from './MainNavigator';
-import type {RootStackParamList} from '../types';
+import {selectUpdateRequired} from '@app/selectors/app.selectors';
+import {UpdateRequiredScreen} from '@app/screens/UpdateRequired.screen';
 
-const RootStack = createNativeStackNavigator<RootStackParamList>();
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace ReactNavigation {
-    // eslint-disable-next-line
-    interface RootParamList extends RootStackParamList {}
-  }
-}
-
-export const RootNavigator = () => {
+export const RootNavigator: React.FC<Partial<RootNavigatorProps>> = () => {
   /** Global State */
   const session = useSelector(selectSession);
   const isLoading = useSelector(selectLoading);
+  const isUpdateRequired = useSelector(selectUpdateRequired);
   const isGuestMode = useSelector(selectGuestMode);
 
   return (
@@ -30,21 +23,26 @@ export const RootNavigator = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      {isLoading ? (
+      {isUpdateRequired ? (
+        <RootStack.Screen
+          name="UpdateRequired"
+          component={UpdateRequiredScreen}
+        />
+      ) : isLoading ? (
         <RootStack.Screen name="Loading" component={LoadingScreen} />
       ) : (
         <RootStack.Group>
           {isGuestMode || session ? (
             <RootStack.Screen name="Main" component={MainNavigator} />
           ) : (
-            <RootStack.Screen name="Auth" component={AuthNavigator} />
+            <RootStack.Screen name="Auth" component={Auth} />
           )}
           <RootStack.Screen
             options={{
               headerShown: false,
             }}
             name="Legal"
-            component={LegalNavigator}
+            component={Legal}
           />
         </RootStack.Group>
       )}

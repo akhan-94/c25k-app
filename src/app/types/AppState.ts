@@ -9,6 +9,7 @@ export interface AppState {
     hasRated: boolean;
     dateRated: string | null;
   };
+  updateRequired: boolean;
   snackbar: {
     isVisible: boolean;
     type: 'success' | 'error' | 'info' | 'warning' | undefined;

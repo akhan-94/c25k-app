@@ -1,9 +1,5 @@
 export {GeneralSettingsScreen} from './screens/GeneralSettings.screen';
-export type {
-  SettingsNavigatorParamList,
-  SettingsStackParamList,
-} from './SettingsNavigator';
-export {SettingsNavigator} from './SettingsNavigator';
+export {Settings} from './Settings';
 export {
   selectSettingsState,
   settingsReducer,
