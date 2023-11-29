@@ -1,41 +1,49 @@
 {
   "project_info": {
-    "project_number": "640031171222",
-    "project_id": "ib-couch2runner",
-    "storage_bucket": "ib-couch2runner.appspot.com"
+    "project_number": "878006506237",
+    "project_id": "pacekeeper-app",
+    "storage_bucket": "pacekeeper-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:640031171222:android:32ca9723b059f63a8858b7",
+        "mobilesdk_app_id": "1:878006506237:android:75ef46ba898beaa0206494",
         "android_client_info": {
-          "package_name": "com.idlebyte.couch2runner"
+          "package_name": "com.idlebyte.pacekeeper"
         }
       },
       "oauth_client": [
         {
-          "client_id": "640031171222-7fibh86nhpj40776c5ulk2pogp50n1n4.apps.googleusercontent.com",
+          "client_id": "878006506237-bosp9hpd8l0krqrcbevb8o9v83ulgkor.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.idlebyte.couch2runner",
+            "package_name": "com.idlebyte.pacekeeper",
             "certificate_hash": "b7f97c05896c8a41336e6a87bd3f7cc424f3d3c6"
           }
         },
         {
-          "client_id": "640031171222-0jed0gbhght3lqpfga1d9kr4hia2vl02.apps.googleusercontent.com",
+          "client_id": "878006506237-vbkcbmml85jsecoelbotnp3aulu0serr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idlebyte.pacekeeper",
+            "certificate_hash": "eae823933e14054beea01c0f1e87c5e07e6a78d6"
+          }
+        },
+        {
+          "client_id": "878006506237-mrkgiil1405i1qojbrpoofubichg0gvv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAgvsPIcekQLYr-q0nQmEOXbZAI3T3pjZs"
+          "current_key": "AIzaSyCU0bfcPGrUQ4rxLc5g7e4U6gr5f42WWo4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "640031171222-0jed0gbhght3lqpfga1d9kr4hia2vl02.apps.googleusercontent.com",
+              "client_id": "878006506237-mrkgiil1405i1qojbrpoofubichg0gvv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 import {ActiveRunDetails} from '../components/ActiveRunDetails';
 import {DayInstructions} from '../components/DayInstructions';
 import {DaySelector} from '../components/DaySelector';
 import {MainControls} from '../components/MainControls';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 export const MainRunScreen = () => {
   const [previewDay, setPreviewDay] = React.useState<null | {
@@ -13,9 +14,14 @@ export const MainRunScreen = () => {
 
   return (
     <View style={styles.container}>
-      <DaySelector setPreviewDay={setPreviewDay} />
-      <DayInstructions previewDay={previewDay} />
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={{height: 200, width: Dimensions.get('screen').width}}
+      />
+      {/* <DayInstructions previewDay={previewDay} /> */}
       <ActiveRunDetails previewDay={previewDay} />
+      <DaySelector setPreviewDay={setPreviewDay} />
+
       <MainControls />
     </View>
   );

@@ -8,6 +8,7 @@ import {checkVersion} from 'react-native-check-version';
 import {LoggerService} from '@services/logger';
 import {store} from '@lib/redux';
 import {appActions} from '@app/state';
+import {enableLatestRenderer} from 'react-native-maps';
 
 @Service()
 export class StartUpService {
@@ -27,10 +28,11 @@ export class StartUpService {
   constructor() {}
 
   public async initialize() {
-    enableFreeze();
+    enableFreeze(true);
     registerTranslation('en', en);
     this.soundService.initialize();
     this._setFeatureFlags();
+    enableLatestRenderer();
     this._configGoogleSignIn();
     await this._checkForStoreUpdates();
   }

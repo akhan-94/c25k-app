@@ -100,9 +100,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.idlebyte.couch2runner"
+    namespace "com.idlebyte.pacekeeper"
     defaultConfig {
-        applicationId "com.idlebyte.couch2runner"
+        applicationId "com.idlebyte.pacekeeper"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

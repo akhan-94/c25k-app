@@ -1,4 +1,4 @@
-package com.idlebyte.couch2runner;
+package com.idlebyte.pacekeeper;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

@@ -30,10 +30,7 @@ export const ModalContainer = ({
   enableThirdPartyLogin,
 }: ModalContainerProps) => {
   /** Derived State */
-  const snapPoints = React.useMemo(
-    () => [enableThirdPartyLogin ? '40%' : 300],
-    [enableThirdPartyLogin],
-  );
+  const snapPoints = React.useMemo(() => ['100%'], []);
 
   const {handleSheetPositionChange} = useBottomSheetBackHandler(sheetRef);
 
@@ -70,6 +67,7 @@ export const ModalContainer = ({
       detached={true}
       bottomInset={appTheme.spacing.medium}
       enablePanDownToClose
+      enableDynamicSizing={true}
       handleComponent={null}
       style={styles.container}
       onChange={handleSheetChanges}>
@@ -106,11 +104,12 @@ const BottomSheetBackground = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: appTheme.spacing.medium,
-  },
+  container: {},
   innerContent: {
     padding: appTheme.spacing.medium,
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: appTheme.spacing.medium,
   },
   closeButton: {
     marginTop: -(appTheme.spacing.medium / 2),

@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  self.moduleName = @"Couch2Runner";
+  self.moduleName = @"PaceKeeper";
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

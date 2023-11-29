@@ -1,4 +1,4 @@
-package com.idlebyte.couch2runner;
+package com.idlebyte.pacekeeper;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
@@ -14,7 +14,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "Couch2Runner";
+    return "PaceKeeper";
   }
 
   /**
